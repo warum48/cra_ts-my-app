@@ -3,9 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
+import { StyledEngineProvider } from "@mui/material/styles";
+import { BrowserRouter, MemoryRouter, Routes, Route } from "react-router-dom";
 
-import { ReduxWrapper } from "./redux/ReduxWrapper";
-import { GlobalProvider } from "./ContextGlobal";
+import { ReduxWrapper } from "_redux/ReduxWrapper";
+import { GlobalProvider } from "_context/ContextGlobal";
+import { Home } from "_routes/Home";
+//-----------------------TYPES-------------------------
+import { RoutesTypes } from "_types/TYPES";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +18,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <ReduxWrapper>
     <GlobalProvider>
-      <App />
+    <StyledEngineProvider injectFirst>
+            <BrowserRouter>
+              <Routes>
+              <Route path="/" element={<App />}>
+                  <Route path={RoutesTypes.Home} element={<Home />} />
+                  </Route>
+                  </Routes>
+            </BrowserRouter>
+          </StyledEngineProvider>
     </GlobalProvider>
   </ReduxWrapper>
 );
