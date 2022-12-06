@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 
 import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 //import { useSelector, useDispatch } from "react-redux";
 
@@ -33,13 +34,41 @@ export const GlobalProvider = ({ children }: Props) => {
     []
   );
 
+  const themeLight = createTheme({
+    
+    palette: {
+      mode: 'light',
+      background: {
+        default: "#ededed"
+      },
+      //primary: {
+       // main: '#ff4400',
+        //main: "linear-gradient(to right, tomato, cyan)",
+     // },
+    }
+  });
+  
+  const themeDark = createTheme({
+    
+    palette: {
+      mode: 'dark',
+      background: {
+        default: "#1a1b24"
+      },
+      text: {
+        primary: "#ffffff"
+      }
+    }
+  });
+
   const theme = React.useMemo(
     () =>
-      createTheme({
+     /* createTheme({
         palette: {
           mode,
         },
-      }),
+      }),*/
+    mode == 'light' ? themeLight : themeDark,
     [mode]
   );
 
@@ -56,7 +85,9 @@ export const GlobalProvider = ({ children }: Props) => {
 
   return (
     <GlobalContext.Provider value={value}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+        {children}</ThemeProvider>
     </GlobalContext.Provider>
   );
 };

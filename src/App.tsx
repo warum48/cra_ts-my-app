@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-//---------------router----------------------
+//---------------router----------------------//
 import {
   useLocation,
   Outlet,
@@ -11,38 +11,39 @@ import {
   useParams
 } from "react-router-dom";
 
+//----------mui
+import useMediaQuery from '@mui/material/useMediaQuery';
 import IconButton from "@mui/material/IconButton";
 import { Box, Button } from "@mui/material";
-import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
+import {  ThemeProvider, createTheme, useTheme } from "@mui/material/styles";
 //import Brightness4Icon from "@mui/icons-material/Brightness4";
 //import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 //import { GlobalProvider } from "_context/ContextGlobal";
+//---------
 import { GlobalContext } from "_context/ContextGlobal";
+import {LightMode} from "_components/LightMode";
+import {Navigator} from "_components/Navigator";
+import {Header} from "_components/Header";
 
 function App() {
-
   const theme = useTheme();
-  const {colorMode} = React.useContext(GlobalContext);
+  const drawerWidth = 256;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  //const theme = useTheme();
+  //const {colorMode} = React.useContext(GlobalContext);
 
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Box
+    <>
+    {/*<div className="App">*/}
+      {/*<Box
       sx={{
         display: "flex",
         width: "100%",
@@ -62,18 +63,64 @@ function App() {
       >
         {theme.palette.mode === "dark" ? (
           <>
-          {/*<Brightness7Icon />*/} dark </>
+          dark </>
         ) : (
           <>
-          {/*<Brightness4Icon />*/} light
+           light
           </>
         )}
         
       </IconButton>
       <Button variant="contained">some button</Button>
     </Box>
+        */}
+   {/*     <LightMode/>
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        
+      </div>
+      
     <Outlet />
-    </div>
+      */}
+    
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+        {/*<CssBaseline />*/}
+        <Box
+          component="nav"
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
+          {isSmUp ? null : (
+            <Navigator
+              PaperProps={{ style: { width: drawerWidth } }}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+            />
+          )}
+          <Navigator
+            PaperProps={{ style: { width: drawerWidth } }}
+            sx={{ display: { sm: 'block', xs: 'none' } }}
+          />
+        </Box>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Header onDrawerToggle={handleDrawerToggle} />
+          <Box component="main" sx={{ flex: 1, py: 6, px: 4, 
+            //bgcolor: '#eaeff1' 
+            }}>
+           {/* <Content /> */}
+           content
+          </Box>
+          <Box component="footer" sx={{ p: 2, 
+            //bgcolor: '#eaeff1' 
+            }}>
+            {/*<Copyright />*/}
+          </Box>
+        </Box>
+      </Box>
+    
+    
+    {/*</div>*/}
+    </>
   );
 }
 
