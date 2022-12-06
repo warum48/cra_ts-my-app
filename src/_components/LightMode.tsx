@@ -7,6 +7,9 @@ import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 //import Brightness4Icon from "@mui/icons-material/Brightness4";
 //import Brightness7Icon from "@mui/icons-material/Brightness7";
 
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+
 //import { GlobalProvider } from "_context/ContextGlobal";
 import { GlobalContext } from "_context/ContextGlobal";
 
@@ -29,19 +32,16 @@ export function LightMode() {
         //p: 3
       }}
     >
-      {theme.palette.mode} mode
+      {/*{theme.palette.mode} mode */}
       <IconButton
         sx={{ ml: 1 }}
         onClick={colorMode.toggleColorMode}
         color="inherit"
       >
         {theme.palette.mode === "dark" ? (
-          <>
-          {/*<Brightness7Icon />*/} dark </>
+          <DarkModeIcon/>
         ) : (
-          <>
-          {/*<Brightness4Icon />*/} light
-          </>
+          <LightModeIcon/>
         )}
         
       </IconButton>

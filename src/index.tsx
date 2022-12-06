@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 //import reportWebVitals from './reportWebVitals';
 import { StyledEngineProvider } from "@mui/material/styles";
-import { Button } from "@mui/material/";
+import { Button, Grid, Toolbar } from "@mui/material/";
 import { BrowserRouter, MemoryRouter, Routes, Route } from "react-router-dom";
 
 import { ReduxWrapper } from "_redux/ReduxWrapper";
@@ -22,7 +22,18 @@ const RootWrapper = () => {
     <>
       {!isLoggedIn ? (
         <>
-        <LightMode/>
+        <Toolbar>
+          <Grid container spacing={1} alignItems="center">
+            
+            <Grid item xs />
+            
+            
+            
+            <Grid item>
+             <LightMode/>
+             </Grid>
+          </Grid>
+        </Toolbar>
         <Auth setIsLoggedIn={setIsLoggedIn}/>
         </>
       ) : (

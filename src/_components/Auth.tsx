@@ -75,12 +75,18 @@ export function Auth({ setIsLoggedIn }: IAuth) {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        
         <Box
           sx={{
             marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            //py: 2, px:2,
+           // my: 0, mx: 4,
+              
+            //  bgcolor: '#ffffff'
+                
           }}
         >
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>

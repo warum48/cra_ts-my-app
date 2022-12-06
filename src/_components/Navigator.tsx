@@ -7,45 +7,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-//import HomeIcon from '@mui/icons-material/Home';
-import PeopleIcon from '@mui/icons-material/People';
-import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
-import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
-import PublicIcon from '@mui/icons-material/Public';
-import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
-import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
+
 import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 import HomeIcon from '@mui/icons-material/Home';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import DownloadIcon from '@mui/icons-material/Download';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import { bluegreen_bg, bluegreen_bg_130_dark, bluegreen_bg_vert } from '_styles/jsstyles';
 
-/*const categories = [
 
-{
-    id: 'Home',
-    icon: <PublicIcon /> ,
-    active: true,
-
-},
-
-  {
-    id: 'Отчеты по задачам',
-    icon: <PublicIcon /> ,
-    
-  },
-  {
-    id: 'Экспорт данных',
-    icon: <PublicIcon /> ,
-    children: [
-      { id: 'Analytics', icon: <SettingsIcon />, active:false },
-      { id: 'Performance', icon: <TimerIcon /> },
-      { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
-    ],
-  },
-];
-*/
 
 const categories = [
     {
@@ -55,12 +27,12 @@ const categories = [
     },
     {
         id: 'Отчеты по задачам',
-        icon: <PublicIcon /> ,
+        icon: <InsertDriveFileIcon /> ,
         active: true,
       },
     {
       id: 'Экспорт данных',
-      icon: <PublicIcon /> ,
+      icon: <DownloadIcon /> ,
       children: [
         { id: 'Выполнение задач', icon: <SettingsIcon />, active: false },
         { id: 'Изображения', icon: <TimerIcon /> },
@@ -111,44 +83,18 @@ export function Navigator(props:any) {
         src="./surlogo_white.png" 
       />
       <List disablePadding >
-       {/*} <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
-          Paperbase
-        </ListItem>
-        <ListItem sx={{ ...item, ...itemCategory }}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText>Project Overview</ListItemText>
-  </ListItem>*/}
-       {/* {categories.map(({ id, icon, children }) => (
-          <Box key={id}>
-            <ListItem sx={{ py: 2, px: 3, color: '#fff' }}>
-            <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText sx={{  }}>{id}</ListItemText>
-      </ListItem>
-            {children?.map(({ id: childId, icon, active }) => (
-              <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
-                  
-                  <ListItemText>{childId}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
-           
-            <Divider sx={{ mt: 2 }} />
-          </Box>
-        ))}*/}
+       
         {categories.map(({ id, children, active, icon }) => (
           <Box key={id} >
-            <ListItem sx={{ py: children ? '2px' : 1 , px: 3 }}>
-            <ListItemIcon sx={{ color: '#fff', minWidth:'50px' }}> {icon}</ListItemIcon>
+            <ListItem sx={{ paddingBottom: children ? '2px' : 2 , px: 3 }}>
+            <ListItemIcon sx={{ color: '#fff', minWidth:'40px' }}> {icon}</ListItemIcon>
               <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
             </ListItem>
             {children?.map(({ id: childId, icon, active }) => (
               <ListItem disablePadding key={childId}>
                 <ListItemButton selected={active} sx={item}>
                   
-                  <ListItemText sx={{ marginLeft:'50px'}}>{childId}</ListItemText>
+                  <ListItemText sx={{ marginLeft:'40px'}}>{childId}</ListItemText>
                 </ListItemButton>
               </ListItem>
             ))}

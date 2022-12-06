@@ -41,47 +41,7 @@ function App() {
 
 
   return (
-    <>
-    {/*<div className="App">*/}
-      {/*<Box
-      sx={{
-        display: "flex",
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-        bgcolor: "background.default",
-        color: "text.primary",
-       // borderRadius: 1,
-        //p: 3
-      }}
-    >
-      {theme.palette.mode} mode
-      <IconButton
-        sx={{ ml: 1 }}
-        onClick={colorMode.toggleColorMode}
-        color="inherit"
-      >
-        {theme.palette.mode === "dark" ? (
-          <>
-          dark </>
-        ) : (
-          <>
-           light
-          </>
-        )}
-        
-      </IconButton>
-      <Button variant="contained">some button</Button>
-    </Box>
-        */}
-   {/*     <LightMode/>
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        
-      </div>
-      
-    <Outlet />
-      */}
+    
     
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
         {/*<CssBaseline />*/}
@@ -104,11 +64,14 @@ function App() {
         </Box>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           <Header onDrawerToggle={handleDrawerToggle} />
-          <Box component="main" sx={{ flex: 1, py: 6, px: 4, 
-            //bgcolor: '#eaeff1' 
+          <Box component="main" sx={{ flex: 1, 
+          //py: 6, px: 4, 
+          py: 2, px:2,
+          my: 0, mx: 4,
+            //bgcolor: '#ffffff' 
             }}>
            {/* <Content /> */}
-           content
+           Content
           </Box>
           <Box component="footer" sx={{ p: 2, 
             //bgcolor: '#eaeff1' 
@@ -119,8 +82,8 @@ function App() {
       </Box>
     
     
-    {/*</div>*/}
-    </>
+    
+    
   );
 }
 
