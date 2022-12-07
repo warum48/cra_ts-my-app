@@ -1,25 +1,13 @@
-/*export interface IDict {
-  id: string;
-  name: string;
-  from: string;
-  from_name: string;
-  to: string;
-  to_name: string;
-  words: object[];
-}*/
-
-export enum TableModeTypes {
-  Edit = "edit",
-  Read = "read"
+export enum RoutesTypes { 
+  Home = "/",
+  Reports = "/reports",
+  //Help = "/help",
+  //Edit = "/edit",
 }
 
-export enum RoutesTypes {
-  Edit = "/edit",
-  Play = "/play",
-  Dictonaries = "/dictonaries",
-  TestTone = "/testtone",
-  Home = "/",
-  Help = "/help"
+/*export enum TableModeTypes {
+  Edit = "edit",
+  Read = "read"
 }
 
 export interface IDefaultDict {
@@ -45,3 +33,4 @@ export interface IDictExtended extends IDefaultDict {
   selectionModel?: object[];
   direction?: boolean; //true - direct, false - inverted
 }
+*/

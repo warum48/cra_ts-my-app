@@ -39,7 +39,7 @@ export const GlobalProvider = ({ children }: Props) => {
     palette: {
       mode: 'light',
       background: {
-        default: "#ededed"
+        default: "#efefef"
       },
       //primary: {
        // main: '#ff4400',

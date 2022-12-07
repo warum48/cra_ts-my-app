@@ -10,6 +10,7 @@ import { BrowserRouter, MemoryRouter, Routes, Route } from "react-router-dom";
 import { ReduxWrapper } from "_redux/ReduxWrapper";
 import { GlobalProvider } from "_context/ContextGlobal";
 import { Home } from "_routes/Home";
+import { Reports } from "_routes/Reports";
 import { Auth } from "_components/Auth";
 import {LightMode} from "_components/LightMode";
 //-----------------------TYPES-------------------------
@@ -41,6 +42,10 @@ const RootWrapper = () => {
           <Routes>
             <Route path="/" element={<App />}>
               <Route path={RoutesTypes.Home} element={<Home />} />
+              <Route
+                    path={RoutesTypes.Reports}
+                    element={<Reports />}
+                  />
             </Route>
             <Route path="*" element={<App />} />
           </Routes>

@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
+import SearchBar  from '_components/SearchBar';
+import ReportsTable from "_components/ReportsTable";
 
 const Container = styled(Box)`
   position: relative;
@@ -15,15 +19,19 @@ const Container = styled(Box)`
 `;
 
 
-export const Home = () => {
+export const Reports = () => {
   useEffect(() => {
     console.log("home");
   }, []);
   
   return (
     <>
-     {/*<Box sx={{height:'1300px'}}></Box>*/}
-      Home
+    <Typography variant='h6'>Выберите отчёт по задаче для изменения</Typography>
+     <SearchBar/>
+     <ReportsTable/>
+    
+    <Divider sx={{ mt: 4 }} />
+    <Typography>Reports End</Typography> 
     </>
   );
 };

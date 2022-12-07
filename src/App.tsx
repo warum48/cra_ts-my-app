@@ -36,6 +36,8 @@ function App() {
     setMobileOpen(!mobileOpen);
   };
 
+ 
+
   //const theme = useTheme();
   //const {colorMode} = React.useContext(GlobalContext);
 
@@ -43,7 +45,10 @@ function App() {
   return (
     
     
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+    <Box sx={{ 
+      display: 'flex', 
+      //minHeight: '100vh' 
+      }}>
         {/*<CssBaseline />*/}
         <Box
           component="nav"
@@ -62,20 +67,24 @@ function App() {
             sx={{ display: { sm: 'block', xs: 'none' } }}
           />
         </Box>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ 
+          flex: 1, display: 'flex', flexDirection: 'column' 
+          }}>
           <Header onDrawerToggle={handleDrawerToggle} />
-          <Box component="main" sx={{ flex: 1, 
-          //py: 6, px: 4, 
+          <Box component="main" sx={{ 
+            flex: 1, 
+          ///////py: 6, px: 4, 
           py: 2, px:2,
           my: 0, mx: 4,
-            //bgcolor: '#ffffff' 
+            
             }}>
            {/* <Content /> */}
-           Content
+           
+           <Outlet />
           </Box>
           <Box component="footer" sx={{ p: 2, 
-            //bgcolor: '#eaeff1' 
-            }}>
+            
+            }}> 
             {/*<Copyright />*/}
           </Box>
         </Box>

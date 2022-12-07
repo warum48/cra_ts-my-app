@@ -31,7 +31,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { bluegreen_bg } from "_styles/jsstyles";
+import { bluegreen_bg, panel_bg, panel_bg_dark } from "_styles/jsstyles";
 
 {
   /*function Copyright(props: any) {
@@ -82,6 +82,8 @@ export function Auth({ setIsLoggedIn }: IAuth) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            p:3,
+            ...panel_bg[theme.palette.mode]
             //py: 2, px:2,
            // my: 0, mx: 4,
               
