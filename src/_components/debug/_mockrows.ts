@@ -1,4 +1,17 @@
-export const rows = [
+type Item = {
+  
+    id: number,
+    task: string, 
+    date_beginning: string, 
+    date_end: string, 
+    worker: string, 
+    shop: string, 
+    source: string, 
+    status: string, 
+
+}
+
+export const rows: Item[] = [
     /*{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
@@ -57,7 +70,7 @@ export const rows = [
   "worker": "Елена Уварова",
   "shop": "ЦБ-00145308 - Магнит регионы - 185035, Карелия Респ, Петрозаводск г, Красноармейская (Центр р-н) ул, дом № 25",
   "source": "Андроид",
-  "status": "Завершен"
+  "status": "Временный отказ"
 },
 {
     "id": 4753565,
@@ -78,7 +91,7 @@ export const rows = [
   "worker": "Елена Уварова",
   "shop": "ЦБ-00145308 - Магнит регионы - 185035, Карелия Респ, Петрозаводск г, Красноармейская (Центр р-н) ул, дом № 25",
   "source": "Андроид",
-  "status": "Завершен"
+  "status": "Проверен"
 },
 {
     "id": 4456565,
@@ -120,7 +133,7 @@ export const rows = [
   "worker": "Елена Уварова",
   "shop": "ЦБ-00145308 - Магнит регионы - 185035, Карелия Респ, Петрозаводск г, Красноармейская (Центр р-н) ул, дом № 25",
   "source": "Андроид",
-  "status": "Завершен"
+  "status": "Проверен"
 },
 {
     "id": 4853565,

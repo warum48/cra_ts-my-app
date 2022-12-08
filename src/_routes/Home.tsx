@@ -3,6 +3,9 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
+import ReportDetails from "_components/ReportDetails";
+import Information from "_components/ReportDetails/Information";
+
 const Container = styled(Box)`
   position: relative;
   display: flex;
@@ -22,8 +25,10 @@ export const Home = () => {
   
   return (
     <>
-     {/*<Box sx={{height:'1300px'}}></Box>*/}
-      Home
+     {/*<Box sx={{height:'1300px'}}></Box>
+      Home (детали репорта здесь только для тестов / быстрого доступа)*/}
+      <ReportDetails/>
+      {/*<Information/>*/} 
     </>
   );
 };

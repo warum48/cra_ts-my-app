@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import SearchBar  from '_components/SearchBar';
 import ReportsTable from "_components/ReportsTable";
+import ReportMainTable from "_components/ReportMainTable";
 
 const Container = styled(Box)`
   position: relative;
@@ -28,7 +29,7 @@ export const Reports = () => {
     <>
     <Typography variant='h6'>Выберите отчёт по задаче для изменения</Typography>
      <SearchBar/>
-     <ReportsTable/>
+     <ReportMainTable/>
     
     <Divider sx={{ mt: 4 }} />
     <Typography>Reports End</Typography> 

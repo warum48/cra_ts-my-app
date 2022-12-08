@@ -1,0 +1,55 @@
+export const reportDetailsTabs = {
+    info: {
+        name:"Информация",
+    },
+    steps:{
+        name:"Шаги и задачи"
+    },
+    pictures:{
+        name:"Изображения"
+    },
+    ankets:{
+        name:"Анкеты"
+    },
+    assortment:{
+        name:"Ассортимент магазина"
+    },
+    absence_reasons:{
+        name:"Причины отсутствия товаров"
+    },
+    geolocation:{
+        name:"Геолокация"
+    }
+}
+
+export const reportDetailsExample = {
+    "info": {
+        "name":"Информация",
+        "ID":"",
+        "Общее":{
+            "Задача":""
+        },
+        "Даты":{
+            "Дата начала": "Dec. 8, 2022, 9:53 a.m",
+            "Дата завершения": "Dec. 8, 2022, 9:56 a.m.",
+        }
+    },
+    steps:{
+        name:"Шаги и задачи"
+    },
+    pictures:{
+        name:"Изображения"
+    },
+    ankets:{
+        name:"Анкеты"
+    },
+    assortment:{
+        name:"Ассортимент магазина"
+    },
+    absence_reasons:{
+        name:"Причины отсутствия товаров"
+    },
+    geolocation:{
+        name:"Геолокация"
+    }
+}
