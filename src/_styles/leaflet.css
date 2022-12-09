@@ -1,0 +1,8 @@
+.leaflet-container{
+    height:100%;
+}
+
+.leaflet-control-attribution.leaflet-control {
+    display:none !important
+}
+/*add svg to hide just prapor*/

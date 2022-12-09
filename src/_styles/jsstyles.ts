@@ -18,7 +18,7 @@ export const panel_bg_dark = {
   background: "rgba(255,255,255,0.3)",
 };
 export const panel_bg = {
-  dark: { background: "rgba(255,255,255,0.2)" },
+  dark: { background: "rgba(255,255,255,0.1)" },
   light: { background: "white" }
 };
 

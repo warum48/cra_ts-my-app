@@ -12,7 +12,9 @@ import Typography from "@mui/material/Typography";
 import Information from "_components/ReportDetails/Information";
 import Empty from "_components/ReportDetails/Empty";
 import { Assortment } from "_components/ReportDetails/Assortment";
-import { Steps} from "_components/ReportDetails/Steps";
+import { Steps } from "_components/ReportDetails/Steps";
+import { Info } from "_components/ReportDetails/Info";
+import { Geolocation } from "_components/ReportDetails/Geolocation";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -33,7 +35,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 0 }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -183,7 +185,7 @@ export default function ReportDetails() {
   const reportDetailsTabs = {
     info: {
       name: "Информация",
-      component: <Empty/>
+      component: <Info/>
     },
     steps: {
       name: "Шаги и задачи",
@@ -207,7 +209,7 @@ export default function ReportDetails() {
     },
     geolocation: {
       name: "Геолокация",
-      component: <Empty/>
+      component: <Geolocation/>
     }
   };
 
@@ -240,13 +242,17 @@ export default function ReportDetails() {
           variant="scrollable"
         >
           {Object.entries(reportDetailsTabs).map(([key, item], index) => (
-            <Tab label={item.name} {...a11yProps(index)} sx={{fontSize:'12px'}}/>
+            <Tab key={'tab'+key} label={item.name} {...a11yProps(index)} sx={{fontSize:'12px'}}/>
           ))}
         </Tabs>
       </Box>
 
       {Object.entries(reportDetailsTabs).map(([key, item], index) => (
-        <TabPanel value={value} index={index}>
+        <TabPanel 
+        value={value} 
+        index={index}
+        key={'panel'+key}
+        >
             
           {item.component}
         </TabPanel>
