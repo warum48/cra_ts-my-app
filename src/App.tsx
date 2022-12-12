@@ -40,14 +40,36 @@ function App() {
 
   //const theme = useTheme();
   //const {colorMode} = React.useContext(GlobalContext);
+  //
+  /*
+    */
 
   return (
+    <>
+   {/*} <Box 
+    className="_bgimage" 
+    component="img"
+    sx={{
+      height: 'auto',
+      width: '100%',
+      zIndex:-1,
+      position:'absolute',
+      top:0,
+      overflow:'hidden'
+    }}
+    src="http://neurolab.mcbs.group/local/templates/neurolab/assets/images/svg/s-mp-one-img-bg.svg"
+    >
+  </Box>*/}
+    
+    
     <Box
+     className={theme.palette.mode === 'light' ? "bgimage" :''}
       sx={{
         display: "flex",
         minHeight: "100vh",
       }}
     >
+      
       {/*<CssBaseline />*/}
       <Box
         component="nav"
@@ -75,6 +97,7 @@ function App() {
       >
         <Header onDrawerToggle={handleDrawerToggle} />
         <Box
+        
           component="main"
           sx={{
             flex: 1,
@@ -101,6 +124,7 @@ function App() {
         </Box>
       </Box>
     </Box>
+    </>
   );
 }
 

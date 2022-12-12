@@ -9,12 +9,12 @@ import "_styles/mui.css";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import Information from "_components/ReportDetails/Information";
-import Empty from "_components/ReportDetails/Empty";
-import { Assortment } from "_components/ReportDetails/Assortment";
-import { Steps } from "_components/ReportDetails/Steps";
-import { Info } from "_components/ReportDetails/Info";
-import { Geolocation } from "_components/ReportDetails/Geolocation";
+import Information from "_routes/reports/details/components/Information";
+import Empty from "_components/Empty";
+import { Assortment } from "_routes/reports/details/components/Assortment";
+import { Steps } from "_routes/reports/details/components/Steps";
+import { Info } from "_routes/reports/details/components/Info";
+import { Geolocation } from "_routes/reports/details/components/Geolocation";
 import Button from "@mui/material/Button";
 
 interface TabPanelProps {

@@ -1,7 +1,16 @@
 import * as React from "react";
+import {
+  useLocation,
+  Outlet,
+  //Link,
+  Link as RouterLink,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -12,87 +21,6 @@ import { StyledTableCell, StyledTableRow } from "_styles/jsstyles";
 import { rows } from "_components/debug/_mockrows";
 import Pagination from "@mui/material/Pagination";
 
-/*function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich Ice cream sandwich Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-*/
-
-/*const columns  = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'task',
-    headerName: 'Задача',
-    minWidth: 200,
-    flex:1,
-    //editable: true,
-    //headerClassName: 'super-app-theme--header',
-  },
-  {
-    field: 'date_beginning',
-    headerName: 'Дата начала',
-    width: 180,
-    //editable: true,
-  },
-  {
-    field: 'date_end',
-    headerName: 'Дата завершения',
-   // type: 'number',
-    width: 180,
-    //editable: true,
-  },
-  {
-    field: 'worker',
-    headerName: 'Сотрудник',
-    //description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-   // valueGetter: (params: GridValueGetterParams) =>
-   //   `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-  {
-    field: 'shop',
-    headerName: 'Магазин',
-    //type: 'number',
-    minWidth: 110,
-    flex:5
-    //editable: true,
-  },
-  {
-    field: 'source',
-    headerName: 'Источник',
-    //type: 'number',
-    width: 110,
-    //editable: true,
-  },
-  {
-    field: 'status',
-    headerName: 'Статус',
-   // type: 'number',
-    width: 110,
-    //editable: true,
-  },
-];*/
-/*type Item = {
-    field: string,
-    headerName: string,
-}*/
 type IHeader = {
   field: string;
   headerName: string;
@@ -158,7 +86,10 @@ export default function ReportDetailsTable() {
         return {
           color: theme.palette.text.secondary,
         };
-      } else if (row[colfield as keyof Item] == "Временный отказ" || row[colfield as keyof Item] == "Отказано") {
+      } else if (
+        row[colfield as keyof Item] == "Временный отказ" ||
+        row[colfield as keyof Item] == "Отказано"
+      ) {
         return {
           color: theme.palette.error.main,
           boxShadow: "inset 0 -2px 0px " + theme.palette.error.light,
@@ -204,7 +135,20 @@ export default function ReportDetailsTable() {
                   <>
                     {/*<StyledTableCell>{row.shop}</StyledTableCell>*/}
                     <StyledTableCell sx={getStyleFor(row, col.field)}>
-                      {row[col.field as keyof typeof row] || "-"}
+                      {col.field == "id" || col.field == "task" ? (
+                        <Link
+                          component={RouterLink}
+                          //to={"/reports/" + row[col.field as keyof typeof row]}
+                          to={"/reports/" + row['id']}
+                          sx={{ color: theme.palette.text.primary,
+                            textDecorationColor:theme.palette.text.primary
+                          }}
+                        >
+                          {row[col.field as keyof typeof row]}
+                        </Link>
+                      ) : (
+                        row[col.field as keyof typeof row] || "-"
+                      )}
                     </StyledTableCell>
                   </>
                 ))}

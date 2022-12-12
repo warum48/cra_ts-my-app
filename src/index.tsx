@@ -9,12 +9,13 @@ import { BrowserRouter, MemoryRouter, Routes, Route } from "react-router-dom";
 
 import { ReduxWrapper } from "_redux/ReduxWrapper";
 import { GlobalProvider } from "_context/ContextGlobal";
-import { Home } from "_routes/Home";
-import { Reports } from "_routes/Reports";
+import { Home } from "_routes/home/Home";
+import { Reports } from "_routes/reports/Reports";
 import { Auth } from "_components/Auth";
 import {LightMode} from "_components/LightMode";
 //-----------------------TYPES-------------------------
 import { RoutesTypes } from "_types/TYPES";
+import ReportDetails from "_routes/reports/details/ReportDetails";
 
 const RootWrapper = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -45,6 +46,10 @@ const RootWrapper = () => {
               <Route
                     path={RoutesTypes.Reports}
                     element={<Reports />}
+                  />
+                  <Route
+                    path={RoutesTypes.Reports + "/:id"}
+                    element={<ReportDetails />}
                   />
             </Route>
             <Route path="*" element={<App />} />

@@ -9,8 +9,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 //------COMPONENTS----
 import SearchBar from "_components/SearchBar";
-import ReportsTable from "_components/ReportsTable";
-import ReportMainTable from "_components/ReportMainTable";
+//import ReportsTable from "_components/ReportsTable";
+import ReportMainTable from "_routes/reports/components/ReportMainTable";
 import FilterSelect from "_components/FilterSelect";
 import Stack from "@mui/system/Stack";
 import { StackHeader } from "_styles/jsstyles";
