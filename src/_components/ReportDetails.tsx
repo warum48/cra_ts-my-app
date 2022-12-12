@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import { panel_bg } from "_styles/jsstyles";
+import { bluegreen_bg, panel_bg } from "_styles/jsstyles";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { rows } from "_components/debug/_mockrows";
 import "_styles/mui.css";
@@ -15,6 +15,7 @@ import { Assortment } from "_components/ReportDetails/Assortment";
 import { Steps } from "_components/ReportDetails/Steps";
 import { Info } from "_components/ReportDetails/Info";
 import { Geolocation } from "_components/ReportDetails/Geolocation";
+import Button from "@mui/material/Button";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -214,7 +215,7 @@ export default function ReportDetails() {
   };
 
   return (
-    <Box sx={{ width: "100%", marginBottom: "50px" }}>
+    <Box sx={{ width: "100%", mb:3 }}>
       {/*<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
@@ -257,6 +258,25 @@ export default function ReportDetails() {
           {item.component}
         </TabPanel>
       ))}
+
+<Box sx={{pt:2}}>
+<Button
+              type="submit"
+              variant="contained"
+              sx={{ color: '#ffffff',  boxShadow: 0, ...bluegreen_bg}}
+              //onClick={() => setIsLoggedIn(true)}
+            >
+              Сохранить
+            </Button>
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{mx:2, ...panel_bg[theme.palette.mode]}}
+              //onClick={() => setIsLoggedIn(true)}
+            >
+              Сохранить и продолжить редактирование
+            </Button>
+            </Box>
 
     </Box>
   );

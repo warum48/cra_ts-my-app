@@ -26,6 +26,7 @@ import {
   bluegreen_bg,
   bluegreen_bg_130_dark,
   bluegreen_bg_vert,
+  grayLines,
 } from "_styles/jsstyles";
 import { RoutesTypes } from "_types/TYPES";
 
@@ -80,6 +81,14 @@ export function Navigator(props: any) {
 
   return (
     <Drawer variant="permanent" {...other}>
+      {/*<Box
+        sx={{
+          //bgcolor: '#101F33' ,
+          position:absolute
+          height: "100%",
+          //paddingTop: "30px",
+        }}
+      ></Box>*/}
       <Box
         sx={{
           //bgcolor: '#101F33' ,
@@ -87,6 +96,7 @@ export function Navigator(props: any) {
           paddingTop: "30px",
           textAlign: "left",
           ...bluegreen_bg_130_dark,
+          ...grayLines,
           //background: 'linear-gradient(180deg,#014f71 1.2%,#3caa42 90.53%)'
           //background: 'linear-gradient(130deg,#014f71 35.2%,#36993b 96.53%)'
           //background: 'linear-gradient(130deg,#026189 35.2%,#36993b 96.53%)'

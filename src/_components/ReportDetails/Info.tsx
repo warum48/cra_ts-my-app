@@ -93,14 +93,12 @@ export function Info() {
       maxRows={10}
       variant="outlined"
     /></ItemInfo></Grid>
-<Grid item xs={12}>
+{/*<Grid item xs={12}>
 <ItemInfo>
 <Button
               type="submit"
               variant="contained"
               sx={{ color: '#ffffff',  boxShadow: 0, ...bluegreen_bg}}
-              
-              //just placeholder:
               //onClick={() => setIsLoggedIn(true)}
             >
               Сохранить
@@ -109,14 +107,12 @@ export function Info() {
               type="submit"
               variant="outlined"
               sx={{mx:2}}
-              //sx={{ color: '#ffffff',  ...bluegreen_bg}}
-              //just placeholder:
               //onClick={() => setIsLoggedIn(true)}
             >
               Сохранить и продолжить редактирование
             </Button>
             </ItemInfo>
-            </Grid>
+    </Grid>*/}
         </Grid>
       
     </Paper>

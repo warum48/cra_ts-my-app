@@ -1,6 +1,7 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Table from "@mui/material/Table";
+import Box from "@mui/material/Box";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -9,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { StyledTableCell, StyledTableRow } from "_styles/jsstyles";
 import { rows } from "_components/debug/_mockrows";
+import Pagination from "@mui/material/Pagination";
 
 /*function createData(
   name: string,
@@ -138,59 +140,57 @@ const columns: IHeader[] = [
   },
 ];
 
-
-
-
 export default function ReportDetailsTable() {
-
   const theme = useTheme();
-  function getStyleFor(row:Item, colfield:string){
-  
-    if(colfield == "status"){
-      if(row[colfield as keyof Item] == "Проверен"){
+  function getStyleFor(row: Item, colfield: string) {
+    if (colfield == "status") {
+      if (row[colfield as keyof Item] == "Проверен") {
         return {
           //boxSizing:'border-box',
-          color:theme.palette.success.main, //"green",
-          boxShadow:"inset 0 -2px 0px "  + theme.palette.success.light,
-        }
-      }else if(row[colfield as keyof Item] == "Завершен"){
+          color: theme.palette.success.main, //"green",
+          boxShadow: "inset 0 -2px 0px " + theme.palette.success.light,
+        };
+      } else if (row[colfield as keyof Item] == "Завершен") {
         return {
-          color:theme.palette.primary.dark
-        }
-      }else if(row[colfield as keyof Item] == "Начат"){
+          color: theme.palette.primary.dark,
+        };
+      } else if (row[colfield as keyof Item] == "Начат") {
         return {
-          color:theme.palette.text.secondary
-        }
-      }else if(row[colfield as keyof Item] == "Временный отказ"){
+          color: theme.palette.text.secondary,
+        };
+      } else if (row[colfield as keyof Item] == "Временный отказ" || row[colfield as keyof Item] == "Отказано") {
         return {
-          color:theme.palette.error.main,
-          boxShadow:"inset 0 -2px 0px "  + theme.palette.error.light,
-        }
+          color: theme.palette.error.main,
+          boxShadow: "inset 0 -2px 0px " + theme.palette.error.light,
+        };
       }
     }
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            {/*}
+    <Box>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 300 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              {/*}
             <StyledTableCell>Dessert (100g serving)</StyledTableCell>
             <StyledTableCell>Calories</StyledTableCell>
             <StyledTableCell>Fat&nbsp;(g)</StyledTableCell>
             <StyledTableCell>Carbs&nbsp;(g)</StyledTableCell>
             <StyledTableCell>Protein&nbsp;(g)</StyledTableCell>
   */}
-            {columns.map((item, index) => (
-              <StyledTableCell sx={{whiteSpace: "nowrap"}}>{item.headerName}</StyledTableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.id}>
-              {/* <StyledTableCell component="th" scope="row">
+              {columns.map((item, index) => (
+                <StyledTableCell sx={{ whiteSpace: "nowrap" }}>
+                  {item.headerName}
+                </StyledTableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <StyledTableRow key={row.id}>
+                {/* <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
               <StyledTableCell>{row.calories}</StyledTableCell>
@@ -200,22 +200,30 @@ export default function ReportDetailsTable() {
               <StyledTableCell>{row.carbs}</StyledTableCell>
               <StyledTableCell>{row.carbs}</StyledTableCell>
           <StyledTableCell>{row.carbs}</StyledTableCell> */}
-              {columns.map((col: IHeader, index) => (
-                <>
-                  {/*<StyledTableCell>{row.shop}</StyledTableCell>*/}
-                  <StyledTableCell
-                  sx={ getStyleFor(row, col.field) }
-                  >
-                    
-                    {row[col.field as keyof typeof row] || "-"}
-                  </StyledTableCell>
-                </>
-              ))}
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                {columns.map((col: IHeader, index) => (
+                  <>
+                    {/*<StyledTableCell>{row.shop}</StyledTableCell>*/}
+                    <StyledTableCell sx={getStyleFor(row, col.field)}>
+                      {row[col.field as keyof typeof row] || "-"}
+                    </StyledTableCell>
+                  </>
+                ))}
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Box
+        sx={{
+          display: "flex",
+          py: 2,
+          width: "100%",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Pagination count={10} />
+      </Box>
+    </Box>
   );
 }
 
