@@ -28,6 +28,7 @@ import { PersistGate } from "redux-persist/integration/react";
 //import store from './store';
 
 import unpersistableReducer from "./debug/unpersistableSlice";
+import themeReducer from "./visualThemeSlice";
 
 //import App from './App';
 
@@ -40,6 +41,7 @@ const persistConfig = {
     //"posts",
     //"users",
     //"alldictonaries"
+    "colorTheme"
   ],
   storage
 };
@@ -47,7 +49,8 @@ const persistConfig = {
 const reducers = combineReducers({
   //  counter: counterReducer,
   //  inptf: inputReducer,
-  unpersistable: unpersistableReducer
+  unpersistable: unpersistableReducer,
+  colorTheme: themeReducer
   //
   //  posts: postReducer,
   //  users: externalFetchReducer,

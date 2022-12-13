@@ -56,7 +56,7 @@ export const Home = () => {
               variant="contained"
               component={Link}
               to="/reports"
-              sx={{ color: '#ffffff',  boxShadow: 0, ...bluegreen_bg}}
+              sx={{ color: '#ffffff',  boxShadow: 0, background: theme.palette.common.buttonGradient,}}
               //onClick={() => setIsLoggedIn(true)}
             >
               К отчетам

@@ -14,7 +14,7 @@ import { bluegreen_bg, panel_bg, StyledTableCell, StyledTableRow } from "_styles
 import Grid from "@mui/material/Grid";
 import { GridOverlay } from "@mui/x-data-grid";
 import TextField from "@mui/material/TextField";
-import { Heading, ItemInfo, ItemName } from "_components/GridTableComponents";
+import { Heading, ItemInfo, ItemName } from "_styles/GridTableComponents";
 
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "./logo.svg";
-import "./App.css";
+//import "./App.css";
 
 //---------------router----------------------//
 import {
@@ -63,7 +63,7 @@ function App() {
     
     
     <Box
-     className={theme.palette.mode === 'light' ? "bgimage" :''}
+     className={theme.palette.mode === 'light' ? "main_bgimage" :''}
       sx={{
         display: "flex",
         minHeight: "100vh",

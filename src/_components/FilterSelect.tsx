@@ -21,11 +21,14 @@ export default function FilterSelect({label}:IFilterSelectProps) {
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">{label}</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="simple-select-label"
+          id="simple-select"
           value={age}
           label={label}//"Age"
           onChange={handleChange}
+          MenuProps={{
+            disableScrollLock: true,
+          }}
         >
           <MenuItem value={10}>One</MenuItem>
           <MenuItem value={20}>Two</MenuItem>

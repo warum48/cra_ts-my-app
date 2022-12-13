@@ -106,8 +106,8 @@ export function Auth({ setIsLoggedIn }: IAuth) {
             alt="logo"
             src={
               theme.palette.mode === "dark"
-                ? "./surlogo_white.png"
-                : "./surlogo.png"
+                ? "/surlogo_white.png"
+                : "/surlogo.png"
             }
           />
 
@@ -148,7 +148,10 @@ export function Auth({ setIsLoggedIn }: IAuth) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 , color: '#ffffff',  ...bluegreen_bg}}
+              sx={{ mt: 3, mb: 2 , color: '#ffffff', 
+               //...bluegreen_bg
+               background: theme.palette.common.buttonGradient,
+              }}
               //just placeholder:
               onClick={() => setIsLoggedIn(true)}
             >

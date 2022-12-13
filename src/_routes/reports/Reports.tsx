@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 //------MUI-----
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
@@ -14,6 +14,8 @@ import ReportMainTable from "_routes/reports/components/ReportMainTable";
 import FilterSelect from "_components/FilterSelect";
 import Stack from "@mui/system/Stack";
 import { StackHeader } from "_styles/jsstyles";
+import SelectAdvanced from  "_components/SelectAdvanced";
+import { Filters } from "./components/Filters"
 
 const Container = styled(Box)`
   position: relative;
@@ -27,6 +29,7 @@ const Container = styled(Box)`
 `;
 
 export const Reports = () => {
+  const theme = useTheme();
   useEffect(() => {
     console.log("home");
   }, []);
@@ -44,16 +47,9 @@ export const Reports = () => {
           <ReportMainTable />
         </Grid>
         <Grid item xs={3}>
-          <Paper sx={{ ml: 2, p: 2 }}>
-            <Stack spacing={2}>
-              {/*<StackHeader>Отфильтровать по: </StackHeader>*/}
-              <Typography variant="subtitle2" >Отфильтровать по:</Typography>
-              <FilterSelect label={"Статус"} />
-              <FilterSelect label={"Источник"} />
-              <FilterSelect label={"Задача"} />
-              <FilterSelect label={"Регион"} />
-            </Stack>
-          </Paper>
+        
+<Filters/>
+
         </Grid>
         {/*<Grid item xs={12}>
           <Divider sx={{ mt: 4 }} />
@@ -63,3 +59,35 @@ export const Reports = () => {
     </>
   );
 };
+
+  /*<SelectAdvanced/>
+  <SelectAdvanced/>
+  <SelectAdvanced/>
+  <SelectAdvanced/>*/
+
+
+  /*
+  <Paper sx={{ ml: 2, p: 2 }}>
+            <Stack spacing={2}>
+              
+              <Typography variant="subtitle2" >Отфильтровать по:</Typography>
+              <FilterSelect label={"Статус"} />
+              <FilterSelect label={"Источник"} />
+              <FilterSelect label={"Задача"} />
+  <FilterSelect label={"Регион"} />
+
+  <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            color: "#ffffff",
+            boxShadow: 0,
+            background: theme.palette.common.buttonGradient,
+          }}
+          //onClick={() => setIsLoggedIn(true)}
+        >
+          Очистить фильтры
+        </Button>
+            </Stack>
+          </Paper>
+          */

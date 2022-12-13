@@ -6,6 +6,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -78,6 +79,7 @@ const itemCategory = {
 
 export function Navigator(props: any) {
   const { ...other } = props;
+  const theme = useTheme();
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -95,8 +97,10 @@ export function Navigator(props: any) {
           height: "100%",
           paddingTop: "30px",
           textAlign: "left",
-          ...bluegreen_bg_130_dark,
+          //...bluegreen_bg_130_dark,
+          background: theme.palette.common.mainGradientBg_135,
           ...grayLines,
+
           //background: 'linear-gradient(180deg,#014f71 1.2%,#3caa42 90.53%)'
           //background: 'linear-gradient(130deg,#014f71 35.2%,#36993b 96.53%)'
           //background: 'linear-gradient(130deg,#026189 35.2%,#36993b 96.53%)'
@@ -112,7 +116,7 @@ export function Navigator(props: any) {
             marginLeft: "30px",
           }}
           alt="logo"
-          src="./surlogo_white.png"
+          src="/surlogo_white.png"
         />
         <List disablePadding>
           {categories.map(({ id, children, active, icon, route }) => (

@@ -20,6 +20,7 @@ import Paper from "@mui/material/Paper";
 import { StyledTableCell, StyledTableRow } from "_styles/jsstyles";
 import { rows } from "_components/debug/_mockrows";
 import Pagination from "@mui/material/Pagination";
+import { useQuery, gql } from '@apollo/client';
 
 type IHeader = {
   field: string;
@@ -104,13 +105,7 @@ export default function ReportDetailsTable() {
         <Table sx={{ minWidth: 300 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              {/*}
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell>Calories</StyledTableCell>
-            <StyledTableCell>Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell>Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell>Protein&nbsp;(g)</StyledTableCell>
-  */}
+              
               {columns.map((item, index) => (
                 <StyledTableCell sx={{ whiteSpace: "nowrap" }}>
                   {item.headerName}
@@ -121,16 +116,7 @@ export default function ReportDetailsTable() {
           <TableBody>
             {rows.map((row) => (
               <StyledTableRow key={row.id}>
-                {/* <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell>{row.calories}</StyledTableCell>
-              <StyledTableCell>{row.fat}</StyledTableCell>
-              <StyledTableCell>{row.carbs}</StyledTableCell>
-              <StyledTableCell sx={{color:'red'}}>{row.protein}</StyledTableCell>
-              <StyledTableCell>{row.carbs}</StyledTableCell>
-              <StyledTableCell>{row.carbs}</StyledTableCell>
-          <StyledTableCell>{row.carbs}</StyledTableCell> */}
+                
                 {columns.map((col: IHeader, index) => (
                   <>
                     {/*<StyledTableCell>{row.shop}</StyledTableCell>*/}

@@ -16,6 +16,7 @@ import { Steps } from "_routes/reports/details/components/Steps";
 import { Info } from "_routes/reports/details/components/Info";
 import { Geolocation } from "_routes/reports/details/components/Geolocation";
 import Button from "@mui/material/Button";
+import { DisplayLocations } from "_components/debug/ApolloTest";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -34,11 +35,7 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 0 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
     </div>
   );
 }
@@ -186,36 +183,36 @@ export default function ReportDetails() {
   const reportDetailsTabs = {
     info: {
       name: "Информация",
-      component: <Info/>
+      component: <Info />,
     },
     steps: {
       name: "Шаги и задачи",
-      component: <Steps/>
+      component: <Steps />,
     },
     pictures: {
       name: "Изображения",
-      component:<Empty/>
+      component: <Empty />,
     },
     ankets: {
       name: "Анкеты",
-      component: <Empty/>
+      component: <DisplayLocations />,
     },
     assortment: {
       name: "Ассортимент магазина",
-      component: <Assortment/>
+      component: <Assortment />,
     },
     absence_reasons: {
       name: "Причины отсутствия товаров",
-      component: <Empty/>
+      component: <Empty />,
     },
     geolocation: {
       name: "Геолокация",
-      component: <Geolocation/>
-    }
+      component: <Geolocation />,
+    },
   };
 
   return (
-    <Box sx={{ width: "100%", mb:3 }}>
+    <Box sx={{ width: "100%", mb: 3 }}>
       {/*<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
@@ -234,7 +231,7 @@ export default function ReportDetails() {
         </TabPanel>
       ))}*/}
 
-<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -243,41 +240,44 @@ export default function ReportDetails() {
           variant="scrollable"
         >
           {Object.entries(reportDetailsTabs).map(([key, item], index) => (
-            <Tab key={'tab'+key} label={item.name} {...a11yProps(index)} sx={{fontSize:'12px'}}/>
+            <Tab
+              key={"tab" + key}
+              label={item.name}
+              {...a11yProps(index)}
+              sx={{ fontSize: "12px" }}
+            />
           ))}
         </Tabs>
       </Box>
 
       {Object.entries(reportDetailsTabs).map(([key, item], index) => (
-        <TabPanel 
-        value={value} 
-        index={index}
-        key={'panel'+key}
-        >
-            
+        <TabPanel value={value} index={index} key={"panel" + key}>
           {item.component}
         </TabPanel>
       ))}
 
-<Box sx={{pt:2}}>
-<Button
-              type="submit"
-              variant="contained"
-              sx={{ color: '#ffffff',  boxShadow: 0, ...bluegreen_bg}}
-              //onClick={() => setIsLoggedIn(true)}
-            >
-              Сохранить
-            </Button>
-            <Button
-              type="submit"
-              variant="outlined"
-              sx={{mx:2, ...panel_bg[theme.palette.mode]}}
-              //onClick={() => setIsLoggedIn(true)}
-            >
-              Сохранить и продолжить редактирование
-            </Button>
-            </Box>
-
+      <Box sx={{ pt: 2 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            color: "#ffffff",
+            boxShadow: 0,
+            background: theme.palette.common.buttonGradient,
+          }}
+          //onClick={() => setIsLoggedIn(true)}
+        >
+          Сохранить
+        </Button>
+        <Button
+          type="submit"
+          variant="outlined"
+          sx={{ mx: 2, ...panel_bg[theme.palette.mode] }}
+          //onClick={() => setIsLoggedIn(true)}
+        >
+          Сохранить и продолжить редактирование
+        </Button>
+      </Box>
     </Box>
   );
 }

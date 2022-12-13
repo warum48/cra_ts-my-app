@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha , useTheme} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -66,6 +66,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchBar() {
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -96,7 +97,10 @@ export default function SearchBar() {
           <Button
               type="submit"
               variant="contained"
-              sx={{ color: '#ffffff',  ...bluegreen_bg}}
+              sx={{ color: '#ffffff', 
+               //...bluegreen_bg,
+               background: theme.palette.common.buttonGradient,
+              }}
               //just placeholder:
               //onClick={() => setIsLoggedIn(true)}
             >
