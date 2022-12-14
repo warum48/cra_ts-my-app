@@ -55,9 +55,42 @@ code {
 }*/
 
 .react-select__control{
-  background-color: #ffffff00;
+  background-color: #ffffff;
+  color:black;
 }
-.react-select__menu, react-select__menu-list, react-select__option{
+.react-select-dark__value-container{
+  color:white;
+}
+.react-select-dark__input-container, .react-select-dark__single-value{
+  color:white;
+}
+
+.react-select-dark__control{
+  background-color: #131313;
+  color:white;
+}
+
+/*.react-select__menu,  .react-select__option{
   background-color: #ffffff22;
+  color:black;
+}*/
+
+.react-select-dark__menu,  .react-select-dark__option{
+  background-color: #222222;
+  color:white;
 }
+
+
+.react-select-dark__option--is-focused, .react-select-dark__option--is-selected{
+  background-color: #206bc433;
+  color:white;
+}
+
+/*react-select__option
+
+'option--is-disabled': isDisabled,
+        'option--is-focused': isFocused,
+        'option--is-selected': isSelected,
+
+*/
 

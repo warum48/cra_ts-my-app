@@ -124,7 +124,7 @@ export const GlobalProvider = ({ children }: Props) => {
     palette: {
       mode: "light",
       background: {
-        default: colorSet === 'strong' ? '#f3f6f9' : '#f6f6f6',//"#efefef",
+        default: colorSet === 'strong' ? '#f3f6f9' : '#f3f3f3',//"#efefef",
       },
       //primary: {
        // main: '#ff4400',

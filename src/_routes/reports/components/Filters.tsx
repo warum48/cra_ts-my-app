@@ -64,7 +64,7 @@ export const Filters = () => {
         options={options}
         value={selectedOption}
        // styles={select_styles}
-        classNamePrefix="react-select"
+        classNamePrefix={theme.palette.mode === "dark" ? "react-select-dark" : "react-select"}
       />
       {/*
  <Select
