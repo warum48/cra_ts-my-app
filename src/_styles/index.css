@@ -53,3 +53,11 @@ code {
     transform: scale(1);
 }
 }*/
+
+.react-select__control{
+  background-color: #ffffff00;
+}
+.react-select__menu, react-select__menu-list, react-select__option{
+  background-color: #ffffff22;
+}
+

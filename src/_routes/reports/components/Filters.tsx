@@ -6,6 +6,22 @@ import Select, {
     ActionMeta }  from 'react-select';
 import { colourOptions } from '_components/debug/_mockadvsel';
 
+const select_styles  = {
+    option: (provided:any, state:any) => ({
+      ...provided,
+      fontWeight: state.isSelected ? "bold" : "normal",
+      color: "white",
+      backgroundColor: 'yellow', //state.data.color,
+      fontSize: state.selectProps.myFontSize
+    }),
+    singleValue: (provided:any, state:any) => ({
+      ...provided,
+      backgroundColor: 'yellow',
+      color: 'yellow', //state.data.color,
+      fontSize: state.selectProps.myFontSize
+    })
+  };
+
 const options = [
     { value: 1, label: "One" },
     { value: 2, label: "two" },
@@ -35,6 +51,9 @@ export const Filters = () => {
             <Stack spacing={2}>
               {/*<StackHeader>Отфильтровать по: </StackHeader>*/}
               <Typography variant="subtitle2" >Отфильтровать по:</Typography>
+              {selectedOption && 
+              <code>debug: {selectedOption?.label}</code>
+}
               {/*<FilterSelect label={"Статус"} />
               <FilterSelect label={"Источник"} />
               <FilterSelect label={"Задача"} />
@@ -44,6 +63,8 @@ export const Filters = () => {
         onChange={handleChange}
         options={options}
         value={selectedOption}
+       // styles={select_styles}
+        classNamePrefix="react-select"
       />
       {/*
  <Select
