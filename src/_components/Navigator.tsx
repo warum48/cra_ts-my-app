@@ -56,8 +56,8 @@ const categories = [
     id: "Экспорт данных",
     icon: <DownloadIcon />,
     children: [
-      { id: "Выполнение задач", icon: <SettingsIcon />, active: false },
-      { id: "Изображения", icon: <TimerIcon /> },
+      { id: "Выполнение задач", icon: <SettingsIcon />, active: false, route: RoutesTypes.Pictures }, //Execution,
+      { id: "Изображения", icon: <TimerIcon />, route: RoutesTypes.Pictures, },
     ],
   },
 ];
@@ -125,8 +125,8 @@ export function Navigator(props: any) {
               disablePadding key={id}
               //sx={{ paddingBottom: children ? "2px" : 2, px: 0 }}
               >
-                <ListItemButton selected={active} sx={{ ...item, m:0 , px:3, marginBottom: children ? "2px" : 2  }}
-                 component={Link} to={route || '/'}
+                <ListItemButton selected={active} sx={{ ...item, m:0 , px:3, marginBottom: children ? "2px" : 2 , opacity:!!route ? "1  !important"  : "0.6 !important"}}
+                 component={Link} to={route || '/'} disabled={!route}
                  >
                   <ListItemIcon sx={{ color: "#fff", minWidth: "40px" }}>
                     {" "}
@@ -135,10 +135,10 @@ export function Navigator(props: any) {
                   <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
                 </ListItemButton>
               </ListItem>
-              {children?.map(({ id: childId, icon, active }) => (
+              {children?.map(({ id: childId, icon, active, route }) => (
                 <ListItem disablePadding key={childId}>
-                  <ListItemButton selected={active} sx={item}>
-                    <ListItemText sx={{ marginLeft: "40px" }}>
+                  <ListItemButton selected={active} sx={item} component={Link} to={route || '/'} >
+                    <ListItemText sx={{ marginLeft: "40px", color: "#fff"  }} >
                       {childId}
                     </ListItemText>
                   </ListItemButton>

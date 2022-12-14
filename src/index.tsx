@@ -11,8 +11,10 @@ import { ReduxWrapper } from "_redux/ReduxWrapper";
 import { GlobalProvider } from "_context/ContextGlobal";
 import { Home } from "_routes/home/Home";
 import { Reports } from "_routes/reports/Reports";
+import { Execution } from "_routes/export/Execution";
+import { ExportPictures} from "_routes/export/Pictures";
 import { Auth } from "_components/Auth";
-import {LightMode} from "_components/LightMode";
+import { LightMode } from "_components/LightMode";
 //-----------------------TYPES-------------------------
 import { RoutesTypes } from "_types/TYPES";
 import ReportDetails from "_routes/reports/details/ReportDetails";
@@ -24,33 +26,30 @@ const RootWrapper = () => {
     <>
       {!isLoggedIn ? (
         <>
-        <Toolbar>
-          <Grid container spacing={1} alignItems="center">
-            
-            <Grid item xs />
-            
-            
-            
-            <Grid item>
-             <LightMode/>
-             </Grid>
-          </Grid>
-        </Toolbar>
-        <Auth setIsLoggedIn={setIsLoggedIn}/>
+          <Toolbar>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item xs />
+
+              <Grid item>
+                <LightMode />
+              </Grid>
+            </Grid>
+          </Toolbar>
+          <Auth setIsLoggedIn={setIsLoggedIn} />
         </>
       ) : (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />}>
               <Route path={RoutesTypes.Home} element={<Home />} />
+              <Route path={RoutesTypes.Reports} element={<Reports />} />
               <Route
-                    path={RoutesTypes.Reports}
-                    element={<Reports />}
-                  />
-                  <Route
-                    path={RoutesTypes.Reports + "/:id"}
-                    element={<ReportDetails />}
-                  />
+                path={RoutesTypes.Reports + "/:id"}
+                element={<ReportDetails />}
+              />
+              
+              <Route path={RoutesTypes.Execution} element={<Execution />} />
+              <Route path={RoutesTypes.Pictures} element={<ExportPictures />} />
             </Route>
             <Route path="*" element={<App />} />
           </Routes>

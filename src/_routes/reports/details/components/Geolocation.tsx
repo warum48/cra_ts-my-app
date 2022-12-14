@@ -16,7 +16,7 @@ import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import Grid from "@mui/material/Grid";
 import { panel_bg, StyledTableCell, StyledTableRow } from "_styles/jsstyles";
 import "_styles/leaflet.css";
-import { Heading, ItemInfo, ItemName } from "_styles/GridTableComponents";
+import { Heading, ItemInfo, ItemName } from "_styles/MuiStyledComponents";
 
 export function Geolocation() {
   const theme = useTheme();

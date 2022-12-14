@@ -114,7 +114,7 @@ function App() {
         </Box>
         <Box component="footer" sx={{ p: 2, mx: 4 }}>
 
-          <Divider sx={{ mr:'25px'}} />
+          {/*<Divider sx={{ mr:'25px'}} />*/}
           <GoToTop/>
           <Typography variant="caption">
             © ООО "УК "Бизнес Решения", 2022. Все права защищены.

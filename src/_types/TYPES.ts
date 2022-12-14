@@ -1,6 +1,8 @@
 export enum RoutesTypes { 
   Home = "/",
   Reports = "/reports",
+  Execution = "/execution",
+  Pictures = "/pictures"
   //Help = "/help",
   //Edit = "/edit",
 }
