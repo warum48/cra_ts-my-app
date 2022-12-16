@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { StyledTableCell, StyledTableRow } from "_styles/jsstyles";
+import { TableTemplate } from "_components/TableTemplate";
 //import { rows } from "_components/debug/_mockrows";
 
 
@@ -106,7 +107,7 @@ export function Assortment() {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <>{/*<TableContainer component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -132,7 +133,9 @@ export function Assortment() {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+              </TableContainer>*/}
+              <TableTemplate<Item> rows={rows} columns={columns} getStyle={getStyleFor}/>
+              </>
   );
 }
 

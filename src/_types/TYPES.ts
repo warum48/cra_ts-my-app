@@ -2,7 +2,10 @@ export enum RoutesTypes {
   Home = "/",
   Reports = "/reports",
   Execution = "/execution",
-  Pictures = "/pictures"
+  Pictures = "/pictures",
+  Debug_GQL = "/debug_gql",
+  Debug_LazyGQL = "/debug_lazygql",
+  Debug_LazySelect = "/debug_lazyselect",
   //Help = "/help",
   //Edit = "/edit",
 }

@@ -58,8 +58,10 @@ export const ExportPictures = () => {
 
   const options = [
     { value: 1, label: "One" },
-    { value: 2, label: "two" },
+    { value: 2, label: "two two two two two" },
     { value: 3, label: "three three three three three three three" },
+    {value: 4, label: "four four four four four" },
+    {value: 5, label: "five five five" },
   ];
   const optionsSteps = [
     { value: 1, label: "One" },

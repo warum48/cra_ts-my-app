@@ -10,7 +10,7 @@ const GET_LOCATIONS = gql`
   }
 `;
 
-export function DisplayLocations() {
+export function ApolloTest() {
     const { loading, error, data } = useQuery(GET_LOCATIONS);
   
     if (loading) return <p>Loading...</p>;

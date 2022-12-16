@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import { bluegreen_bg, panel_bg, StyledTableCell, StyledTableRow } from "_styles/jsstyles";
+//import { bluegreen_bg, panel_bg, StyledTableCell, StyledTableRow } from "_styles/jsstyles";
 
 import Grid from "@mui/material/Grid";
 import { GridOverlay } from "@mui/x-data-grid";

@@ -27,11 +27,15 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { bluegreen_bg, panel_bg, panel_bg_dark } from "_styles/jsstyles";
+import { //bluegreen_bg, 
+  panel_bg, 
+  //panel_bg_dark 
+} from "_styles/jsstyles";
 
 {
   /*function Copyright(props: any) {
@@ -76,14 +80,14 @@ export function Auth({ setIsLoggedIn }: IAuth) {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         
-        <Box
+        <Paper
           sx={{
             marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             p:3,
-            ...panel_bg[theme.palette.mode]
+            //...panel_bg[theme.palette.mode]
             //py: 2, px:2,
            // my: 0, mx: 4,
               
@@ -170,7 +174,7 @@ export function Auth({ setIsLoggedIn }: IAuth) {
               </Grid>
 </Grid>*/}
           </Box>
-        </Box>
+        </Paper>
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>

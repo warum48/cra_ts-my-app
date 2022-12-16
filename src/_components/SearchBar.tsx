@@ -16,7 +16,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { bluegreen_bg, panel_bg } from '_styles/jsstyles';
+import { 
+  //bluegreen_bg, 
+  panel_bg } from '_styles/jsstyles';
 
 const Search = styled(Box)(({ theme }) => ({
   position: 'relative',

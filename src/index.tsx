@@ -18,6 +18,9 @@ import { LightMode } from "_components/LightMode";
 //-----------------------TYPES-------------------------
 import { RoutesTypes } from "_types/TYPES";
 import ReportDetails from "_routes/reports/details/ReportDetails";
+import { ApolloTest } from "_components/debug/ApolloTest";
+import { ApolloFetchOnClick } from "_components/debug/ApolloFetchOnClick";
+import { ApolloLazySelect } from "_components/debug/ApolloLazySelect";
 
 const RootWrapper = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -50,6 +53,9 @@ const RootWrapper = () => {
               
               <Route path={RoutesTypes.Execution} element={<Execution />} />
               <Route path={RoutesTypes.Pictures} element={<ExportPictures />} />
+              <Route path={RoutesTypes.Debug_GQL} element={<ApolloTest/>} />
+              <Route path={RoutesTypes.Debug_LazyGQL} element={<ApolloFetchOnClick/>} />
+              <Route path={RoutesTypes.Debug_LazySelect} element={<ApolloLazySelect/>} />
             </Route>
             <Route path="*" element={<App />} />
           </Routes>

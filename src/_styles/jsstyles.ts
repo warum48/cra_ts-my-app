@@ -7,7 +7,7 @@ import { url } from 'inspector';
 
 //const theme = useTheme();
 
-export const bluegreen_bg = {
+/*export const bluegreen_bg = {
   background: "linear-gradient(90deg,#0098d7 1.2%,#3caa42 90.53%)",
 };
 export const bluegreen_bg_vert = {
@@ -21,7 +21,7 @@ export const panel_bg_light = {
 };
 export const panel_bg_dark = {
   background: "rgba(255,255,255,0.3)",
-};
+};*/
 export const panel_bg = {
   dark: { background: "rgba(255,255,255,0.1)" },
   light: { background: "white" }

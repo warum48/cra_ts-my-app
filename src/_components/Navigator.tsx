@@ -23,10 +23,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import DownloadIcon from "@mui/icons-material/Download";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import {
-  bluegreen_bg,
-  bluegreen_bg_130_dark,
-  bluegreen_bg_vert,
+  //bluegreen_bg,
+  //bluegreen_bg_130_dark,
+  //bluegreen_bg_vert,
   grayLines,
 } from "_styles/jsstyles";
 import { RoutesTypes } from "_types/TYPES";
@@ -56,8 +57,17 @@ const categories = [
     id: "Экспорт данных",
     icon: <DownloadIcon />,
     children: [
-      { id: "Выполнение задач", icon: <SettingsIcon />, active: false, route: RoutesTypes.Pictures }, //Execution,
+      { id: "Выполнение задач", icon: <SettingsIcon />, active: false, route: RoutesTypes.Execution }, //Execution,
       { id: "Изображения", icon: <TimerIcon />, route: RoutesTypes.Pictures, },
+    ],
+  },
+  {
+    id: "Debug",
+    icon: <SmartToyIcon />,
+    children: [
+      { id: "GraphQL query",  active: false, route: RoutesTypes.Debug_GQL }, //Execution,
+      { id: "GraphQL lazy",  route: RoutesTypes.Debug_LazyGQL, },
+      { id: "Lazy Select",  route: RoutesTypes.Debug_LazySelect, },
     ],
   },
 ];
@@ -135,7 +145,7 @@ export function Navigator(props: any) {
                   <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
                 </ListItemButton>
               </ListItem>
-              {children?.map(({ id: childId, icon, active, route }) => (
+              {children?.map(({ id: childId, active, route }) => (
                 <ListItem disablePadding key={childId}>
                   <ListItemButton selected={active} sx={item} component={Link} to={route || '/'} >
                     <ListItemText sx={{ marginLeft: "40px", color: "#fff"  }} >

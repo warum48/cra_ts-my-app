@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import ReportDetails from "_routes/reports/details/ReportDetails";
 import Information from "_routes/reports/details/components/Information";
 import { Typography } from "@mui/material";
-import { bluegreen_bg } from "_styles/jsstyles";
+//import { bluegreen_bg } from "_styles/jsstyles";
 
 const Container = styled(Box)`
   position: relative;
