@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useLazyQuery } from "@apollo/client";
 import Select, {
@@ -18,6 +19,15 @@ const GET_LOCATIONS = gql`
 export function ApolloLazySelect() {
  
   const [getCountries, { loading, error, data }] = useLazyQuery(GET_LOCATIONS);
+  const [optionsAr, setOptionsAr] = React.useState([]) 
+
+ React.useEffect(()=>{
+  var newArr = data?.locations.map(function(val:any, index:number){
+   // return {key:index, value:val*val};
+   return {value:val.id, label:val.name}
+})
+setOptionsAr (newArr);
+ },[data])
 
   //if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
@@ -30,7 +40,8 @@ export function ApolloLazySelect() {
               isMulti={true}
                 //defaultValue={options[0] }
                 //onChange={handleChangeTasks}
-                options={data?.locations || []}
+                //options={data?.locations || []}
+                options={optionsAr}
                // value={selectedOptionTasks}
                 placeholder={"Выберите шаг задачи"}
                 noOptionsMessage={() => "Загрузка"} //({inputValue}) => !inputValue ? noOptionsText : 

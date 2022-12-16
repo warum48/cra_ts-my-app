@@ -87,6 +87,10 @@ code {
   color:white;
 }
 
+.react-select-dark__multi-value__remove{
+  background-color: gray;
+}
+
 /*react-select__option
 
 'option--is-disabled': isDisabled,
