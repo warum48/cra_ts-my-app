@@ -3,9 +3,11 @@ export enum RoutesTypes {
   Reports = "/reports",
   Execution = "/execution",
   Pictures = "/pictures",
+  //---debug---
   Debug_GQL = "/debug_gql",
   Debug_LazyGQL = "/debug_lazygql",
   Debug_LazySelect = "/debug_lazyselect",
+  Debug_LeafletPure = "/debug_leafletpure",
   //Help = "/help",
   //Edit = "/edit",
 }

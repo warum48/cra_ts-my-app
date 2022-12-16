@@ -67,7 +67,8 @@ const categories = [
     children: [
       { id: "GraphQL query",  active: false, route: RoutesTypes.Debug_GQL }, //Execution,
       { id: "GraphQL lazy",  route: RoutesTypes.Debug_LazyGQL, },
-      { id: "Lazy Select",  route: RoutesTypes.Debug_LazySelect, },
+      { id: "Lazy GQL Select",  route: RoutesTypes.Debug_LazySelect, },
+      { id: "Leaflet pure",  route: RoutesTypes.Debug_LeafletPure, },
     ],
   },
 ];

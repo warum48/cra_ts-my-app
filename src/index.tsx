@@ -21,6 +21,7 @@ import ReportDetails from "_routes/reports/details/ReportDetails";
 import { ApolloTest } from "_components/debug/ApolloTest";
 import { ApolloFetchOnClick } from "_components/debug/ApolloFetchOnClick";
 import { ApolloLazySelect } from "_components/debug/ApolloLazySelect";
+import { LeafletPure } from "_components/debug/LeafletPure";
 
 const RootWrapper = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -56,6 +57,7 @@ const RootWrapper = () => {
               <Route path={RoutesTypes.Debug_GQL} element={<ApolloTest/>} />
               <Route path={RoutesTypes.Debug_LazyGQL} element={<ApolloFetchOnClick/>} />
               <Route path={RoutesTypes.Debug_LazySelect} element={<ApolloLazySelect/>} />
+              <Route path={RoutesTypes.Debug_LeafletPure} element={<LeafletPure/>} />
             </Route>
             <Route path="*" element={<App />} />
           </Routes>
