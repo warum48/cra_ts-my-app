@@ -16,6 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "_redux/ReduxWrapper";
 //--------context----------------
 import { GlobalContext } from "_context/ContextGlobal";
+//--------FORM--------
+//import {FormContainer, TextFieldElement, PasswordElement, FieldError, useWatch, useForm, } from 'react-hook-form-mui'
 //--------MUI---------
 //import * as React from 'react';
 import Avatar from "@mui/material/Avatar";
@@ -32,9 +34,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { //bluegreen_bg, 
-  panel_bg, 
-  //panel_bg_dark 
+import { Controller, useForm } from "react-hook-form";
+import {
+  //bluegreen_bg,
+  panel_bg,
+  //panel_bg_dark
 } from "_styles/jsstyles";
 
 {
@@ -64,35 +68,65 @@ interface IAuth {
   setIsLoggedIn: (value: boolean) => void; //Dispatch<SetStateAction<<boolean>>
 }
 
+type AForm = {
+  email: string;
+  password: string;
+};
+
 export function Auth({ setIsLoggedIn }: IAuth) {
   const theme = useTheme();
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const { control, formState, handleSubmit, watch } = useForm<AForm>({
+    mode: "onTouched",
+   // mode:'onBlur'
+  });
+
+  const onSubmit = (data: AForm) => {
+    console.log(data);
+    setIsLoggedIn(true);
+  }
+  /*const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log('trysubmit');
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
-  };
+  };*/
+
+  //----
+  /*const [name, email] = useWatch({
+    name: ['name', 'email']
+  })*/
+  /*const formContext = useForm<{ name: string }>({
+    defaultValues: {
+      name: 'Hans'
+    }
+  })
+  const {handleSubmit} = formContext
+
+  const action = (act:string) => {
+console.log('act');
+  }*/
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        
+
         <Paper
           sx={{
             marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            p:3,
+            p: 3,
             //...panel_bg[theme.palette.mode]
             //py: 2, px:2,
-           // my: 0, mx: 4,
-              
+            // my: 0, mx: 4,
+
             //  bgcolor: '#ffffff'
-                
           }}
         >
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -102,8 +136,8 @@ export function Auth({ setIsLoggedIn }: IAuth) {
           <Box
             component="img"
             sx={{
-              height: 53/3*2,
-              width: 222/3*2,
+              height: (53 / 3) * 2,
+              width: (222 / 3) * 2,
               //maxHeight: { xs: 233, md: 167 },
               //maxWidth: { xs: 350, md: 250 },
             }}
@@ -119,31 +153,101 @@ export function Auth({ setIsLoggedIn }: IAuth) {
             Sign in {theme.palette.mode}
     </Typography>*/}
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
+            //component="form"
+            //onSubmit={handleSubmit}
+            //onSubmit={handleSubmit(onSubmit)}
+            //noValidate
             sx={{ mt: 1 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
+            {/*} <FormContainer
+            //defaultValues={{name: ''}}
+            handleSubmit={handleSubmit}
+            onSuccess={data => console.log(data)}
+        >
+          <TextFieldElement
+        required
+        fullWidth
+        parseError={((error: FieldError) => "Проверьте правильность")}
+        type={'email'}
+        margin={'dense'}
+        label={'Email'}
+        name={'email'}
+      />
+      <PasswordElement margin={'dense'}
+      fullWidth
+        label={'Password'}
+        required
+        name={'password'}
+      />
+  </FormContainer>*/}
+  <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+            defaultValue = {''}
               name="email"
-              autoComplete="email"
-              autoFocus
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Это поля обязательное",
+                },
+                pattern: {
+                  //value: /\d+/,
+                  value: /^\S+@\S+$/i,
+                  message: 'Некорректный ввод',
+                },
+              }}
+              render={({
+                field,
+                fieldState: { invalid, isTouched, isDirty, error },
+              }) => (
+                <TextField
+                {...field}
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  //name="email"
+                  autoComplete="email"
+                  autoFocus
+                  error={invalid && isTouched}
+                  helperText={error?.message}
+                  //defaultValue={''}
+                />
+              )}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
+
+            <Controller
+            defaultValue = {''}
               name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Надо заполнить",
+                },
+              }}
+              render={({
+                field,
+                fieldState: { invalid, isTouched, isDirty, error },
+              }) => (
+                <TextField
+                {...field}
+                  margin="normal"
+                  required
+                  fullWidth
+                  //name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  error={invalid && isTouched}
+                  helperText={error?.message}
+                  //defaultValue={''}
+                />
+              )}
             />
+
             {/*<FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -152,15 +256,19 @@ export function Auth({ setIsLoggedIn }: IAuth) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 , color: '#ffffff', 
-               //...bluegreen_bg
-               background: theme.palette.common.buttonGradient,
+              sx={{
+                mt: 3,
+                mb: 2,
+                color: "#ffffff",
+                //...bluegreen_bg
+                background: theme.palette.common.buttonGradient,
               }}
               //just placeholder:
-              onClick={() => setIsLoggedIn(true)}
+              //onClick={() => setIsLoggedIn(true)}
             >
               Войти
             </Button>
+            </form>
             {/*<Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -180,3 +288,5 @@ export function Auth({ setIsLoggedIn }: IAuth) {
     </ThemeProvider>
   );
 }
+
+//https://stackoverflow.com/questions/70129485/react-hook-form-validation-with-material-ui-textfield-is-not-working
