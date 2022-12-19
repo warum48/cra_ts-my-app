@@ -40,6 +40,7 @@ import {
   panel_bg,
   //panel_bg_dark
 } from "_styles/jsstyles";
+import { DebugBox } from "./debug/DebugBox";
 
 {
   /*function Copyright(props: any) {
@@ -78,13 +79,13 @@ export function Auth({ setIsLoggedIn }: IAuth) {
 
   const { control, formState, handleSubmit, watch } = useForm<AForm>({
     mode: "onTouched",
-   // mode:'onBlur'
+    // mode:'onBlur'
   });
 
   const onSubmit = (data: AForm) => {
     console.log(data);
     setIsLoggedIn(true);
-  }
+  };
   /*const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     console.log('trysubmit');
     event.preventDefault();
@@ -180,94 +181,94 @@ console.log('act');
         name={'password'}
       />
   </FormContainer>*/}
-  <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-            defaultValue = {''}
-              name="email"
-              control={control}
-              rules={{
-                required: {
-                  value: true,
-                  message: "Это поля обязательное",
-                },
-                pattern: {
-                  //value: /\d+/,
-                  value: /^\S+@\S+$/i,
-                  message: 'Некорректный ввод',
-                },
-              }}
-              render={({
-                field,
-                fieldState: { invalid, isTouched, isDirty, error },
-              }) => (
-                <TextField
-                {...field}
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  //name="email"
-                  autoComplete="email"
-                  autoFocus
-                  error={invalid && isTouched}
-                  helperText={error?.message}
-                  //defaultValue={''}
-                />
-              )}
-            />
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Controller
+                defaultValue={""}
+                name="email"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Это поля обязательное",
+                  },
+                  pattern: {
+                    //value: /\d+/,
+                    value: /^\S+@\S+$/i,
+                    message: "Некорректный ввод",
+                  },
+                }}
+                render={({
+                  field,
+                  fieldState: { invalid, isTouched, isDirty, error },
+                }) => (
+                  <TextField
+                    {...field}
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    //name="email"
+                    autoComplete="email"
+                    autoFocus
+                    error={invalid && isTouched}
+                    helperText={error?.message}
+                    //defaultValue={''}
+                  />
+                )}
+              />
 
-            <Controller
-            defaultValue = {''}
-              name="password"
-              control={control}
-              rules={{
-                required: {
-                  value: true,
-                  message: "Надо заполнить",
-                },
-              }}
-              render={({
-                field,
-                fieldState: { invalid, isTouched, isDirty, error },
-              }) => (
-                <TextField
-                {...field}
-                  margin="normal"
-                  required
-                  fullWidth
-                  //name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  error={invalid && isTouched}
-                  helperText={error?.message}
-                  //defaultValue={''}
-                />
-              )}
-            />
+              <Controller
+                defaultValue={""}
+                name="password"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Надо заполнить",
+                  },
+                }}
+                render={({
+                  field,
+                  fieldState: { invalid, isTouched, isDirty, error },
+                }) => (
+                  <TextField
+                    {...field}
+                    margin="normal"
+                    required
+                    fullWidth
+                    //name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    error={invalid && isTouched}
+                    helperText={error?.message}
+                    //defaultValue={''}
+                  />
+                )}
+              />
 
-            {/*<FormControlLabel
+              {/*<FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
 />*/}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-                mt: 3,
-                mb: 2,
-                color: "#ffffff",
-                //...bluegreen_bg
-                background: theme.palette.common.buttonGradient,
-              }}
-              //just placeholder:
-              //onClick={() => setIsLoggedIn(true)}
-            >
-              Войти
-            </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  color: "#ffffff",
+                  //...bluegreen_bg
+                  background: theme.palette.common.buttonGradient,
+                }}
+                //just placeholder:
+                //onClick={() => setIsLoggedIn(true)}
+              >
+                Войти
+              </Button>
             </form>
             {/*<Grid container>
               <Grid item xs>
@@ -283,6 +284,7 @@ console.log('act');
 </Grid>*/}
           </Box>
         </Paper>
+       
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>

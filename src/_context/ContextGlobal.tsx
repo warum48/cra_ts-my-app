@@ -6,6 +6,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { PaletteMode } from '@mui/material';
 import * as ReactDOM from "react-dom/client";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  //BrowserRouter as Router,
+ // Switch,
+ // Route,
+ // Link,
+  useParams
+} from "react-router-dom";
 //import App from './App';
 
 const client = new ApolloClient({
@@ -35,7 +42,9 @@ export const GlobalProvider = ({ children }: Props) => {
   const { themeMode, colorSet } = useSelector(
     (state: RootState) => state.colorTheme
   );
-  const [isDebug, setIsDebug] = useState(false);
+  const [isDebug, setIsDebug] = useState(true); 
+  let { debug } = useParams();
+
 
   //-----color mode
   const [mode, setMode] = React.useState<"light" | "dark">("light");
@@ -164,11 +173,14 @@ export const GlobalProvider = ({ children }: Props) => {
 
   //------end color mode
 
-  useEffect(() => {}, []); //TODO find a way to init once on dict change and onload
+  useEffect(() => {
+    //let { debug } = useParams();
+  }, []); //TODO find a way to init once on dict change and onload
 
   //}
 
   const value = {
+    debug,
     isDebug,
     colorMode, //dark-light
     getColorMode //fresh-strong
