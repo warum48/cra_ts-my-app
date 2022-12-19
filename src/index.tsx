@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "_styles/index.css";
 import "_styles/mui.css";
+import "_styles/reactselect.css";
 import App from "./App";
 //import reportWebVitals from './reportWebVitals';
 import { StyledEngineProvider } from "@mui/material/styles";

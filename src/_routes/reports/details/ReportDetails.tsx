@@ -1,23 +1,17 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import { panel_bg } from "_styles/jsstyles";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { rows } from "_components/debug/_mockrows";
+import { panel_bg } from "_styles/MuiStyledComponents";
+import { useTheme } from "@mui/material/styles";
 import "_styles/mui.css";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Information from "_routes/reports/details/components/Information";
 import Empty from "_components/Empty";
 import { Assortment } from "_routes/reports/details/components/Assortment";
 import { Steps } from "_routes/reports/details/components/Steps";
 import { Info } from "_routes/reports/details/components/Info";
 import { Geolocation } from "_routes/reports/details/components/Geolocation";
 import Button from "@mui/material/Button";
-//import { ApolloTest } from "_components/debug/ApolloTest";
-//import { ApolloFetchOnClick } from "_components/debug/ApolloFetchOnClick";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -48,29 +42,22 @@ function a11yProps(index: number) {
   };
 }
 
-
 export default function ReportDetails() {
-  //const mql = window.matchMedia('(max-width: 1000px)');
-  //const smallScreen = mql.matches;
-
-  const theme = useTheme();
-
+ const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  const reportDetailsTabsNamesAr = [
+  /*const reportDetailsTabsNamesAr = [
     "Информация",
-
     "Шаги и задачи",
     "Изображения",
     "Анкеты",
     "Ассортимент магазина",
     "Причины отсутствия товаров",
     "Геолокация",
-  ];
+  ];*/
 
   const reportDetailsTabs = {
     info: {
@@ -139,7 +126,6 @@ export default function ReportDetails() {
             boxShadow: 0,
             background: theme.palette.common.buttonGradient,
           }}
-          //onClick={() => setIsLoggedIn(true)}
         >
           Сохранить
         </Button>
@@ -147,7 +133,6 @@ export default function ReportDetails() {
           type="submit"
           variant="outlined"
           sx={{ mx: 2, ...panel_bg[theme.palette.mode] }}
-          //onClick={() => setIsLoggedIn(true)}
         >
           Сохранить и продолжить редактирование
         </Button>

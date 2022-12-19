@@ -1,12 +1,12 @@
-/** @jsxImportSource @emotion/react */
+/* * @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { css, jsx } from "@emotion/react";
 import { useState } from "react";
 import { useInterval } from "react-use";
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-interface IShowProp {  
-    show: boolean//"visible" | "hidden"
+interface IShowProp {
+  show: boolean; //"visible" | "hidden"
 }
 
 const TopButton = styled.button`
@@ -24,7 +24,7 @@ const TopButton = styled.button`
   transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
   visibility: ${(props: IShowProp) => (props.show ? "visible" : "hidden")};
   opacity: ${(props) => (props.show ? 0.8 : 0)};
-  color:white;
+  color: white;
 
   /*&:after {
     content: "\\f077";
@@ -74,9 +74,11 @@ export const GoToTop = () => {
   const goToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-  return (<TopButton onClick={goToTop} show={show}>
-   <KeyboardArrowUpIcon/>
-  </TopButton>);
+  return (
+    <TopButton onClick={goToTop} show={show}>
+      <KeyboardArrowUpIcon />
+    </TopButton>
+  );
 };
 
 //custom setInterval

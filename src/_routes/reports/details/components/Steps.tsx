@@ -7,25 +7,23 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { StyledTableCell, StyledTableRow } from "_styles/jsstyles";
+import { StyledTableCell, StyledTableRow } from "_styles/MuiStyledComponents";
 //import { rows } from "_components/debug/_mockrows";
-
 
 type IHeader = {
   field: string;
   headerName: string;
 };
 type Item = {
-date_beginning: string, 
-date_end: string, 
+  date_beginning: string;
+  date_end: string;
   step_name: string;
   step_type: string;
   step_skipped: string | boolean;
 };
 
 const columns: IHeader[] = [
-  { field: "date_beginning", 
-    headerName: "Время начала" },
+  { field: "date_beginning", headerName: "Время начала" },
   {
     field: "date_end",
     headerName: "Дата окончания",
@@ -41,71 +39,51 @@ const columns: IHeader[] = [
   {
     field: "step_skipped",
     headerName: "Шаг пропущен",
-  }
+  },
 ];
 
-
 const rows: Item[] = [
-    {
-        "date_beginning": "Dec. 7, 2022, 7:53 p.m.",
-        "date_end": "Dec. 7, 2022, 7:57 p.m.",
-        "step_name":"Фото ДО начала работы",
-        step_type: "Фото",
-        "step_skipped": "Нет"
-      },
-      {
-        "date_beginning": "Dec. 7, 2022, 7:53 p.m.",
-        "date_end": "Dec. 7, 2022, 7:57 p.m.",
-        "step_name":"Фото ПОСЛЕ работы",
-        "step_type": "Фото",
-        "step_skipped": "Нет"
-      },
-      {
-        "date_beginning": "Dec. 7, 2022, 7:53 p.m.",
-        "date_end": "Dec. 7, 2022, 7:57 p.m.",
-        "step_name":"Фото ценников и OOS менее 10шт",
-        "step_type": "Фото",
-        "step_skipped": "Нет"
-      },
-      {
-        "date_beginning": "Dec. 7, 2022, 7:53 p.m.",
-        "date_end": "Dec. 7, 2022, 7:57 p.m.",
-        "step_name":"Комментарий",
-        "step_type": "Комментарий",
-        "step_skipped": "Нет"
-      }
-    ]
-
-
-
+  {
+    date_beginning: "Dec. 7, 2022, 7:53 p.m.",
+    date_end: "Dec. 7, 2022, 7:57 p.m.",
+    step_name: "Фото ДО начала работы",
+    step_type: "Фото",
+    step_skipped: "Нет",
+  },
+  {
+    date_beginning: "Dec. 7, 2022, 7:53 p.m.",
+    date_end: "Dec. 7, 2022, 7:57 p.m.",
+    step_name: "Фото ПОСЛЕ работы",
+    step_type: "Фото",
+    step_skipped: "Нет",
+  },
+  {
+    date_beginning: "Dec. 7, 2022, 7:53 p.m.",
+    date_end: "Dec. 7, 2022, 7:57 p.m.",
+    step_name: "Фото ценников и OOS менее 10шт",
+    step_type: "Фото",
+    step_skipped: "Нет",
+  },
+  {
+    date_beginning: "Dec. 7, 2022, 7:53 p.m.",
+    date_end: "Dec. 7, 2022, 7:57 p.m.",
+    step_name: "Комментарий",
+    step_type: "Комментарий",
+    step_skipped: "Нет",
+  },
+];
 
 export function Steps() {
-
   const theme = useTheme();
-  function getStyleFor(row:Item, colfield:string){
-  
-    if(colfield == "availability"){
-      if(row[colfield as keyof Item] == "Есть в отчете"){
+  function getStyleFor(row: Item, colfield: string) {
+    if (colfield == "availability") {
+      if (row[colfield as keyof Item] == "Есть в отчете") {
         return {
           //boxSizing:'border-box',
-          color:theme.palette.success.main, //"green",
+          color: theme.palette.success.main, //"green",
           //boxShadow:"inset 0 -2px 0px "  + theme.palette.success.light,
-        }
+        };
       }
-      /*else if(row[colfield as keyof Item] == "Завершен"){
-        return {
-          color:theme.palette.primary.dark
-        }
-      }else if(row[colfield as keyof Item] == "Начат"){
-        return {
-          color:theme.palette.text.secondary
-        }
-      }else if(row[colfield as keyof Item] == "Временный отказ"){
-        return {
-          color:theme.palette.error.main,
-          boxShadow:"inset 0 -2px 0px "  + theme.palette.error.light,
-        }
-      }*/
     }
   }
 
@@ -115,22 +93,19 @@ export function Steps() {
         <TableHead>
           <TableRow>
             {columns.map((item, index) => (
-              <StyledTableCell sx={{whiteSpace: "nowrap"}}>{item.headerName}</StyledTableCell>
+              <StyledTableCell sx={{ whiteSpace: "nowrap" }}>
+                {item.headerName}
+              </StyledTableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, i) => (
-            <StyledTableRow key={'row'+i}>
+            <StyledTableRow key={"row" + i}>
               {columns.map((col: IHeader, index) => (
-                
-                  <StyledTableCell
-                  sx={ getStyleFor(row, col.field) }
-                  >
-                    
-                    {row[col.field as keyof typeof row] }
-                  </StyledTableCell>
-                
+                <StyledTableCell sx={getStyleFor(row, col.field)}>
+                  {row[col.field as keyof typeof row]}
+                </StyledTableCell>
               ))}
             </StyledTableRow>
           ))}

@@ -7,26 +7,9 @@ import Select, {
   ActionMeta,
   SingleValue
 } from "react-select";
-import { colourOptions } from "_components/debug/_mockadvsel";
 import { DebugBox } from "_components/debug/DebugBox";
 
-/*const select_styles = {
-  option: (provided: any, state: any) => ({
-    ...provided,
-    fontWeight: state.isSelected ? "bold" : "normal",
-    color: "white",
-    backgroundColor: "yellow", //state.data.color,
-    fontSize: state.selectProps.myFontSize,
-  }),
-  singleValue: (provided: any, state: any) => ({
-    ...provided,
-    backgroundColor: "yellow",
-    color: "yellow", //state.data.color,
-    fontSize: state.selectProps.myFontSize,
-  }),
-};*/
 
-//sx={{fontSize: theme}}
 interface ISelectLabel {
   text: string;
 }

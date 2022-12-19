@@ -1,69 +1,13 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  Dispatch,
-  SetStateAction,
-} from "react"; //fork
-//-------REDUX
-import { useSelector, useDispatch } from "react-redux";
-/*import {
-  //updateLoopNum,
-  //incrementLoopNum,
-  //currentDict,
-  //getCurLoopNum,
-} from "_redux/debug/unpersistableSlice";*/
-import { RootState } from "_redux/ReduxWrapper";
-//--------context----------------
-import { GlobalContext } from "_context/ContextGlobal";
-//--------FORM--------
-//import {FormContainer, TextFieldElement, PasswordElement, FieldError, useWatch, useForm, } from 'react-hook-form-mui'
-//--------MUI---------
-//import * as React from 'react';
-import Avatar from "@mui/material/Avatar";
+import * as React from 'react';
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { Controller, useForm } from "react-hook-form";
-import {
-  //bluegreen_bg,
-  panel_bg,
-  //panel_bg_dark
-} from "_styles/jsstyles";
-import { DebugBox } from "./debug/DebugBox";
 
-{
-  /*function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}*/
-}
-
-//const theme = createTheme();
-//const theme = useTheme();
 
 interface IAuth {
   setIsLoggedIn: (value: boolean) => void; //Dispatch<SetStateAction<<boolean>>
@@ -86,30 +30,6 @@ export function Auth({ setIsLoggedIn }: IAuth) {
     console.log(data);
     setIsLoggedIn(true);
   };
-  /*const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('trysubmit');
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };*/
-
-  //----
-  /*const [name, email] = useWatch({
-    name: ['name', 'email']
-  })*/
-  /*const formContext = useForm<{ name: string }>({
-    defaultValues: {
-      name: 'Hans'
-    }
-  })
-  const {handleSubmit} = formContext
-
-  const action = (act:string) => {
-console.log('act');
-  }*/
 
   return (
     <ThemeProvider theme={theme}>
@@ -123,24 +43,13 @@ console.log('act');
             flexDirection: "column",
             alignItems: "center",
             p: 3,
-            //...panel_bg[theme.palette.mode]
-            //py: 2, px:2,
-            // my: 0, mx: 4,
-
-            //  bgcolor: '#ffffff'
           }}
         >
-          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-        </Avatar> */}
-
           <Box
             component="img"
             sx={{
               height: (53 / 3) * 2,
               width: (222 / 3) * 2,
-              //maxHeight: { xs: 233, md: 167 },
-              //maxWidth: { xs: 350, md: 250 },
             }}
             alt="logo"
             src={
@@ -150,37 +59,9 @@ console.log('act');
             }
           />
 
-          {/*<Typography component="h1" variant="h5">
-            Sign in {theme.palette.mode}
-    </Typography>*/}
           <Box
-            //component="form"
-            //onSubmit={handleSubmit}
-            //onSubmit={handleSubmit(onSubmit)}
-            //noValidate
             sx={{ mt: 1 }}
           >
-            {/*} <FormContainer
-            //defaultValues={{name: ''}}
-            handleSubmit={handleSubmit}
-            onSuccess={data => console.log(data)}
-        >
-          <TextFieldElement
-        required
-        fullWidth
-        parseError={((error: FieldError) => "Проверьте правильность")}
-        type={'email'}
-        margin={'dense'}
-        label={'Email'}
-        name={'email'}
-      />
-      <PasswordElement margin={'dense'}
-      fullWidth
-        label={'Password'}
-        required
-        name={'password'}
-      />
-  </FormContainer>*/}
             <form onSubmit={handleSubmit(onSubmit)}>
               <Controller
                 defaultValue={""}
@@ -192,7 +73,6 @@ console.log('act');
                     message: "Это поля обязательное",
                   },
                   pattern: {
-                    //value: /\d+/,
                     value: /^\S+@\S+$/i,
                     message: "Некорректный ввод",
                   },
@@ -249,10 +129,6 @@ console.log('act');
                 )}
               />
 
-              {/*<FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-/>*/}
               <Button
                 type="submit"
                 fullWidth
@@ -261,31 +137,14 @@ console.log('act');
                   mt: 3,
                   mb: 2,
                   color: "#ffffff",
-                  //...bluegreen_bg
                   background: theme.palette.common.buttonGradient,
                 }}
-                //just placeholder:
-                //onClick={() => setIsLoggedIn(true)}
               >
                 Войти
               </Button>
             </form>
-            {/*<Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-</Grid>*/}
           </Box>
         </Paper>
-       
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   );

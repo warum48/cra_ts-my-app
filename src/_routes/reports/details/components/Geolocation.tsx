@@ -1,20 +1,10 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
-/*import { MapContainer } from 'react-leaflet/MapContainer'
-import { TileLayer } from 'react-leaflet/TileLayer'
-import { useMap } from 'react-leaflet/hooks'*/
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import Grid from "@mui/material/Grid";
-import { panel_bg, StyledTableCell, StyledTableRow } from "_styles/jsstyles";
+import { panel_bg, } from "_styles/MuiStyledComponents";
 import "_styles/leaflet.css";
 import { Heading, ItemInfo, ItemName } from "_styles/MuiStyledComponents";
 
@@ -43,9 +33,6 @@ export function Geolocation() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
               <Marker position={[51.505, -0.09]}>
-                {/*<Popup>
-      A pretty CSS3 popup. <br /> Easily customizable.
-  </Popup>*/}
               </Marker>
             </MapContainer>
           </Box>

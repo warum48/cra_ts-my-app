@@ -1,19 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import {
-  useLocation,
-  Outlet,
   Link,
-  useNavigate,
-  useParams,
 } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
-import ReportDetails from "_routes/reports/details/ReportDetails";
-import Information from "_routes/reports/details/components/Information";
 import { Typography } from "@mui/material";
-//import { bluegreen_bg } from "_styles/jsstyles";
 
 const Container = styled(Box)`
   position: relative;
@@ -21,11 +13,9 @@ const Container = styled(Box)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  //height: calc(100vh - 112px);
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  //background-image: url('http://neurolab.mcbs.group/local/templates/neurolab/assets/images/svg/s-mp-one-img-bg.svg');
 `;
 
 export const Home = () => {
@@ -37,8 +27,6 @@ export const Home = () => {
 
   return (
     <>
-      {/*<Box sx={{height:'1300px'}}></Box>
-      Home (детали репорта здесь только для тестов / быстрого доступа)*/}
       <Container>
         <Box sx={{pb:'70px', textAlign: "center",}}>
         <Typography
@@ -57,15 +45,11 @@ export const Home = () => {
               component={Link}
               to="/reports"
               sx={{ color: '#ffffff',  boxShadow: 0, background: theme.palette.common.buttonGradient,}}
-              //onClick={() => setIsLoggedIn(true)}
             >
               К отчетам
             </Button>
             </Box>
       </Container>
-      {/*<
-      <ReportDetails/>
-      Information/>*/}
     </>
   );
 };

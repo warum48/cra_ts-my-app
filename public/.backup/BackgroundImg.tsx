@@ -1,4 +1,4 @@
-import * as React from 'react';
+/*import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -20,4 +20,4 @@ export default function Empty() {
   return (
     <Paper sx={{width:'100%',p:2, ...panel_bg[theme.palette.mode]}}>Компонент в стадии разработки</Paper> 
   );
-}
+}*/

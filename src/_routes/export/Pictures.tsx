@@ -2,10 +2,7 @@ import React, { useRef, useEffect } from "react";
 //------MUI-----
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 //------LIB-----------
 import dayjs, { Dayjs } from "dayjs";
@@ -31,9 +28,9 @@ export const ExportPictures = () => {
     dayjs("2014-08-18T21:11:54")
   );
 
-  const handleChangeFrom = (newValue: Dayjs | null) => {
-    setValueFrom(newValue);
-  };
+  //const handleChangeFrom = (newValue: Dayjs | null) => {
+  //  setValueFrom(newValue);
+  //};
   const handleChangeTo = (newValue: Dayjs | null) => {
     setValueTo(newValue);
   };
@@ -100,16 +97,14 @@ export const ExportPictures = () => {
 
   ];
 
-  useEffect(() => {
-    console.log("execution");
-  }, []);
+  
 
   //--------------styles--------------
-  const gridRowSx = {
-    gap: "10px",
-    display: "flex",
-    alignItems: "center",
-  };
+  //const gridRowSx = {
+  //  gap: "10px",
+  //  display: "flex",
+  //  alignItems: "center",
+  //};
 
   return (
     <>

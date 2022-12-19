@@ -1,18 +1,8 @@
-/*.MuiDataGrid-root .MuiDataGrid-cell{
-
-    white-space: normal !important;
-    word-wrap: break-word !important;
-    }*/
-
- /*   input:-webkit-autofill,
-.MuiInputBase-root:has(> input:-webkit-autofill) {
-  background-color: blue;
-}*/
-
 .MuiFilledInput-root {
-    background: "rgba(232, 241, 250, 0)"
-  }
-  .MuiOutlinedInput-input{
-    background: rgba(232, 241, 250, 0) !important
-  }
-  /*TODO: not working yet*/
+  background: "rgba(232, 241, 250, 0)"
+}
+
+.MuiOutlinedInput-input {
+  background: rgba(232, 241, 250, 0) !important
+}
+/*TODO: not working yet*/

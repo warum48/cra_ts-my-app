@@ -2,10 +2,7 @@ import React, { useRef, useEffect } from "react";
 //------MUI-----
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 //------LIB-----------
 import dayjs, { Dayjs } from "dayjs";
@@ -36,40 +33,6 @@ const GET_LOCATIONS = gql`
     }
   }
 `;
-
-
-/*const client = new ApolloClient({
-  uri: "https://metaphysics-production.artsy.net",
-  cache: new InMemoryCache(),
-});
-
-const fetchArtists = async (input: string, cb: any) => {
-  if (input && input.trim().length < 3) {
-    return [];
-  }
-  const res = await client.query({
-    query: gql`
-      query {
-        match_artist(term: "${input}") {
-          name
-          imageUrl
-        }
-      }
-    `
-  });
-
-  if (res.data && res.data.match_artist) {
-    return res.data.match_artist.map(
-      (a: { name: string; imageUrl: string }) => ({
-        label: a.name,
-        value: a.imageUrl
-      })
-    );
-  }
-
-  return [];
-};
-*/
 
 export const Execution = () => {
   const theme = useTheme();
@@ -156,16 +119,14 @@ const [artist, setArtist] = React.useState({
 
   ];
 
-  useEffect(() => {
-    console.log("execution");
-  }, []);
+  
 
   //--------------styles--------------
-  const gridRowSx = {
-    gap: "10px",
-    display: "flex",
-    alignItems: "center",
-  };
+  //const gridRowSx = {
+  //  gap: "10px",
+  //  display: "flex",
+  //  alignItems: "center",
+  //};
 
   return (
     <>

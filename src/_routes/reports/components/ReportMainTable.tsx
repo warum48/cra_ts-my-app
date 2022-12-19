@@ -1,23 +1,17 @@
 import * as React from "react";
 import {
-  useLocation,
-  Outlet,
-  //Link,
   Link as RouterLink,
-  useNavigate,
-  useParams,
 } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { StyledTableCell, StyledTableRow } from "_styles/jsstyles";
+import { StyledTableCell, StyledTableRow } from "_styles/MuiStyledComponents";
 import { rows } from "_components/debug/_mockrows";
 import Pagination from "@mui/material/Pagination";
 import { useQuery, gql } from '@apollo/client';
@@ -104,8 +98,7 @@ export default function ReportDetailsTable() {
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 300 }} aria-label="customized table">
           <TableHead>
-            <TableRow>
-              
+            <TableRow>        
               {columns.map((item, index) => (
                 <StyledTableCell sx={{ whiteSpace: "nowrap" }}>
                   {item.headerName}
@@ -115,16 +108,13 @@ export default function ReportDetailsTable() {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow key={row.id}>
-                
+              <StyledTableRow key={row.id}>           
                 {columns.map((col: IHeader, index) => (
                   <>
-                    {/*<StyledTableCell>{row.shop}</StyledTableCell>*/}
                     <StyledTableCell sx={getStyleFor(row, col.field)}>
                       {col.field == "id" || col.field == "task" ? (
                         <Link
                           component={RouterLink}
-                          //to={"/reports/" + row[col.field as keyof typeof row]}
                           to={"/reports/" + row['id']}
                           sx={{ color: theme.palette.text.primary,
                             textDecorationColor:theme.palette.text.primary
@@ -156,15 +146,3 @@ export default function ReportDetailsTable() {
     </Box>
   );
 }
-
-/*
-{col.field}
-                    {row.shop}
-                    {row["shop"]}
-                    */
-//!!row[col.field as keyof Item] || "-"
-//!!
-// Solution 1: When the type of the object is known
-//const temp = someObj[field as keyof ObjectType]
-// Solution 2: When the type of the object is not known
-// const temp = someObj[field as keyof typeof someObj]
