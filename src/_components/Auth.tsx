@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,9 @@ import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { Controller, useForm } from "react-hook-form";
 import { useQuery, gql } from "@apollo/client";
 import { useLazyQuery } from "@apollo/client";
+import { StyledButton } from "_styles/MuiStyledComponents";
+import { DebugBox } from "./debug/DebugBox";
+import { ErrorSharp } from "@mui/icons-material";
 
 const GET_LOCATIONS = gql`
   query GetLocations {
@@ -21,21 +24,21 @@ const GET_LOCATIONS = gql`
   }
 `;
 
-const TEST_AUTH = gql`
-query MyQuery {
-  login(login: "admin@admin.com", password: "1") {
-    ... on LoginSuccess {
-      __typename
-      token
-    }
-    ... on LoginError {
-      __typename
-      detail
-      statusCode
+const TEST_PRE_AUTH = gql`
+  query MyQuery {
+    login(login: "admin@admin.com", password: "1") {
+      ... on LoginSuccess {
+        __typename
+        token
+      }
+      ... on LoginError {
+        __typename
+        detail
+        statusCode
+      }
     }
   }
-}
-`
+`;
 
 interface IAuth {
   setIsLoggedIn: (value: boolean) => void; //Dispatch<SetStateAction<<boolean>>
@@ -48,7 +51,34 @@ type AForm = {
 
 export function Auth({ setIsLoggedIn }: IAuth) {
   const theme = useTheme();
-  const { loading, error, data } = useQuery(TEST_AUTH);
+  //const emailRef = React.useRef<any>(null);
+  //const passRef = React.useRef<any>(null);
+const [email, setEmail] = React.useState("");
+  const [pass, setPass] = React.useState("");
+  const TEST_AUTH = gql`
+  query MyQuery {
+    login(login: "${email}", password: "${pass}") {
+      ... on LoginSuccess {
+        __typename
+        token
+      }
+      ... on LoginError {
+        __typename
+        detail
+        statusCode
+      }
+    }
+  }
+  `;
+
+  
+  //const { loading, error, data } = useQuery(TEST_AUTH);
+  //const [doAuth, { loading, error, data }] = useLazyQuery(TEST_AUTH);
+  const [
+    doPreAuth,
+    { loading: pre_loading, error: pre_error, data: pre_data },
+  ] = useLazyQuery(TEST_PRE_AUTH);
+  const [doAuth, { loading, error, data }] = useLazyQuery(TEST_AUTH);
 
   const { control, formState, handleSubmit, watch } = useForm<AForm>({
     mode: "onTouched",
@@ -57,8 +87,15 @@ export function Auth({ setIsLoggedIn }: IAuth) {
 
   const onSubmit = (data: AForm) => {
     console.log(data);
-    setIsLoggedIn(true);
+    doAuth();
+    //setIsLoggedIn(true);
   };
+
+  React.useEffect(()=>{
+    if(data && data.login?.token){
+      setIsLoggedIn(true);
+    }
+  },[data])
 
   return (
     <ThemeProvider theme={theme}>
@@ -88,9 +125,7 @@ export function Auth({ setIsLoggedIn }: IAuth) {
             }
           />
 
-          <Box
-            sx={{ mt: 1 }}
-          >
+          <Box sx={{ mt: 1 }}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Controller
                 defaultValue={""}
@@ -102,16 +137,20 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                     message: "Это поля обязательное",
                   },
                   pattern: {
-                    value: /^\S+@\S+$/i,
+                    value:  /^\S+@\S+$/i,//  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/  ,//
                     message: "Некорректный ввод",
                   },
                 }}
                 render={({
-                  field,
+                  field: { onChange, onBlur, value, ref },
+                  //render={({ field: { onChange, onBlur, value, ref } }) => (
                   fieldState: { invalid, isTouched, isDirty, error },
                 }) => (
                   <TextField
-                    {...field}
+                    //{...field}
+                    // onChange={onChange}
+                    onBlur={onBlur}
+                    //value={value}
                     margin="normal"
                     required
                     fullWidth
@@ -122,7 +161,14 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                     autoFocus
                     error={invalid && isTouched}
                     helperText={error?.message}
+                    //ref={emailRef}
                     //defaultValue={''}
+                    //value = {email}
+                    //onChange={ (e) => {console.log(e.target.value)}}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      onChange(e.target.value);
+                    }}
                   />
                 )}
               />
@@ -153,24 +199,80 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                     autoComplete="current-password"
                     error={invalid && isTouched}
                     helperText={error?.message}
+                   // ref={passRef}
+                    onChange={(e) => {
+                      setPass(e.target.value);
+                      field.onChange(e.target.value);
+                    }}
                     //defaultValue={''}
                   />
                 )}
               />
 
               <Button
-                type="submit"
+                //type="submit"
                 fullWidth
                 variant="contained"
                 sx={{
                   mt: 3,
-                  mb: 2,
+                  mb: 0,
                   color: "#ffffff",
                   background: theme.palette.common.buttonGradient,
                 }}
+                onClick={()=>setIsLoggedIn(true)}
               >
-                Войти
+                Войти без сервера
               </Button>
+
+              <StyledButton
+              sx={{
+                mt: 1,
+                mb: 0}}
+                variant="contained"
+                fullWidth
+                theme={theme}
+                onClick={() => doPreAuth()}
+              >
+                Тестовый запрос без входа
+              </StyledButton>
+
+             {/*} <StyledButton
+                variant="contained"
+                fullWidth
+                theme={theme}
+                //onClick={()=>console.log('cv', emailRef.current)} //- doesn't work
+                onClick={() => console.log("cv", email)}
+              >
+                log
+              </StyledButton>*/}
+
+              {pre_data && (
+                <DebugBox fullWidth code={JSON.stringify(pre_data)} />
+              )}
+
+              <StyledButton
+                type="submit"
+                variant="contained"
+                fullWidth
+                theme={theme}
+                sx={{
+                  mt: 1,
+                  mb: 0}}
+                //onClick={() => doAuth()}
+              >
+                Отправка полей
+              </StyledButton>
+
+              {data && <DebugBox fullWidth code={JSON.stringify(data)} />}
+              {error && <>
+              {/*error.map((err, i) => (
+              <div>{err.message}</div>
+              ))}
+              <div>{JSON.stringify(error)}</div>
+              <div>{JSON.stringify(error.graphQLErrors[0].message)}</div>*/}
+              <DebugBox fullWidth code={JSON.stringify(error)} />
+              </>
+              }
             </form>
           </Box>
         </Paper>

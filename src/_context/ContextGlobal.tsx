@@ -4,27 +4,57 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { PaletteMode } from "@mui/material";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/client";
 import { useParams } from "react-router-dom";
+//import { createHttpLink } from 'apollo-link-http';
 //import App from './App';
 
 let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
-let apolloServer = "https://ea34-188-170-78-39.eu.ngrok.io/graphql";
+let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
 if(apolloType == "maintest"){
 console.log('main_apollo')
   apolloServer = "https://flyby-gateway.herokuapp.com/";
 }
 if(apolloType == "surtest"){
-  apolloServer = "https://ea34-188-170-78-39.eu.ngrok.io/graphql";
+  //apolloServer = " https://cors-anywhere.herokuapp.com/https://ea34-188-170-78-39.eu.ngrok.io/graphql";
 }
 
 const client = new ApolloClient({
-  uri: apolloServer,//"https://flyby-gateway.herokuapp.com/",
+  link: new HttpLink({
+      
+      uri: apolloServer,
+      fetchOptions: {
+         mode: 'cors', // no-cors, *cors, same-origin //'*cors'//
+      }
+  }),
   cache: new InMemoryCache(),
 });
+
+/*const client = new ApolloClient({
+  uri: apolloServer,//"https://flyby-gateway.herokuapp.com/",
+  cache: new InMemoryCache(),
+  //fetchOptions: {
+  //  mode: 'no-cors'
+  //}
+  //fetchOptions: { mode: 'no-cors' } as HttpLink.Options,
+ 
+    credentials: 'include',
+    headers: {
+      //authorization: localStorage.getItem('token'),
+      //'client-name': 'WidgetX Ecom [web]',
+     // 'client-version': '1.0.0'
+     'Access-Control-Allow-Origin': '*'
+    },
+  defaultOptions: {
+    query: {
+      fetchPolicy: "no-cache"
+    },
+    
+  }
+});*/
 
 //----------types------------
 
