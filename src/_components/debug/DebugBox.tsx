@@ -20,13 +20,19 @@ export const DebugCodeBox = styled(Box)`
   font-size: 10px;
 margin: auto;
 margin-top:10px;
-  max-width:290px;
+/*display: flex; 
+align-items: stretch;*/
+
+  /*
+  width:100%;*/
+  min-width: 0;
+  max-width: 280px;
 `;
 
 interface DebuggerProps {
   children?: React.ReactNode;
   //isCode: boolean;
-  code: string;
+  code?: string;
   [x: string]: any;
 }
 
@@ -51,7 +57,7 @@ export const DebugBox = ({ children, code = "", ...props }: DebuggerProps) => {
         {code ? (
           <DebugCodeBox {...props}>
             
-              <code>{code}</code>
+              <code><pre>{code}</pre></code>
             
           </DebugCodeBox>
         ) : (

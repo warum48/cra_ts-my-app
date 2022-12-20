@@ -60,6 +60,7 @@ const client = new ApolloClient({
 
 interface IContext {
   isDebug: boolean;
+  setIsDebug: React.Dispatch<React.SetStateAction<boolean>>;
   colorMode: { toggleColorMode: () => void }; //string;
   getColorMode: (colorSet: string) => {
     mainGradientBg_135: string;
@@ -163,6 +164,7 @@ export const GlobalProvider = ({ children }: Props) => {
   const value = {
     debug,
     isDebug,
+    setIsDebug,
     colorMode, //dark-light
     getColorMode, //fresh-strong
   };

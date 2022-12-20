@@ -12,6 +12,7 @@ import { useLazyQuery } from "@apollo/client";
 import { StyledButton } from "_styles/MuiStyledComponents";
 import { DebugBox } from "./debug/DebugBox";
 import { ErrorSharp } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 
 const GET_LOCATIONS = gql`
   query GetLocations {
@@ -208,7 +209,7 @@ const [email, setEmail] = React.useState("");
                   />
                 )}
               />
-
+<DebugBox>
               <Button
                 //type="submit"
                 fullWidth
@@ -247,8 +248,10 @@ const [email, setEmail] = React.useState("");
               </StyledButton>*/}
 
               {pre_data && (
-                <DebugBox fullWidth code={JSON.stringify(pre_data)} />
+                <DebugBox  code={JSON.stringify(pre_data)} />
               )}
+
+</DebugBox>
 
               <StyledButton
                 type="submit"
@@ -260,19 +263,24 @@ const [email, setEmail] = React.useState("");
                   mb: 0}}
                 //onClick={() => doAuth()}
               >
-                Отправка полей
+                ВХОД
               </StyledButton>
 
-              {data && <DebugBox fullWidth code={JSON.stringify(data)} />}
+              {data && <DebugBox  code={JSON.stringify(data)} />}
               {error && <>
               {/*error.map((err, i) => (
               <div>{err.message}</div>
               ))}
               <div>{JSON.stringify(error)}</div>
               <div>{JSON.stringify(error.graphQLErrors[0].message)}</div>*/}
-              <DebugBox fullWidth code={JSON.stringify(error)} />
+              <DebugBox  code={JSON.stringify(error,null, 3)} />
               </>
               }
+              {(data?.login?.statusCode == 401 || data?.login?.statusCode == 404)&&
+              <Box sx={{textAlign:"center"}}>
+<Typography variant="caption" color="error.main" >{data.login.detail}</Typography>
+</Box>
+}
             </form>
           </Box>
         </Paper>

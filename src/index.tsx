@@ -6,7 +6,7 @@ import "_styles/reactselect.css";
 import App from "./App";
 //import reportWebVitals from './reportWebVitals';
 import { StyledEngineProvider } from "@mui/material/styles";
-import { Button, Grid, Toolbar } from "@mui/material/";
+import { Box, Button, Grid, Toolbar } from "@mui/material/";
 import { BrowserRouter, MemoryRouter, Routes, Route } from "react-router-dom";
 
 import { ReduxWrapper } from "_redux/ReduxWrapper";
@@ -24,6 +24,7 @@ import { ApolloTest } from "_components/debug/ApolloTest";
 import { ApolloFetchOnClick } from "_components/debug/ApolloFetchOnClick";
 import { ApolloLazySelect } from "_components/debug/ApolloLazySelect";
 import { LeafletPure } from "_components/LeafletPure";
+import { DebugSwitcher } from "_components/debug/DebugSwitcher";
 
 const RootWrapper = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -37,7 +38,10 @@ const RootWrapper = () => {
               <Grid item xs />
 
               <Grid item>
+                <Box sx={{display:'flex'}}>
+              <DebugSwitcher/>
                 <LightMode />
+                </Box>
               </Grid>
             </Grid>
           </Toolbar>

@@ -45,10 +45,12 @@ body {
   }
 
 
-code {
+code, pre {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
     word-wrap: break-word;
+    overflow-x: scroll;
+    padding-bottom:20px;
     /*max-width:100%;*/
 }
 
