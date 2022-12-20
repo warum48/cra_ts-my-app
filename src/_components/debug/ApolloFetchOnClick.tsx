@@ -11,6 +11,22 @@ const GET_LOCATIONS = gql`
   }
 `;
 
+/*
+query MyQuery {
+  login(login: "admin@admin.com", password: "1") {
+    ... on LoginSuccess {
+      __typename
+      token
+    }
+    ... on LoginError {
+      __typename
+      detail
+      statusCode
+    }
+  }
+}
+*/
+
 export function ApolloFetchOnClick() {
  
   const [getCountries, { loading, error, data }] = useLazyQuery(GET_LOCATIONS);

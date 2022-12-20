@@ -8,8 +8,21 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { useParams } from "react-router-dom";
 //import App from './App';
 
+let params = new URLSearchParams(document.location.search);
+let apolloType = params.get("apollo"); // is the string "Jonathan"
+
+let apolloServer = "https://ea34-188-170-78-39.eu.ngrok.io/graphql";
+//https://ea34-188-170-78-39.eu.ngrok.io/graphql
+if(apolloType == "maintest"){
+console.log('main_apollo')
+  apolloServer = "https://flyby-gateway.herokuapp.com/";
+}
+if(apolloType == "surtest"){
+  apolloServer = "https://ea34-188-170-78-39.eu.ngrok.io/graphql";
+}
+
 const client = new ApolloClient({
-  uri: "https://flyby-gateway.herokuapp.com/",
+  uri: apolloServer,//"https://flyby-gateway.herokuapp.com/",
   cache: new InMemoryCache(),
 });
 

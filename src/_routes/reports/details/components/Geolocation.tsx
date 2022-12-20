@@ -7,8 +7,13 @@ import Grid from "@mui/material/Grid";
 import { panel_bg, } from "_styles/MuiStyledComponents";
 import "_styles/leaflet.css";
 import { Heading, ItemInfo, ItemName } from "_styles/MuiStyledComponents";
+import { LeafletPure } from "_components/LeafletPure";
 
-export function Geolocation() {
+
+interface IProps{
+  points: number[][]
+}
+export function Geolocation({points}:IProps) {
   const theme = useTheme();
   return (
     <Paper sx={{ width: "100%",  ...panel_bg[theme.palette.mode] }}>
@@ -22,6 +27,9 @@ export function Geolocation() {
         </Grid>
 
         <Grid item xs={12}>
+          <LeafletPure points={points}/>
+          {/*
+          //!! ---------react leaflter----------------
           <Box sx={{ height: "600px",px: 2 }}>
             <MapContainer
               center={[13.364047, 103.860313]}
@@ -35,7 +43,7 @@ export function Geolocation() {
               <Marker position={[51.505, -0.09]}>
               </Marker>
             </MapContainer>
-          </Box>
+  </Box>*/}
         </Grid>
         <Grid item xs={3}>
           <ItemName>Долгота:</ItemName>

@@ -7,7 +7,35 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { Controller, useForm } from "react-hook-form";
+import { useQuery, gql } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 
+const GET_LOCATIONS = gql`
+  query GetLocations {
+    locations {
+      id
+      name
+      description
+      photo
+    }
+  }
+`;
+
+const TEST_AUTH = gql`
+query MyQuery {
+  login(login: "admin@admin.com", password: "1") {
+    ... on LoginSuccess {
+      __typename
+      token
+    }
+    ... on LoginError {
+      __typename
+      detail
+      statusCode
+    }
+  }
+}
+`
 
 interface IAuth {
   setIsLoggedIn: (value: boolean) => void; //Dispatch<SetStateAction<<boolean>>
@@ -20,6 +48,7 @@ type AForm = {
 
 export function Auth({ setIsLoggedIn }: IAuth) {
   const theme = useTheme();
+  const { loading, error, data } = useQuery(TEST_AUTH);
 
   const { control, formState, handleSubmit, watch } = useForm<AForm>({
     mode: "onTouched",

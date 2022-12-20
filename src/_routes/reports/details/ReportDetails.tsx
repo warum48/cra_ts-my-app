@@ -59,6 +59,10 @@ export default function ReportDetails() {
     "Геолокация",
   ];*/
 
+  const details = {
+    geolocation:[[13.363, 103.859], [13.364047, 103.860313]]
+  }
+
   const reportDetailsTabs = {
     info: {
       name: "Информация",
@@ -86,7 +90,7 @@ export default function ReportDetails() {
     },
     geolocation: {
       name: "Геолокация",
-      component: <Geolocation />,
+      component: <Geolocation points={details.geolocation}/>,
     },
   };
 
