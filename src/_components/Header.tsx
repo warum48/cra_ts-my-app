@@ -19,7 +19,10 @@ export function Header(props: HeaderProps) {
     <React.Fragment>
       <Toolbar>
         <Grid container spacing={1} alignItems="center">
-          <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
+          <Grid sx={{ 
+            //display: { sm: "none", xs: "block" } 
+            display: { lg: "none", xs: "block" } 
+            }} item>
             <IconButton
               color="inherit"
               aria-label="open drawer"

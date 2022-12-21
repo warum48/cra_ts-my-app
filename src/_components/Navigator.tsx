@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { GlobalContext } from "_context/ContextGlobal";
 import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -17,7 +18,7 @@ import SmartToyIcon from "@mui/icons-material/SmartToy";
 //import { grayLines } from "_styles/jsstyles";
 import { RoutesTypes } from "_types/TYPES";
 
-const categories = [
+let menuCategories = [
   {
     id: "Home",
     icon: <HomeIcon />,
@@ -37,13 +38,19 @@ const categories = [
     children: [
       {
         id: "Выполнение задач",
-        icon: <SettingsIcon />,
+        //icon: <SettingsIcon />,
         active: false,
         route: RoutesTypes.Execution,
       }, //Execution,
-      { id: "Изображения", icon: <TimerIcon />, route: RoutesTypes.Pictures },
-    ],
-  },
+      { id: "Изображения", 
+      //icon: <TimerIcon />, 
+      route: RoutesTypes.Pictures },
+    ]
+  }
+  
+];
+
+const debugCategories = [
   {
     id: "Debug",
     icon: <SmartToyIcon />,
@@ -52,9 +59,19 @@ const categories = [
       { id: "GraphQL lazy", route: RoutesTypes.Debug_LazyGQL },
       { id: "Lazy GQL Select", route: RoutesTypes.Debug_LazySelect },
       { id: "Leaflet pure", route: RoutesTypes.Debug_LeafletPure },
-    ],
-  },
-];
+    ]
+  }
+]
+
+interface IMenuCategory{
+  id:string,
+  icon:React.ReactElement,
+  children?:{id:string, active?:boolean, route:RoutesTypes}[],
+  route?:any,
+  active?:boolean 
+}
+
+
 
 const item = {
   py: "2px",
@@ -74,6 +91,17 @@ const itemCategory = {
 export function Navigator(props: any) {
   const { ...other } = props;
   const theme = useTheme();
+  const { isDebug, setIsDebug} = React.useContext(GlobalContext);
+  //let categories:IMenuCategory[] = [];
+  const [categories, setCategories] = React.useState<IMenuCategory[]>([])
+
+  React.useEffect(()=>{
+  if(isDebug){
+    setCategories([...menuCategories, ...debugCategories])
+  }else{
+    setCategories([...menuCategories])
+  }
+  },[isDebug])
 
   return (
     <Drawer variant="permanent" {...other}>

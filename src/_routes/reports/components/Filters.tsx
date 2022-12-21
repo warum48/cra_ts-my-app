@@ -84,15 +84,17 @@ export const Filters = () => {
   };
 
   return (
-    <Paper sx={{ ml: 2, p: 2 }}>
+    <Paper 
+    sx={{ 
+      //ml: 2, 
+      //maxWidth:'604px',
+      p: 2 }}
+    >
       <Stack spacing={2}>
-        {/*<StackHeader>Отфильтровать по: </StackHeader>*/}
+        {/*
         <Typography variant="subtitle2">Отфильтровать по:</Typography>
-        {/*selectedOption && <code>debug: {selectedOption?.label}</code>*/}
-        {/*<FilterSelect label={"Статус"} />
-              <FilterSelect label={"Источник"} />
-              <FilterSelect label={"Задача"} />
-  <FilterSelect label={"Регион"} />*/}
+        */}
+
         <Box>
           <SelectLabel text={"Статус:"} />
           <Select

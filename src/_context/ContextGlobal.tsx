@@ -8,11 +8,12 @@ import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/c
 import { useParams } from "react-router-dom";
 //import { createHttpLink } from 'apollo-link-http';
 //import App from './App';
-
+const testtoken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2Mjc2MzcsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDE1MDAwMCR1SEs1UFM2TU9NenQkN0xGcTF4T3UveG8rc0ljRE45dm5BL0dZTFNnU0x1Ylkwd2tueUVRVWlucz0ifX0.4rGVmAeL7bARW9yQK3J6UnU1OtfosYXL1n4bAkNF9eE"
 let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
-let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
+//let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
+let apolloServer ="https://712e-188-170-77-22.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
 if(apolloType == "maintest"){
 console.log('main_apollo')
@@ -28,7 +29,11 @@ const client = new ApolloClient({
       uri: apolloServer,
       fetchOptions: {
          mode: 'cors', // no-cors, *cors, same-origin //'*cors'//
-      }
+      },
+      headers: {
+        'Authorization': 'Bearer '+testtoken,
+        'Access-Control-Allow-Origin':'*'
+      }//localStorage.getItem('token'),*/
   }),
   cache: new InMemoryCache(),
 });
@@ -66,6 +71,9 @@ interface IContext {
     mainGradientBg_135: string;
     buttonGradient: string;
   };
+
+  token: string;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const GlobalContext = createContext({} as IContext);
@@ -77,6 +85,7 @@ type Props = {
 //--------------component-----------
 
 export const GlobalProvider = ({ children }: Props) => {
+  const [token , setToken] = React.useState('')
   const { themeMode, colorSet } = useSelector(
     (state: RootState) => state.colorTheme
   );
@@ -167,6 +176,8 @@ export const GlobalProvider = ({ children }: Props) => {
     setIsDebug,
     colorMode, //dark-light
     getColorMode, //fresh-strong
+    token,
+    setToken
   };
 
   return (

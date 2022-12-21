@@ -23,10 +23,10 @@ export const Reports = () => {
           </Typography>
           <SearchBar />
         </Grid>
-        <Grid item xs={9}>
-          <ReportMainTable />
+        <Grid item md={9} xs={12} order={{ xs: 3, md: 2 }}>
+          <ReportMainTable pageNumber={1}/>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item md={3} xs={12} order={{ xs: 2, md: 3 }} sx={{ pl: {md:2, xs:0}, pb:{md:0, xs:2}}}>
           <Filters />
         </Grid>
         

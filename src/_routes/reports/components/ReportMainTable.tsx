@@ -15,6 +15,9 @@ import { StyledTableCell, StyledTableRow } from "_styles/MuiStyledComponents";
 import { rows } from "_components/debug/_mockrows";
 import Pagination from "@mui/material/Pagination";
 import { useQuery, gql } from '@apollo/client';
+import { Interface } from "readline";
+//import { useQuery, gql } from "@apollo/client";
+//import { useLazyQuery } from "@apollo/client";
 
 type IHeader = {
   field: string;
@@ -63,7 +66,51 @@ const columns: IHeader[] = [
   },
 ];
 
-export default function ReportDetailsTable() {
+
+interface IRDTable{
+  pageNumber:number
+}
+
+export default function ReportDetailsTable({pageNumber}:IRDTable) {
+  const GET_TE = gql`
+  query MyQuery {
+    tasksExecutions(pages: {pageNumber: 1, limit: 10}) {
+      teList {
+        dateEnd
+        dateStart
+        source
+        storeId
+        userId
+        taskId
+        id
+      }
+    }
+  }
+  `
+  const { loading, error, data } = useQuery(GET_TE);
+  
+
+  /*
+  "teList": [
+        {
+          "dateEnd": "2022-12-01T06:17:38.701260+00:00",
+          "dateStart": "2022-12-01T06:11:40.259770+00:00",
+          "id": 4421426,
+          "storeId": 7804,
+          "taskId": 163,
+          "userId": 17271
+        },
+        {
+          "dateEnd": "2022-11-09T08:20:33+00:00",
+          "dateStart": "2022-11-09T08:01:22.644782+00:00",
+          "id": 4299545,
+          "storeId": 25199,
+          "taskId": 163,
+          "userId": 17198
+        },*/
+  
+
+//-------MUI---------
   const theme = useTheme();
   function getStyleFor(row: Item, colfield: string) {
     if (colfield == "status") {
@@ -95,7 +142,7 @@ export default function ReportDetailsTable() {
 
   return (
     <Box>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{width: {xs:'calc(100vw - 96px)', md:'100%'}}}>
         <Table sx={{ minWidth: 300 }} aria-label="customized table">
           <TableHead>
             <TableRow>        
@@ -108,10 +155,10 @@ export default function ReportDetailsTable() {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow key={row.id}>           
+              <StyledTableRow key={'row'+row.id}>           
                 {columns.map((col: IHeader, index) => (
                   <>
-                    <StyledTableCell sx={getStyleFor(row, col.field)}>
+                    <StyledTableCell sx={getStyleFor(row, col.field)} key={'col'+index}>
                       {col.field == "id" || col.field == "task" ? (
                         <Link
                           component={RouterLink}
@@ -133,6 +180,7 @@ export default function ReportDetailsTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      {/*<Box>{JSON.stringify(data)}</Box>*/}
       <Box
         sx={{
           display: "flex",
@@ -146,3 +194,13 @@ export default function ReportDetailsTable() {
     </Box>
   );
 }
+
+/*
+
+{"tasksExecutions":{"__typename":"ListTaskExecution",
+"teList":[
+{"__typename":"TaskExecution","dateEnd":"2022-12-01T06:17:38.701260+00:00","dateStart":"2022-12-01T06:11:40.259770+00:00","source":"android","storeId":7804,"userId":17271,"taskId":163,"id":4421426},
+{"__typename":"TaskExecution","dateEnd":"2022-11-09T08:20:33+00:00","dateStart":"2022-11-09T08:01:22.644782+00:00","source":"android","storeId":25199,"userId":17198,"taskId":163,"id":4299545},
+{"__typename":"TaskExecution","dateEnd":"2022-11-04T15:42:08+00:00","dateStart":"2022-11-04T15:29:56.953914+00:00","source":"android","storeId":145091,"userId":20562,"taskId":206,"id":4285377},
+
+*/

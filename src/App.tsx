@@ -33,6 +33,8 @@ function App() {
   const drawerWidth = 256;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+  const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -45,23 +47,8 @@ function App() {
     */
 
   return (
-    <>
-   {/*} <Box 
-    className="_bgimage" 
-    component="img"
-    sx={{
-      height: 'auto',
-      width: '100%',
-      zIndex:-1,
-      position:'absolute',
-      top:0,
-      overflow:'hidden'
-    }}
-    src="http://neurolab.mcbs.group/local/templates/neurolab/assets/images/svg/s-mp-one-img-bg.svg"
-    >
-  </Box>*/}
     
-    
+  
     <Box
      className={theme.palette.mode === 'light' ? "main_bgimage" :''}
       sx={{
@@ -73,9 +60,11 @@ function App() {
       {/*<CssBaseline />*/}
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        //sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        //sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+        sx={{ width: { lg: drawerWidth }, flexShrink: { lg: 0 } }}
       >
-        {isSmUp ? null : (
+        {isLgUp ? null : (
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}
             variant="temporary"
@@ -85,7 +74,9 @@ function App() {
         )}
         <Navigator
           PaperProps={{ style: { width: drawerWidth } }}
-          sx={{ display: { sm: "block", xs: "none" } }}
+          //sx={{ display: { sm: "block", xs: "none" } }}
+          //sx={{ display: { md: "block", xs: "none" } }}
+          sx={{ display: { lg: "block", xs: "none" } }}
         />
       </Box>
       <Box
@@ -124,7 +115,7 @@ function App() {
         </Box>
       </Box>
     </Box>
-    </>
+    
   );
 }
 
