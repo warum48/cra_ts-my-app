@@ -13,7 +13,7 @@ let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
 //let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
-let apolloServer ="https://712e-188-170-77-22.eu.ngrok.io/graphql";
+let apolloServer ="https://abac-188-170-74-170.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
 if(apolloType == "maintest"){
 console.log('main_apollo')
@@ -89,7 +89,7 @@ export const GlobalProvider = ({ children }: Props) => {
   const { themeMode, colorSet } = useSelector(
     (state: RootState) => state.colorTheme
   );
-  const [isDebug, setIsDebug] = useState(true);
+  const [isDebug, setIsDebug] = useState(false);
   let { debug } = useParams();
 
   //-----color mode

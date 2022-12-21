@@ -15,13 +15,16 @@ import { StyledTableCell, StyledTableRow } from "_styles/MuiStyledComponents";
 import { rows } from "_components/debug/_mockrows";
 import Pagination from "@mui/material/Pagination";
 import { useQuery, gql } from '@apollo/client';
-import { Interface } from "readline";
+//import { Interface } from "readline";
+import dayjs from "dayjs";
 //import { useQuery, gql } from "@apollo/client";
 //import { useLazyQuery } from "@apollo/client";
 
 type IHeader = {
   field: string;
   headerName: string;
+  func?: ({}:any | string ) => string;
+ // func?: (any)=>string;
 };
 type Item = {
   id: number | string;
@@ -34,7 +37,7 @@ type Item = {
   status: string;
 };
 
-const columns: IHeader[] = [
+/* const columns: IHeader[] = [
   { field: "id", headerName: "ID" },
   {
     field: "task",
@@ -64,17 +67,57 @@ const columns: IHeader[] = [
     field: "status",
     headerName: "Статус",
   },
+]; */
+
+const columns: IHeader[] = [
+  { field: "id", headerName: "ID" },
+  {
+    field: "taskId",
+    headerName: "Задача",
+  },
+  {
+    field: "dateStart",
+    headerName: "Начало",//"Дата начала    ",
+    func: st => dayjs(st).format('YYYY-MM-DD HH:mm:ss')//tz("Europe/Moscow") //locale('ru-ru').format(
+  },
+  {
+    field: "dateEnd",
+    headerName: "Завершение",//"Дата завершения",
+    func: st => dayjs(st).format('YYYY-MM-DD HH:mm:ss')
+  },
+  {
+    //field: "userId",
+    field: "user",
+    headerName: "Сотрудник",
+    func: ob=>ob.surname + " " + ob.name
+  },
+  {
+    field: "store",//"storeId",
+    headerName: "Магазин",
+    func: ob=>ob.address
+  },
+  {
+    field: "source",
+    headerName: "Источник",
+  },
+  {
+    field: "status",
+    headerName: "Статус",
+  },
 ];
 
-
-interface IRDTable{
+/* interface IRDTable{
   pageNumber:number
-}
+} */
 
-export default function ReportDetailsTable({pageNumber}:IRDTable) {
+export default function ReportMainTable() { //{pageNumber}:IRDTable
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
   const GET_TE = gql`
   query MyQuery {
-    tasksExecutions(pages: {pageNumber: 1, limit: 10}) {
+    tasksExecutions(pages: {pageNumber: ${page}, limit: 10}) {
       teList {
         dateEnd
         dateStart
@@ -82,7 +125,15 @@ export default function ReportDetailsTable({pageNumber}:IRDTable) {
         storeId
         userId
         taskId
+        status
         id
+        user {
+          name
+          surname
+        }
+        store {
+          address
+        }
       }
     }
   }
@@ -147,17 +198,18 @@ export default function ReportDetailsTable({pageNumber}:IRDTable) {
           <TableHead>
             <TableRow>        
               {columns.map((item, index) => (
-                <StyledTableCell sx={{ whiteSpace: "nowrap" }}>
+                <StyledTableCell sx={{ whiteSpace: "nowrap" }} key={'head'+index}>
                   {item.headerName}
                 </StyledTableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={'row'+row.id}>           
+            {/* {rows.map((row) => ( */}
+            {data?.tasksExecutions?.teList.map((row:any, i:number) => (
+              <StyledTableRow key={'row'+i}>           
                 {columns.map((col: IHeader, index) => (
-                  <>
+                
                     <StyledTableCell sx={getStyleFor(row, col.field)} key={'col'+index}>
                       {col.field == "id" || col.field == "task" ? (
                         <Link
@@ -170,18 +222,23 @@ export default function ReportDetailsTable({pageNumber}:IRDTable) {
                           {row[col.field as keyof typeof row]}
                         </Link>
                       ) : (
+                        <>
+                        {!col.func ?
                         row[col.field as keyof typeof row] || "-"
+                        : col.func(row[col.field as keyof typeof row])
+}
+                        </>
                       )}
                     </StyledTableCell>
-                  </>
+                  
                 ))}
               </StyledTableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      {/*<Box>{JSON.stringify(data)}</Box>*/}
-      <Box
+{/*       <Box>{JSON.stringify(data?.tasksExecutions?.teList)}</Box>
+ */}      <Box
         sx={{
           display: "flex",
           py: 2,
@@ -189,7 +246,7 @@ export default function ReportDetailsTable({pageNumber}:IRDTable) {
           justifyContent: "flex-end",
         }}
       >
-        <Pagination count={10} />
+        <Pagination count={10} page={page} onChange={handleChange} />
       </Box>
     </Box>
   );

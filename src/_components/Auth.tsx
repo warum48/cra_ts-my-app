@@ -54,7 +54,7 @@ export function Auth({ setIsLoggedIn }: IAuth) {
   const theme = useTheme();
   //const emailRef = React.useRef<any>(null);
   //const passRef = React.useRef<any>(null);
-const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [pass, setPass] = React.useState("");
   const TEST_AUTH = gql`
   query MyQuery {
@@ -72,7 +72,6 @@ const [email, setEmail] = React.useState("");
   }
   `;
 
-  
   //const { loading, error, data } = useQuery(TEST_AUTH);
   //const [doAuth, { loading, error, data }] = useLazyQuery(TEST_AUTH);
   const [
@@ -92,11 +91,11 @@ const [email, setEmail] = React.useState("");
     //setIsLoggedIn(true);
   };
 
-  React.useEffect(()=>{
-    if(data && data.login?.token){
+  React.useEffect(() => {
+    if (data && data.login?.token) {
       setIsLoggedIn(true);
     }
-  },[data])
+  }, [data]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -138,7 +137,7 @@ const [email, setEmail] = React.useState("");
                     message: "Это поля обязательное",
                   },
                   pattern: {
-                    value:  /^\S+@\S+$/i,//  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/  ,//
+                    value: /^\S+@\S+$/i, //  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/  ,//
                     message: "Некорректный ввод",
                   },
                 }}
@@ -200,7 +199,7 @@ const [email, setEmail] = React.useState("");
                     autoComplete="current-password"
                     error={invalid && isTouched}
                     helperText={error?.message}
-                   // ref={passRef}
+                    // ref={passRef}
                     onChange={(e) => {
                       setPass(e.target.value);
                       field.onChange(e.target.value);
@@ -209,35 +208,37 @@ const [email, setEmail] = React.useState("");
                   />
                 )}
               />
-<DebugBox>
-              <Button
-                //type="submit"
-                fullWidth
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 0,
-                  color: "#ffffff",
-                  background: theme.palette.common.buttonGradient,
-                }}
-                onClick={()=>setIsLoggedIn(true)}
-              >
-                Войти без сервера
-              </Button>
+              <DebugBox>
+                <Button
+                  //type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    mt: 3,
+                    mb: 0,
+                    color: "#ffffff",
+                    background: theme.palette.common.buttonGradient,
+                  }}
+                  onClick={() => setIsLoggedIn(true)}
+                >
+                  пропустить 
+                </Button>
 
-              <StyledButton
-              sx={{
-                mt: 1,
-                mb: 0}}
-                variant="contained"
-                fullWidth
-                theme={theme}
-                onClick={() => doPreAuth()}
-              >
-                Тестовый запрос без входа
-              </StyledButton>
+                {/* <StyledButton
+                  sx={{
+                    mt: 1,
+                    mb: 0,
+                  }}
+                  variant="contained"
+                  fullWidth
+                  theme={theme}
+                  onClick={() => doPreAuth()}
+                >
+                  Тестовый запрос без входа
+                </StyledButton>
+                {pre_data && <DebugBox code={JSON.stringify(pre_data)} />} */}
 
-             {/*} <StyledButton
+                {/*} <StyledButton
                 variant="contained"
                 fullWidth
                 theme={theme}
@@ -247,11 +248,8 @@ const [email, setEmail] = React.useState("");
                 log
               </StyledButton>*/}
 
-              {pre_data && (
-                <DebugBox  code={JSON.stringify(pre_data)} />
-              )}
-
-</DebugBox>
+                
+              </DebugBox>
 
               <StyledButton
                 type="submit"
@@ -260,27 +258,32 @@ const [email, setEmail] = React.useState("");
                 theme={theme}
                 sx={{
                   mt: 1,
-                  mb: 0}}
+                  mb: 0,
+                }}
                 //onClick={() => doAuth()}
               >
                 ВХОД
               </StyledButton>
 
-              {data && <DebugBox  code={JSON.stringify(data)} />}
-              {error && <>
-              {/*error.map((err, i) => (
+              {data && <DebugBox code={JSON.stringify(data)} />}
+              {error && (
+                <>
+                  {/*error.map((err, i) => (
               <div>{err.message}</div>
               ))}
               <div>{JSON.stringify(error)}</div>
               <div>{JSON.stringify(error.graphQLErrors[0].message)}</div>*/}
-              <DebugBox  code={JSON.stringify(error,null, 3)} />
-              </>
-              }
-              {(data?.login?.statusCode == 401 || data?.login?.statusCode == 404)&&
-              <Box sx={{textAlign:"center"}}>
-<Typography variant="caption" color="error.main" >{data.login.detail}</Typography>
-</Box>
-}
+                  <DebugBox code={JSON.stringify(error, null, 3)} />
+                </>
+              )}
+              {(data?.login?.statusCode == 401 ||
+                data?.login?.statusCode == 404) && (
+                <Box sx={{ textAlign: "center" }}>
+                  <Typography variant="caption" color="error.main">
+                    {data.login.detail}
+                  </Typography>
+                </Box>
+              )}
             </form>
           </Box>
         </Paper>
