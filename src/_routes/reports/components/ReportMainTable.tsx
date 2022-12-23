@@ -17,6 +17,11 @@ import Pagination from "@mui/material/Pagination";
 import { useQuery, gql } from '@apollo/client';
 //import { Interface } from "readline";
 import dayjs from "dayjs";
+import { Typography } from "@mui/material";
+import { LoadingBox, CodeError } from "_styles/MuiStyledComponents";
+import { filtersVar } from "_apollo/state";
+//import { filtersVar } from "_apollo/state";
+import { useReactiveVar } from "@apollo/client";
 //import { useQuery, gql } from "@apollo/client";
 //import { useLazyQuery } from "@apollo/client";
 
@@ -89,12 +94,12 @@ const columns: IHeader[] = [
     //field: "userId",
     field: "user",
     headerName: "Сотрудник",
-    func: ob=>ob.surname + " " + ob.name
+    func: ob=>ob?.surname + " " + ob?.name
   },
   {
     field: "store",//"storeId",
     headerName: "Магазин",
-    func: ob=>ob.address
+    func: ob=>ob?.address
   },
   {
     field: "source",
@@ -115,9 +120,9 @@ export default function ReportMainTable() { //{pageNumber}:IRDTable
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-  const GET_TE = gql`
+ /* const GET_TE = gql`
   query MyQuery {
-    tasksExecutions(pages: {pageNumber: ${page}, limit: 10}) {
+    tasksExecutions(filters: {}, pages: {pageNumber: ${page}, limit: 10}) {
       teList {
         dateEnd
         dateStart
@@ -139,6 +144,44 @@ export default function ReportMainTable() { //{pageNumber}:IRDTable
   }
   `
   const { loading, error, data } = useQuery(GET_TE);
+*/
+
+type TFilters = {
+  regionId?: number;
+   source?: string;
+    status?: number;
+     taskId?: number;
+}
+
+  const GET_TE = gql`
+  query MyQuery ($page:Int!, $filters:TeFilters) {
+    getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 10}) {
+      teList {
+        dateEnd
+        dateStart
+        source
+        storeId
+        userId
+        taskId
+        status
+        id
+        user {
+          name
+          surname
+        }
+        store {
+          address
+        }
+      }
+    }
+  }
+  `
+  const filtersVar_re = useReactiveVar(filtersVar);
+  const { loading, error, data } = useQuery(GET_TE,{
+    variables: {page: page, filters: filtersVar_re}
+  });
+
+
   
 
   /*
@@ -204,9 +247,11 @@ export default function ReportMainTable() { //{pageNumber}:IRDTable
               ))}
             </TableRow>
           </TableHead>
+          
+          {data &&
           <TableBody>
             {/* {rows.map((row) => ( */}
-            {data?.tasksExecutions?.teList.map((row:any, i:number) => (
+            {data?.getTasksExecutions?.teList.map((row:any, i:number) => (
               <StyledTableRow key={'row'+i}>           
                 {columns.map((col: IHeader, index) => (
                 
@@ -235,7 +280,10 @@ export default function ReportMainTable() { //{pageNumber}:IRDTable
               </StyledTableRow>
             ))}
           </TableBody>
+}
         </Table>
+        {error && <TableBody><CodeError text={JSON.stringify(error, null, 3)}/></TableBody>}
+          {loading && <TableBody><LoadingBox/></TableBody>}
       </TableContainer>
 {/*       <Box>{JSON.stringify(data?.tasksExecutions?.teList)}</Box>
  */}      <Box
@@ -261,3 +309,10 @@ export default function ReportMainTable() { //{pageNumber}:IRDTable
 {"__typename":"TaskExecution","dateEnd":"2022-11-04T15:42:08+00:00","dateStart":"2022-11-04T15:29:56.953914+00:00","source":"android","storeId":145091,"userId":20562,"taskId":206,"id":4285377},
 
 */
+
+//https://lightrun.com/answers/trojanowski-react-apollo-hooks-how-to-handle-dynamic-variables-in-usequery
+//https://stackoverflow.com/questions/66808806/how-to-use-dynamic-graphql-string-from-separate-page-in-component-react-reac
+
+//{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2OTczMTMsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRwaEF4Zk9OUWQ4RldwNFhXV2JuTHFVJHI2QWxxQ2djSnF3N0Rsd3E5cnREYkNHS292dXVFWkhRdnRwcGxQRXFtVkk9In19.DkDM4dqwj55PXi7GZGVN6pZe4DefNbeXfRDA0BIPl_0"}
+
+//{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2OTczMTMsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRwaEF4Zk9OUWQ4RldwNFhXV2JuTHFVJHI2QWxxQ2djSnF3N0Rsd3E5cnREYkNHS292dXVFWkhRdnRwcGxQRXFtVkk9In19.DkDM4dqwj55PXi7GZGVN6pZe4DefNbeXfRDA0BIPl_0"}

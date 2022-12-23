@@ -8,12 +8,13 @@ import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/c
 import { useParams } from "react-router-dom";
 //import { createHttpLink } from 'apollo-link-http';
 //import App from './App';
-const testtoken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2Mjc2MzcsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDE1MDAwMCR1SEs1UFM2TU9NenQkN0xGcTF4T3UveG8rc0ljRE45dm5BL0dZTFNnU0x1Ylkwd2tueUVRVWlucz0ifX0.4rGVmAeL7bARW9yQK3J6UnU1OtfosYXL1n4bAkNF9eE"
+const testtoken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE3NzcwMDgsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRIbXhsYldBRklDMlRnYWFhcFhtTlZEJGRMbW9COHNnTXVxekZrWVhldG5UQlZSbFM4bkxCRlVPV2JVcVdoeU41M3c9In19.riqYhqbr7UoW1O_jhqDuLy6Y5n9SD8aBEvN1qPsTlF4";
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2Mjc2MzcsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDE1MDAwMCR1SEs1UFM2TU9NenQkN0xGcTF4T3UveG8rc0ljRE45dm5BL0dZTFNnU0x1Ylkwd2tueUVRVWlucz0ifX0.4rGVmAeL7bARW9yQK3J6UnU1OtfosYXL1n4bAkNF9eE"
 let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
 //let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
-let apolloServer ="https://abac-188-170-74-170.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
+let apolloServer ="https://30cc-188-170-82-146.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
 if(apolloType == "maintest"){
 console.log('main_apollo')

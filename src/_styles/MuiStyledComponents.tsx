@@ -1,13 +1,22 @@
+import React from 'react';
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import { Typography } from '@mui/material';
 
 export const panel_bg = {
   dark: { background: "rgba(255,255,255,0.1)" },
   light: { background: "white" }
 };
+
+interface IChildren{
+  children?:JSX.Element
+}
+interface IText{
+  text?:string
+}
 
 //--------------TABLE in DETAILS (Info.tsx, ReportMainTable.tsx ...)
 export const Heading = styled(Box)(({ theme }) => ({
@@ -99,3 +108,38 @@ font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.5rem;
 `
+
+//-----------------errors-------------
+
+
+
+
+export const LoginError = ({text}:IText) => {
+  return (
+  <Box sx={{ textAlign: "center" }}>
+  <Typography variant="caption" color="error.main">
+    {text}
+  </Typography>
+</Box>
+  )
+}
+
+export const CodeError = ({text}:IText) => {
+  return (
+  <Box sx={{ textAlign: "center", p:3}}>
+  <Typography variant="caption" color="error.main">
+    {text}
+  </Typography>
+</Box>
+  )
+}
+
+export const  LoadingBox = () => {
+  return(
+  <Box sx={{ textAlign: "center", p:3 }}>
+  <Typography variant="caption" >
+    Загрузка ...
+  </Typography>
+</Box>
+  )
+}

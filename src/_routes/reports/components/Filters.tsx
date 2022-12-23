@@ -1,4 +1,8 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
+//------apollo--
+import { filtersVar } from "_apollo/state";
+import { useReactiveVar } from "@apollo/client";
+//------mui-----
 import { Paper, Stack, Typography, Button, Box } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
@@ -8,6 +12,7 @@ import Select, {
   SingleValue
 } from "react-select";
 import { DebugBox } from "_components/debug/DebugBox";
+import { useQuery, gql } from '@apollo/client';
 
 
 interface ISelectLabel {
@@ -36,17 +41,47 @@ export const Filters = () => {
   console.log('debug',debug);
   const theme = useTheme();
   const [selectedOption, setSelectedOption] = useState<any>(null);
+  const filtersVar_re = useReactiveVar(filtersVar);
+
+  const SOURCES_FILTER = gql`
+  query SourcesFilterQuery {
+    getTeSources {
+      sourcesList {
+        source
+        description
+      }
+    }
+  }
+  `
+  const STATUS_FILTER = gql`
+  query StatusFilterQuery {
+    getTeStatus {
+      statusesList {
+        description
+        status
+      }
+    }
+  }
+`
+const { loading:loading_sources, error:error_sources, data:data_sources } = useQuery(SOURCES_FILTER);
+
 
   //-------------reducer object----------------------
   interface FilterState {
+    /* objects are types of react-select items*/
     /*status: string;
     source: string;
     task: string;
     region: string;*/
     status: SingleValue<{ value: number; label: string; }> | undefined
     source: SingleValue<{ value: number; label: string; }> | undefined
-    task: SingleValue<{ value: number; label: string; }> | undefined
-    region: SingleValue<{ value: number; label: string; }> | undefined
+    taskId: SingleValue<{ value: number; label: string; }> | undefined
+    regionId: SingleValue<{ value: number; label: string; }> | undefined
+  }
+
+  interface IGQLitem{
+    source:string;
+    description:string;
   }
 
   const defFiltersState = {
@@ -56,8 +91,8 @@ export const Filters = () => {
     region: "",*/
     status: undefined,
     source: undefined,
-    task: undefined,
-    region: undefined,
+    taskId: undefined,
+    regionId: undefined,
   }
 
   const [filters, setFilters] = useReducer(
@@ -67,6 +102,27 @@ export const Filters = () => {
     }),
     defFiltersState
   );
+
+  useEffect(()=>{
+    let tempFiltersOb:any = {}; //TODO add ttype from var
+   /* if(filters.status){
+      tempFiltersOb.status=filters.status
+    }
+    if(filters.region){
+      tempFiltersOb.region=filters.region
+    }*/
+    let k: keyof typeof filters;
+    for(k in filters){
+      console.log('k',k);
+      console.log('fk',filters[k]);
+      if(filters[k] && filters[k]?.value ){
+        //tempFiltersOb[k]=filters[k].label;
+        tempFiltersOb[k] = filters[k]?.value;
+      }
+    } 
+    filtersVar(tempFiltersOb)
+    console.log('--ue--filters', filters);
+  },[filters])
 
   //--------------------------------------------------
 
@@ -98,6 +154,7 @@ export const Filters = () => {
         <Box>
           <SelectLabel text={"Статус:"} />
           <Select
+            isClearable={true}
             //label={"Статус"}
             //defaultValue={options[0] }
             //onChange={handleChange}
@@ -118,11 +175,17 @@ export const Filters = () => {
           />
         </Box>
 
+{data_sources && 
         <Box>
           <SelectLabel text={"Источник:"} />
           <Select
+          isClearable={true}
             onChange={(e) => setFilters({ source: e })} //.value
-            options={options}
+            //options={options}
+            //options={data_sources.teSources.sourcesList}
+            //getOptionLabel={option => option.source}
+            //getOptionValue={option => option.description} //!! typeError: Property 'description' does not exist on type '{ value: number; label: string; }'.
+            options={data_sources.getTeSources.sourcesList.map(({ source, description }:IGQLitem) => ({ value: source, label: description}))}
             value={filters.source || null}
             //value={filters.source}
             classNamePrefix={
@@ -132,13 +195,15 @@ export const Filters = () => {
             }
           />
         </Box>
+}
 
         <Box>
           <SelectLabel text={"Задача:"} />
           <Select
-            onChange={(e) => setFilters({ task: e })} //.value
+          isClearable={true}
+            onChange={(e) => setFilters({ taskId: e })} //.value
             options={options}
-            value={filters.task || null}
+            value={filters.taskId || null}
             classNamePrefix={
               theme.palette.mode === "dark"
                 ? "react-select-dark"
@@ -150,9 +215,10 @@ export const Filters = () => {
         <Box>
           <SelectLabel text={"Регион:"} />
           <Select
-            onChange={(e) => setFilters( {region: e})} //.value
+          isClearable={true}
+            onChange={(e) => setFilters( {regionId: e})} //.value
             options={options}
-            value={filters.region || null}
+            value={filters.regionId || null}
             classNamePrefix={
               theme.palette.mode === "dark"
                 ? "react-select-dark"
@@ -179,7 +245,7 @@ export const Filters = () => {
         options={options}
 />  */}
         {/*selectedOption && (*/}
-        {(filters.status || filters.task || filters.source || filters.region) && (
+        {(filters.status || filters.taskId || filters.source || filters.regionId) && (
           <Button
             variant="contained"
             sx={{
@@ -197,6 +263,7 @@ export const Filters = () => {
           <code>{JSON.stringify(filters)}/debug:{ debug }</code>
           </Typography> */}
           <DebugBox code={JSON.stringify(filters)}/>
+          <DebugBox code={'apollo state: ' + JSON.stringify(filtersVar_re)}/>
       </Stack>
     </Paper>
   );
