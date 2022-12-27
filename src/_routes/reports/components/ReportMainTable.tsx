@@ -22,6 +22,7 @@ import { LoadingBox, CodeError } from "_styles/MuiStyledComponents";
 import { filtersVar } from "_apollo/state";
 //import { filtersVar } from "_apollo/state";
 import { useReactiveVar } from "@apollo/client";
+import { formatDate } from "_components/UTILS";
 //import { useQuery, gql } from "@apollo/client";
 //import { useLazyQuery } from "@apollo/client";
 
@@ -83,12 +84,12 @@ const columns: IHeader[] = [
   {
     field: "dateStart",
     headerName: "Начало",//"Дата начала    ",
-    func: st => dayjs(st).format('YYYY-MM-DD HH:mm:ss')//tz("Europe/Moscow") //locale('ru-ru').format(
+    func: st => formatDate(st)//dayjs(st).format('YYYY-MM-DD HH:mm:ss')//tz("Europe/Moscow") //locale('ru-ru').format(
   },
   {
     field: "dateEnd",
     headerName: "Завершение",//"Дата завершения",
-    func: st => dayjs(st).format('YYYY-MM-DD HH:mm:ss')
+    func: st => formatDate(st)//dayjs(st).format('YYYY-MM-DD HH:mm:ss')
   },
   {
     //field: "userId",
@@ -155,7 +156,7 @@ type TFilters = {
 
   const GET_TE = gql`
   query MyQuery ($page:Int!, $filters:TeFilters) {
-    getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 10}) {
+    getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 100}) {
       teList {
         dateEnd
         dateStart
@@ -282,8 +283,8 @@ type TFilters = {
           </TableBody>
 }
         </Table>
-        {error && <TableBody><CodeError text={JSON.stringify(error, null, 3)}/></TableBody>}
-          {loading && <TableBody><LoadingBox/></TableBody>}
+        {error && <CodeError text={JSON.stringify(error, null, 3)}/>}
+          {loading && <LoadingBox/>}
       </TableContainer>
 {/*       <Box>{JSON.stringify(data?.tasksExecutions?.teList)}</Box>
  */}      <Box
@@ -316,3 +317,117 @@ type TFilters = {
 //{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2OTczMTMsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRwaEF4Zk9OUWQ4RldwNFhXV2JuTHFVJHI2QWxxQ2djSnF3N0Rsd3E5cnREYkNHS292dXVFWkhRdnRwcGxQRXFtVkk9In19.DkDM4dqwj55PXi7GZGVN6pZe4DefNbeXfRDA0BIPl_0"}
 
 //{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2OTczMTMsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRwaEF4Zk9OUWQ4RldwNFhXV2JuTHFVJHI2QWxxQ2djSnF3N0Rsd3E5cnREYkNHS292dXVFWkhRdnRwcGxQRXFtVkk9In19.DkDM4dqwj55PXi7GZGVN6pZe4DefNbeXfRDA0BIPl_0"}
+
+/*
+{
+  "data": {
+    "getTasksExecutions": {
+      "earliestDate": "2022-09-01",
+      "teList": [
+        {
+          "id": 4279176
+        },
+        {
+          "id": 4279080
+        },
+        {
+          "id": 4279223
+        },
+        {
+          "id": 4279215
+        },
+        {
+          "id": 4279168
+        },
+        {
+          "id": 4402367
+        },
+        {
+          "id": 4279035
+        },
+        {
+          "id": 4462125
+        },
+        {
+          "id": 4279227
+        },
+        {
+          "id": 4279246
+        }
+      ]
+    }
+  }
+
+
+
+  "data": {
+    "getTasksExecutions": {
+      "earliestDate": "2022-12-08",
+      "teList": [
+        {
+          "latitude": 64.52359,
+          "longitude": 40.6199125
+        },
+        {
+          "latitude": 51.7263388,
+          "longitude": 39.2044669
+        },
+        {
+          "latitude": 55.9375251,
+
+
+
+          query MyQuery {
+  getTasksExecutions(
+    pages: {pageNumber: 10, limit: 10}
+    filters: {}
+    startDate: "2022-12-08"
+    endDate: "2022-12-31"
+  ) {
+    earliestDate
+    teList {
+      latitude
+      longitude
+    }
+  }
+}
+
+
+query MyQuery {
+  getTasksExecutions(
+    pages: {pageNumber: 10, limit: 10}
+    filters: {taskId: 10, status: 10, source: "", regionId: 10}
+    startDate: "2022-12-08"
+    endDate: "2022-12-31"
+  ) {
+    earliestDate
+
+  }
+}
+
+
+query MyQuery {
+  getTasksExecutions(
+    pages: {pageNumber: 10, limit: 10}
+    filters: {taskId: 10, status: 10, source: "", regionId: 10}
+    startDate: "2022-12-08"
+    endDate: "2022-12-31"
+  ) {
+    earliestDate
+
+  }
+}
+
+
+query MyQuery {
+  getTasksExecutions(
+    pages: {pageNumber: 10, limit: 10}
+    filters: {taskId: 10, status: 10, source: "", regionId: 10}
+    startDate: "2022-12-08"
+    endDate: "2022-12-31"
+  ) {
+    earliestDate
+
+  }
+}
+}*/

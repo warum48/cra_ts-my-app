@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import SearchBar from "_components/SearchBar";
 import ReportMainTable from "_routes/reports/components/ReportMainTable";
 import { Filters } from "./components/Filters";
+import { DateFilters } from "./components/DateFilters";
 
 export const Reports = () => {
   const theme = useTheme();
@@ -25,6 +26,7 @@ export const Reports = () => {
           <SearchBar />
         </Grid>
         <Grid item md={9} xs={12} order={{ xs: 3, md: 2 }}>
+          <DateFilters/>
           <ReportMainTable />
         </Grid>
         <Grid item md={3} xs={12} order={{ xs: 2, md: 3 }} sx={{ pl: {md:2, xs:0}, pb:{md:0, xs:2}}}>

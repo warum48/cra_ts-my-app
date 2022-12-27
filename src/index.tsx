@@ -54,7 +54,7 @@ const RootWrapper = () => {
               <Route path={RoutesTypes.Home} element={<Home />} />
               <Route path={RoutesTypes.Reports} element={<Reports />} />
               <Route
-                path={RoutesTypes.Reports + "/:id"}
+                path={RoutesTypes.Reports + "/:routerTEId"}
                 element={<ReportDetails />}
               />
               

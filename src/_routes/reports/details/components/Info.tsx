@@ -4,8 +4,43 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { Heading, ItemInfo, ItemName } from "_styles/MuiStyledComponents";
+import { formatDate } from "_components/UTILS";
+import {inputInternalCommentVar} from "_apollo/state"
 
-export function Info() {
+interface IInfoProps {
+  infoData: {
+  comments: string;
+    commentsInternal: string;
+    commentsStatus: string;
+    dateEnd: string;
+    dateStart: string;
+    id: string;
+    distance: string;
+    latitude: string;
+    longitude: string;
+    money: string;
+    moneySource: string;
+    source: string;
+    status: string;
+    storeId: string;
+    taskId: string;
+    userId: string;
+    store: {
+      address: string;
+      id: number;
+      latitude: string;
+      longitude: string;
+    }
+    user: {
+      name: string;
+      surname: string;
+    }
+  },
+  inputRef:any
+}
+
+export function Info( {infoData, inputRef}:IInfoProps) {
+  //id, taskId, store, user, dateEnd, dateStart, comments, commentsInternal, commentsStatus
   const theme = useTheme();
   return (
     <Paper
@@ -14,13 +49,15 @@ export function Info() {
         py: 0
       }}
     >
+      <>
+      {infoData &&
       <Grid container spacing={0}>
         {/** -------- */}
         <Grid item xs={3}>
           <ItemName>ID</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>4504021</ItemInfo>
+          <ItemInfo>{infoData.id}</ItemInfo>
         </Grid>
         {/** -------- */}
         <Grid item xs={12}>
@@ -30,7 +67,31 @@ export function Info() {
           <ItemName>Задача:</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>Выкладка Сибирская Коллекция 3</ItemInfo>
+          <ItemInfo>{infoData.taskId}</ItemInfo>
+        </Grid>
+        <Grid item xs={3}>
+          <ItemName>Магазин:</ItemName>
+        </Grid>
+        <Grid item xs={9}>
+          <ItemInfo>{infoData.store.address}</ItemInfo>
+        </Grid>
+        <Grid item xs={3}>
+          <ItemName>Сотрудник:</ItemName>
+        </Grid>
+        <Grid item xs={9}>
+          <ItemInfo>{infoData.user.name + " " + infoData.user.surname}</ItemInfo>
+        </Grid>
+        <Grid item xs={3}>
+          <ItemName>Источник:</ItemName>
+        </Grid>
+        <Grid item xs={9}>
+          <ItemInfo>{infoData.source}</ItemInfo>
+        </Grid>
+        <Grid item xs={3}>
+          <ItemName>Статус:</ItemName>
+        </Grid>
+        <Grid item xs={9}>
+          <ItemInfo>{infoData.status}</ItemInfo>
         </Grid>
         {/** -------- */}
         <Grid item xs={12}>
@@ -40,13 +101,13 @@ export function Info() {
           <ItemName>Дата начала:</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>Dec. 8, 2022, 10:29 p.m.</ItemInfo>
+          <ItemInfo>{formatDate(infoData.dateStart)}</ItemInfo>
         </Grid>
         <Grid item xs={3}>
           <ItemName>Дата завершения:</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>Dec. 8, 2022, 10:29 p.m.</ItemInfo>
+          <ItemInfo>{formatDate(infoData.dateEnd)}</ItemInfo>
         </Grid>
         {/*-------- */}
         <Grid item xs={12}>
@@ -58,8 +119,7 @@ export function Info() {
         </Grid>
         <Grid item xs={9}>
           <ItemInfo>
-            Поправил выкладку. Сделал кор блок. Пельмени сочные разморозились
-            поэтому их убрали на списание ДМ Иван Андреевич (тел.89015275258)
+            {infoData.comments}
           </ItemInfo>
         </Grid>
         {/*-------- */}
@@ -76,6 +136,7 @@ export function Info() {
         <Grid item xs={9}>
           <ItemInfo>
             <TextField
+            ref={inputRef}
               id="outlined-multiline-static"
               label="Ваш комментарий"
               multiline
@@ -83,10 +144,16 @@ export function Info() {
               fullWidth
               maxRows={10}
               variant="outlined"
+              defaultValue={infoData.commentsInternal}
+              onChange={e => inputInternalCommentVar(e.target.value)}
+              //onChange={e => {inputRef.current.value = e.target.value;}}
+              //inputRef={e => inputRef = e}
             />
           </ItemInfo>
         </Grid>
       </Grid>
+      }
+      </>
     </Paper>
   );
 }

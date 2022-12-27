@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -13,6 +14,7 @@ import { StyledButton } from "_styles/MuiStyledComponents";
 import { DebugBox } from "./debug/DebugBox";
 import { ErrorSharp } from "@mui/icons-material";
 import { Typography } from "@mui/material";
+import {GlobalContext} from "_context/ContextGlobal";
 
 const GET_LOCATIONS = gql`
   query GetLocations {
@@ -51,6 +53,8 @@ type AForm = {
 };
 
 export function Auth({ setIsLoggedIn }: IAuth) {
+  //const [token, setTokem] = React.useContext(GlobalContext)
+  const { token, setToken} = React.useContext(GlobalContext);
   const theme = useTheme();
   //const emailRef = React.useRef<any>(null);
   //const passRef = React.useRef<any>(null);
@@ -94,6 +98,9 @@ export function Auth({ setIsLoggedIn }: IAuth) {
   React.useEffect(() => {
     if (data && data.login?.token) {
       setIsLoggedIn(true);
+
+      setToken(data.login?.token)
+      
     }
   }, [data]);
 

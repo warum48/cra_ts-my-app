@@ -41,6 +41,7 @@ export const Filters = () => {
   console.log('debug',debug);
   const theme = useTheme();
   const [selectedOption, setSelectedOption] = useState<any>(null);
+
   const filtersVar_re = useReactiveVar(filtersVar);
 
   const SOURCES_FILTER = gql`
@@ -64,6 +65,7 @@ export const Filters = () => {
   }
 `
 const { loading:loading_sources, error:error_sources, data:data_sources } = useQuery(SOURCES_FILTER);
+const { loading:loading_status, error:error_status, data:data_status } = useQuery(STATUS_FILTER);
 
 
   //-------------reducer object----------------------

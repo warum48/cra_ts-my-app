@@ -11,6 +11,9 @@ interface IFilters {
     regionId?: string | number | undefined
     testvalue?: string
 }
+/*interface IcurrentTEID {
+   
+}*/
 //filters: {regionId: 10, source: "", status: 10, taskId: 10}
 
 export const cache: InMemoryCache = new InMemoryCache({
@@ -21,7 +24,24 @@ export const cache: InMemoryCache = new InMemoryCache({
             read(){
                 return filtersVar();
             }
+        },
+        currendTEID: {
+            read(){
+                return currentTEIDVar();
+            }
+        },
+        token: {
+            read(){
+                return tokenVar();
+            }
+        },
+        //this is uncontrolled textField in Info component that shows mutable value 
+        inputInternalComment: {
+            read(){
+              return inputInternalCommentVar();
+            }
         }
+
         /*todos: {
           read () {
             return todosVar();
@@ -57,7 +77,20 @@ export const visibilityFilterVar = makeVar<VisibilityFilter>(
   VisibilityFilters.SHOW_ALL
 )*/
 
-const filtersInitValue = {}
+//"id": 4421432
+const filtersInitValue = {};
+const currentTEIDInitValue = 4421432;
+const tokenInitValue ='';
+const inputInternalCommentInitValue='';
 export const filtersVar: ReactiveVar<IFilters> = makeVar<IFilters>(
     filtersInitValue
   );
+  export const currentTEIDVar: ReactiveVar<Number> = makeVar<Number>(
+    currentTEIDInitValue
+  );
+  export const tokenVar: ReactiveVar<String> = makeVar<String>(
+    tokenInitValue
+  );
+  export const inputInternalCommentVar: ReactiveVar<String> = makeVar<String>(
+    inputInternalCommentInitValue
+  )

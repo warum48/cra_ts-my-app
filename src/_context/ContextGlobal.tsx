@@ -8,13 +8,13 @@ import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/c
 import { useParams } from "react-router-dom";
 //import { createHttpLink } from 'apollo-link-http';
 //import App from './App';
-const testtoken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE3NzcwMDgsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRIbXhsYldBRklDMlRnYWFhcFhtTlZEJGRMbW9COHNnTXVxekZrWVhldG5UQlZSbFM4bkxCRlVPV2JVcVdoeU41M3c9In19.riqYhqbr7UoW1O_jhqDuLy6Y5n9SD8aBEvN1qPsTlF4";
+const testtoken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzIxMjMzMzAsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRIbXhsYldBRklDMlRnYWFhcFhtTlZEJGRMbW9COHNnTXVxekZrWVhldG5UQlZSbFM4bkxCRlVPV2JVcVdoeU41M3c9In19.jPwPVoj-8VtHXRbozVwa03jzrQ4-vMsx3a147Z5vQMg";
 //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzE2Mjc2MzcsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDE1MDAwMCR1SEs1UFM2TU9NenQkN0xGcTF4T3UveG8rc0ljRE45dm5BL0dZTFNnU0x1Ylkwd2tueUVRVWlucz0ifX0.4rGVmAeL7bARW9yQK3J6UnU1OtfosYXL1n4bAkNF9eE"
 let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
 //let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
-let apolloServer ="https://30cc-188-170-82-146.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
+let apolloServer ="https://3e55-188-170-84-8.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
 if(apolloType == "maintest"){
 console.log('main_apollo')
@@ -24,20 +24,7 @@ if(apolloType == "surtest"){
   //apolloServer = " https://cors-anywhere.herokuapp.com/https://ea34-188-170-78-39.eu.ngrok.io/graphql";
 }
 
-const client = new ApolloClient({
-  link: new HttpLink({
-      
-      uri: apolloServer,
-      fetchOptions: {
-         mode: 'cors', // no-cors, *cors, same-origin //'*cors'//
-      },
-      headers: {
-        'Authorization': 'Bearer '+testtoken,
-        'Access-Control-Allow-Origin':'*'
-      }//localStorage.getItem('token'),*/
-  }),
-  cache: new InMemoryCache(),
-});
+
 
 /*const client = new ApolloClient({
   uri: apolloServer,//"https://flyby-gateway.herokuapp.com/",
@@ -86,7 +73,24 @@ type Props = {
 //--------------component-----------
 
 export const GlobalProvider = ({ children }: Props) => {
-  const [token , setToken] = React.useState('')
+  const [token , setToken] = React.useState(testtoken);
+
+  const client = new ApolloClient({
+    link: new HttpLink({
+        
+        uri: apolloServer,
+        fetchOptions: {
+           mode: 'cors', // no-cors, *cors, same-origin //'*cors'//
+        },
+        headers: {
+          'Authorization': 'Bearer '+token,
+          'Access-Control-Allow-Origin':'*'
+        }//localStorage.getItem('token'),*/
+    }),
+    cache: new InMemoryCache(),
+  });
+
+
   const { themeMode, colorSet } = useSelector(
     (state: RootState) => state.colorTheme
   );

@@ -8,11 +8,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { StyledTableCell, StyledTableRow } from "_styles/MuiStyledComponents";
+import { TableTemplate } from "_components/TableTemplate";
+import { formatDate } from "_components/UTILS";
 //import { rows } from "_components/debug/_mockrows";
 
 type IHeader = {
   field: string;
   headerName: string;
+  func?: ({}:any | string ) => string; //TODO: move to sep file
 };
 type Item = {
   date_beginning: string;
@@ -21,8 +24,21 @@ type Item = {
   step_type: string;
   step_skipped: string | boolean;
 };
+type IStep = {
+  __typename: string;
+  dateEnd: string;
+  id: number;
+  dateStart: string;
+  isSkip: boolean;
+  name: string;
+  stepType: string;
+  taskId: number;
+};
+type IStepsProps = {
+  stepsAr: IStep[];
+};
 
-const columns: IHeader[] = [
+/*const columns: IHeader[] = [
   { field: "date_beginning", headerName: "Время начала" },
   {
     field: "date_end",
@@ -38,6 +54,26 @@ const columns: IHeader[] = [
   },
   {
     field: "step_skipped",
+    headerName: "Шаг пропущен",
+  },
+];*/
+const columns: IHeader[] = [
+  { field: "dateEnd", headerName: "Время начала", func: st => formatDate(st) },
+  {
+    field: "dateStart",
+    headerName: "Дата окончания",
+    func: st => formatDate(st)
+  },
+  {
+    field: "name",
+    headerName: "Название шага",
+  },
+  {
+    field: "stepType",
+    headerName: "Тип шага",
+  },
+  {
+    field: "isSkip",
     headerName: "Шаг пропущен",
   },
 ];
@@ -73,7 +109,7 @@ const rows: Item[] = [
   },
 ];
 
-export function Steps() {
+export function Steps({ stepsAr }: IStepsProps) {
   const theme = useTheme();
   function getStyleFor(row: Item, colfield: string) {
     if (colfield == "availability") {
@@ -88,7 +124,8 @@ export function Steps() {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <>
+      {/*<TableContainer component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -111,7 +148,13 @@ export function Steps() {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+              </TableContainer>*/}
+      <TableTemplate<IStep>
+        rows={stepsAr}
+        columns={columns}
+        //getStyle={getStyleFor}
+      />
+    </>
   );
 }
 
