@@ -44,7 +44,7 @@ export const Filters = () => {
 
   const filtersVar_re = useReactiveVar(filtersVar);
 
-  const SOURCES_FILTER = gql`
+  /*const SOURCES_FILTER = gql`
   query SourcesFilterQuery {
     getTeSources {
       sourcesList {
@@ -63,18 +63,44 @@ export const Filters = () => {
       }
     }
   }
+`*/
+const ALL_FILTERS = gql`
+query FilterQuery {
+  getTeSources {
+    sourcesList {
+      source
+      description
+    }
+  }
+  getTeStatus {
+    statusesList {
+      description
+      status
+    }
+  }
+  getTasksNames {
+    tasksNamesList {
+      id
+      name
+    }
+  }
+  getRegions {
+    regionsList {
+      id
+      name
+    }
+  }
+}
 `
-const { loading:loading_sources, error:error_sources, data:data_sources } = useQuery(SOURCES_FILTER);
-const { loading:loading_status, error:error_status, data:data_status } = useQuery(STATUS_FILTER);
+
+//const { loading:loading_sources, error:error_sources, data:data_sources } = useQuery(SOURCES_FILTER);
+//const { loading:loading_status, error:error_status, data:data_status } = useQuery(STATUS_FILTER);
+
+const { loading, error, data } = useQuery(ALL_FILTERS);
 
 
   //-------------reducer object----------------------
   interface FilterState {
-    /* objects are types of react-select items*/
-    /*status: string;
-    source: string;
-    task: string;
-    region: string;*/
     status: SingleValue<{ value: number; label: string; }> | undefined
     source: SingleValue<{ value: number; label: string; }> | undefined
     taskId: SingleValue<{ value: number; label: string; }> | undefined
@@ -82,15 +108,14 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
   }
 
   interface IGQLitem{
-    source:string;
+    source?:string;
     description:string;
+    status?:string;
+    id?:string;
+    name?:string;
   }
 
   const defFiltersState = {
-    /*status: "",
-    source: "",
-    task: "",
-    region: "",*/
     status: undefined,
     source: undefined,
     taskId: undefined,
@@ -107,12 +132,6 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
 
   useEffect(()=>{
     let tempFiltersOb:any = {}; //TODO add ttype from var
-   /* if(filters.status){
-      tempFiltersOb.status=filters.status
-    }
-    if(filters.region){
-      tempFiltersOb.region=filters.region
-    }*/
     let k: keyof typeof filters;
     for(k in filters){
       console.log('k',k);
@@ -137,38 +156,29 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
   };
 
   const clearAll = () => {
-    //setSelectedOption(null);
     setFilters(defFiltersState);
   };
 
   return (
     <Paper 
     sx={{ 
-      //ml: 2, 
-      //maxWidth:'604px',
       p: 2 }}
     >
+      {data &&
       <Stack spacing={2}>
         {/*
         <Typography variant="subtitle2">Отфильтровать по:</Typography>
         */}
-
+        
         <Box>
           <SelectLabel text={"Статус:"} />
           <Select
             isClearable={true}
-            //label={"Статус"}
-            //defaultValue={options[0] }
-            //onChange={handleChange}
-            //onChange={(e) => setFilters({ status: e?.label })} //.value
             onChange={(e) => setFilters({ status: e })} //.value
-            //onChange={(e)=>console.log('e',e)}
-            options={options}
-            // value={selectedOption}
-            //value={options.find((x) => x.label === filters.status)}
+            //options={options}
+            options={data.getTeStatus.statusesList.map(({ status, description }:IGQLitem) => ({ value: status, label: description}))}
+
             value={filters.status|| null}
-            //value={filters.status}
-            // styles={select_styles}
             classNamePrefix={
               theme.palette.mode === "dark"
                 ? "react-select-dark"
@@ -177,19 +187,15 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
           />
         </Box>
 
-{data_sources && 
+
+
         <Box>
           <SelectLabel text={"Источник:"} />
           <Select
           isClearable={true}
             onChange={(e) => setFilters({ source: e })} //.value
-            //options={options}
-            //options={data_sources.teSources.sourcesList}
-            //getOptionLabel={option => option.source}
-            //getOptionValue={option => option.description} //!! typeError: Property 'description' does not exist on type '{ value: number; label: string; }'.
-            options={data_sources.getTeSources.sourcesList.map(({ source, description }:IGQLitem) => ({ value: source, label: description}))}
+            options={data.getTeSources.sourcesList.map(({ source, description }:IGQLitem) => ({ value: source, label: description}))}
             value={filters.source || null}
-            //value={filters.source}
             classNamePrefix={
               theme.palette.mode === "dark"
                 ? "react-select-dark"
@@ -197,14 +203,15 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
             }
           />
         </Box>
-}
+
 
         <Box>
           <SelectLabel text={"Задача:"} />
           <Select
           isClearable={true}
             onChange={(e) => setFilters({ taskId: e })} //.value
-            options={options}
+            //options={options}
+            options={data.getTasksNames.tasksNamesList.map(({ id, name }:IGQLitem) => ({ value: id, label: name}))}
             value={filters.taskId || null}
             classNamePrefix={
               theme.palette.mode === "dark"
@@ -219,7 +226,8 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
           <Select
           isClearable={true}
             onChange={(e) => setFilters( {regionId: e})} //.value
-            options={options}
+            //options={options}
+            options={data.getRegions.regionsList.map(({ id, name }:IGQLitem) => ({ value: id, label: name}))}
             value={filters.regionId || null}
             classNamePrefix={
               theme.palette.mode === "dark"
@@ -229,24 +237,6 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
           />
         </Box>
 
-          
-        {/*
- <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-      />
-<Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-      /> 
-<Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-/>  */}
-        {/*selectedOption && (*/}
         {(filters.status || filters.taskId || filters.source || filters.regionId) && (
           <Button
             variant="contained"
@@ -260,13 +250,10 @@ const { loading:loading_status, error:error_status, data:data_status } = useQuer
             Очистить фильтры
           </Button>
         )}
-         
-       {/*} <Typography sx={{ wordWrap: "break-word", fontSize: "10px" }}>
-          <code>{JSON.stringify(filters)}/debug:{ debug }</code>
-          </Typography> */}
           <DebugBox code={JSON.stringify(filters)}/>
           <DebugBox code={'apollo state: ' + JSON.stringify(filtersVar_re)}/>
       </Stack>
+}
     </Paper>
   );
 };

@@ -30,6 +30,7 @@ type IHeader = {
   field: string;
   headerName: string;
   func?: ({}:any | string ) => string;
+  funcComplex?: (dataAr:any[], num:number ) => string;
  // func?: (any)=>string;
 };
 type Item = {
@@ -109,6 +110,7 @@ const columns: IHeader[] = [
   {
     field: "status",
     headerName: "Статус",
+    funcComplex: (dataAr:any[], num:number ) => dataAr[num-1].description
   },
 ];
 
@@ -175,6 +177,14 @@ type TFilters = {
         }
       }
     }
+
+    getTeStatus {
+      statusesList {
+        description
+        status
+      }
+    }
+
   }
   `
   const filtersVar_re = useReactiveVar(filtersVar);
@@ -235,6 +245,59 @@ type TFilters = {
     }
   }
 
+  function getStyleFor_(colfield: string, cellvalue:string) {
+    if (colfield == "status") {
+      if (cellvalue == "Проверен") {
+        return {
+          //boxSizing:'border-box',
+          color: theme.palette.success.main, //"green",
+          boxShadow: "inset 0 -2px 0px " + theme.palette.success.light,
+        };
+      } else if (cellvalue == "Завершен") {
+        return {
+          color: theme.palette.primary.dark,
+        };
+      } else if (cellvalue == "Начат") {
+        return {
+          color: theme.palette.text.secondary,
+        };
+      } else if (
+        cellvalue == "Временный отказ" ||
+        cellvalue == "Отказано"
+      ) {
+        return {
+          color: theme.palette.error.main,
+          boxShadow: "inset 0 -2px 0px " + theme.palette.error.light,
+        };
+      }
+    }
+  }
+
+  function getCellValue(row:any, col:IHeader, dataAr:any[]=[], num:number=0){
+    
+    if(col.func ){
+    return col.func(row[col.field as keyof typeof row])
+    }
+    if(col.funcComplex ){
+      return col.funcComplex(dataAr, num);
+      }
+    return row[col.field as keyof typeof row] || "-"
+  }
+
+ /* function getValue(row:any, col:IHeader){  
+    if(col.func){
+      return (col.func(row[col.field]))
+    }
+    
+
+     if(col.field.indexOf('.') != -1){
+      var compPath = col.field.split('.');
+      //return (row[compPath[0] as keyof typeof row ][compPath[1] as any ] )
+      return (row[compPath[0]][compPath[1]] )
+     }
+     return (row[col.field as keyof typeof row] )
+  }*/
+
   return (
     <Box>
       <TableContainer component={Paper} sx={{width: {xs:'calc(100vw - 96px)', md:'100%'}}}>
@@ -253,10 +316,29 @@ type TFilters = {
           <TableBody>
             {/* {rows.map((row) => ( */}
             {data?.getTasksExecutions?.teList.map((row:any, i:number) => (
-              <StyledTableRow key={'row'+i}>           
+              <StyledTableRow key={'row'+i}>    
+              <>
+              <StyledTableCell sx={getStyleFor(row, "id")} ><Link
+                          component={RouterLink}
+                          to={"/reports/" + row['id']}
+                          sx={{ color: theme.palette.text.primary,
+                            textDecorationColor:theme.palette.text.primary
+                          }}
+                        >{row.id}</Link></StyledTableCell>
+              <StyledTableCell sx={getStyleFor(row, "id")} >{row.taskId}</StyledTableCell>
+              <StyledTableCell sx={getStyleFor(row, "id")} >{formatDate(row.dateStart)}</StyledTableCell>
+              <StyledTableCell sx={getStyleFor(row, "id")} >{formatDate(row.dateEnd)}</StyledTableCell>
+
+              <StyledTableCell sx={getStyleFor(row, "id")} >{row.user?.name + " " + row.user?.surname}</StyledTableCell>
+              <StyledTableCell sx={getStyleFor(row, "id")} >{row.store?.address}</StyledTableCell>
+              <StyledTableCell sx={getStyleFor(row, "id")} >{row.source}</StyledTableCell>
+              <StyledTableCell sx={getStyleFor_("status", data.getTeStatus.statusesList[row.status-1].description)} >{data.getTeStatus.statusesList[row.status-1].description}</StyledTableCell>
+
+              
+                    {/*
+
                 {columns.map((col: IHeader, index) => (
-                
-                    <StyledTableCell sx={getStyleFor(row, col.field)} key={'col'+index}>
+                <StyledTableCell sx={getStyleFor(row, col.field)} key={'col'+index}>
                       {col.field == "id" || col.field == "task" ? (
                         <Link
                           component={RouterLink}
@@ -269,15 +351,19 @@ type TFilters = {
                         </Link>
                       ) : (
                         <>
-                        {!col.func ?
+                        {
+                        !col.func ?
                         row[col.field as keyof typeof row] || "-"
-                        : col.func(row[col.field as keyof typeof row])
-}
+                        : col.func(row[col.field as keyof typeof row]
+                        )
+                        }
+                        
                         </>
                       )}
-                    </StyledTableCell>
-                  
+                      </StyledTableCell>
                 ))}
+                */}
+                  </>
               </StyledTableRow>
             ))}
           </TableBody>
