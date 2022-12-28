@@ -159,6 +159,8 @@ type TFilters = {
   const GET_TE = gql`
   query MyQuery ($page:Int!, $filters:TeFilters) {
     getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 100}) {
+      pagesCount
+      earliestDate
       teList {
         dateEnd
         dateStart
@@ -184,6 +186,15 @@ type TFilters = {
         status
       }
     }
+
+    getTasksNames {
+      tasksNamesList {
+        id
+        name
+      }
+    }
+
+    
 
   }
   `
@@ -318,20 +329,19 @@ type TFilters = {
             {data?.getTasksExecutions?.teList.map((row:any, i:number) => (
               <StyledTableRow key={'row'+i}>    
               <>
-              <StyledTableCell sx={getStyleFor(row, "id")} ><Link
+              <StyledTableCell ><Link
                           component={RouterLink}
                           to={"/reports/" + row['id']}
                           sx={{ color: theme.palette.text.primary,
                             textDecorationColor:theme.palette.text.primary
                           }}
                         >{row.id}</Link></StyledTableCell>
-              <StyledTableCell sx={getStyleFor(row, "id")} >{row.taskId}</StyledTableCell>
-              <StyledTableCell sx={getStyleFor(row, "id")} >{formatDate(row.dateStart)}</StyledTableCell>
-              <StyledTableCell sx={getStyleFor(row, "id")} >{formatDate(row.dateEnd)}</StyledTableCell>
-
-              <StyledTableCell sx={getStyleFor(row, "id")} >{row.user?.name + " " + row.user?.surname}</StyledTableCell>
-              <StyledTableCell sx={getStyleFor(row, "id")} >{row.store?.address}</StyledTableCell>
-              <StyledTableCell sx={getStyleFor(row, "id")} >{row.source}</StyledTableCell>
+              <StyledTableCell >{data.getTasksNames.tasksNamesList.find((x:any) => x.id === row.taskId).name}</StyledTableCell>
+              <StyledTableCell >{formatDate(row.dateStart)}</StyledTableCell>
+              <StyledTableCell >{formatDate(row.dateEnd)}</StyledTableCell>
+              <StyledTableCell >{row.user?.name + " " + row.user?.surname}</StyledTableCell>
+              <StyledTableCell >{row.store?.address}</StyledTableCell>
+              <StyledTableCell >{row.source}</StyledTableCell>
               <StyledTableCell sx={getStyleFor_("status", data.getTeStatus.statusesList[row.status-1].description)} >{data.getTeStatus.statusesList[row.status-1].description}</StyledTableCell>
 
               
@@ -381,7 +391,9 @@ type TFilters = {
           justifyContent: "flex-end",
         }}
       >
-        <Pagination count={10} page={page} onChange={handleChange} />
+        { data && 
+        <Pagination count={data.getTasksExecutions?.pagesCount} page={page} onChange={handleChange} />
+        }
       </Box>
     </Box>
   );
