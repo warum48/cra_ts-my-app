@@ -285,7 +285,7 @@ export default function ReportDetails() {
           Сохранить и продолжить редактирование
         </Button>
       </Box>
-      {data && JSON.stringify(data)}
+      {/*data && JSON.stringify(data)*/}
     </Box>
   );
 }

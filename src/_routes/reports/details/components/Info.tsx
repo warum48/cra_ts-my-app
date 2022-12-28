@@ -73,13 +73,13 @@ export function Info( {infoData, inputRef}:IInfoProps) {
           <ItemName>Магазин:</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>{infoData.store.address}</ItemInfo>
+          <ItemInfo>{infoData.store?.address}</ItemInfo>
         </Grid>
         <Grid item xs={3}>
           <ItemName>Сотрудник:</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>{infoData.user.name + " " + infoData.user.surname}</ItemInfo>
+          <ItemInfo>{infoData.user?.name + " " + infoData.user?.surname}</ItemInfo>
         </Grid>
         <Grid item xs={3}>
           <ItemName>Источник:</ItemName>

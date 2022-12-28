@@ -14,7 +14,7 @@ let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
 //let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
-let apolloServer ="https://3e55-188-170-84-8.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
+let apolloServer ="https://7bad-188-170-83-146.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
 if(apolloType == "maintest"){
 console.log('main_apollo')
