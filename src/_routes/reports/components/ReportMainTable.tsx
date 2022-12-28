@@ -19,7 +19,7 @@ import { useQuery, gql } from '@apollo/client';
 import dayjs from "dayjs";
 import { Typography } from "@mui/material";
 import { LoadingBox, CodeError } from "_styles/MuiStyledComponents";
-import { filtersVar } from "_apollo/state";
+import { filtersVar, searchInputVar, startDateVar, endDateVar } from "_apollo/state";
 //import { filtersVar } from "_apollo/state";
 import { useReactiveVar } from "@apollo/client";
 import { formatDate } from "_components/UTILS";
@@ -157,8 +157,8 @@ type TFilters = {
 }
 
   const GET_TE = gql`
-  query MyQuery ($page:Int!, $filters:TeFilters) {
-    getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 100}) {
+  query MyQuery ($page:Int!, $filters:TeFilters, $search:String, $startDate:Date, $endDate:Date ) {
+    getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 100}, search:$search, startDate:$startDate, endDate:$endDate) {
       pagesCount
       earliestDate
       teList {
@@ -194,13 +194,14 @@ type TFilters = {
       }
     }
 
-    
-
   }
   `
   const filtersVar_re = useReactiveVar(filtersVar);
+  const searchInputVar_re = useReactiveVar(searchInputVar);
+  const startDatetVar_re = useReactiveVar(startDateVar);
+  const endDatetVar_re = useReactiveVar(endDateVar);
   const { loading, error, data } = useQuery(GET_TE,{
-    variables: {page: page, filters: filtersVar_re}
+    variables: {page: page, filters: filtersVar_re, search:searchInputVar_re, startDate: startDateVar(), endDate:endDateVar()}
   });
 
 

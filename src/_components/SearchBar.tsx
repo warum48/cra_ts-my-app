@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { panel_bg } from "_styles/MuiStyledComponents";
+import { searchInputVar } from "_apollo/state";
 
 const Search = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -42,6 +43,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchBar() {
   const theme = useTheme();
+  const inputRef = React.useRef<any>(null)
 
   return (
     <Box
@@ -56,8 +58,13 @@ export default function SearchBar() {
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
+        ref={inputRef}
+          fullWidth
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
+          defaultValue=""
+          onChange={e => {inputRef.current.value = e.target.value;}}
+          //!!!---instant update---//onChange={e => {if(e.target.value.length > 2 || e.target.value.length==0){searchInputVar(e.target.value)}}}
         />
       </Search>
       <Button
@@ -67,6 +74,7 @@ export default function SearchBar() {
           color: "#ffffff",
           background: theme.palette.common.buttonGradient,
         }}
+        onClick={()=>searchInputVar(inputRef.current?.value)}
       >
         Искать
       </Button>

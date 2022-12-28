@@ -1,15 +1,14 @@
-
 import { InMemoryCache, ReactiveVar, makeVar } from "@apollo/client";
 import { FilterVintageSharp } from "@mui/icons-material";
 //import { Todos } from "./models/Todos";
 //import { VisibilityFilter, VisibilityFilters } from "./models/VisibilityFilter";
 
 interface IFilters {
-    status?: string | number | undefined
-    source?: string | number | undefined
-    taskId?: string | number | undefined
-    regionId?: string | number | undefined
-    testvalue?: string
+  status?: string | number | undefined;
+  source?: string | number | undefined;
+  taskId?: string | number | undefined;
+  regionId?: string | number | undefined;
+  testvalue?: string;
 }
 /*interface IcurrentTEID {
    
@@ -21,25 +20,43 @@ export const cache: InMemoryCache = new InMemoryCache({
     Query: {
       fields: {
         filters: {
-            read(){
-                return filtersVar();
-            }
+          read() {
+            return filtersVar();
+          },
         },
         currendTEID: {
-            read(){
-                return currentTEIDVar();
-            }
+          read() {
+            return currentTEIDVar();
+          },
         },
         token: {
-            read(){
-                return tokenVar();
-            }
+          read() {
+            return tokenVar();
+          },
         },
-        //this is uncontrolled textField in Info component that shows mutable value 
+        //this is uncontrolled textField in Info component that shows mutable value
         inputInternalComment: {
-            read(){
-              return inputInternalCommentVar();
-            }
+          read() {
+            return inputInternalCommentVar();
+          },
+        },
+
+        searchInput: {
+          read() {
+            return searchInputVar();
+          },
+        },
+
+        startDate: {
+          read() {
+            return startDateVar();
+          },
+        },
+
+        endDate: {
+          read() {
+            return endDateVar();
+          },
         }
 
         /*todos: {
@@ -52,9 +69,9 @@ export const cache: InMemoryCache = new InMemoryCache({
             return visibilityFilterVar();
           },
         }*/
-      }
-    }
-  }
+      },
+    },
+  },
 });
 
 /**
@@ -80,17 +97,22 @@ export const visibilityFilterVar = makeVar<VisibilityFilter>(
 //"id": 4421432
 const filtersInitValue = {};
 const currentTEIDInitValue = 4421432;
-const tokenInitValue ='';
-const inputInternalCommentInitValue='';
-export const filtersVar: ReactiveVar<IFilters> = makeVar<IFilters>(
-    filtersInitValue
-  );
-  export const currentTEIDVar: ReactiveVar<Number> = makeVar<Number>(
-    currentTEIDInitValue
-  );
-  export const tokenVar: ReactiveVar<String> = makeVar<String>(
-    tokenInitValue
-  );
-  export const inputInternalCommentVar: ReactiveVar<String> = makeVar<String>(
-    inputInternalCommentInitValue
-  )
+const tokenInitValue = "";
+const inputInternalCommentInitValue = "";
+const searchInputInitValue = "";
+export const startDateInitValue = "2022-09-01";//undefined;
+export const endDateInitValue = "2222-09-01";//undefined;
+export const filtersVar: ReactiveVar<IFilters> =
+  makeVar<IFilters>(filtersInitValue);
+export const currentTEIDVar: ReactiveVar<Number> =
+  makeVar<Number>(currentTEIDInitValue);
+export const tokenVar: ReactiveVar<String> = makeVar<String>(tokenInitValue);
+export const inputInternalCommentVar: ReactiveVar<String> = makeVar<String>(
+  inputInternalCommentInitValue
+);
+export const searchInputVar: ReactiveVar<String> =
+  makeVar<String>(searchInputInitValue);
+export const startDateVar: ReactiveVar<String> =
+  makeVar<String>(startDateInitValue);  
+export const endDateVar: ReactiveVar<String> =
+  makeVar<String>(endDateInitValue); 
