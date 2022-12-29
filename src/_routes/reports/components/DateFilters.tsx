@@ -83,18 +83,9 @@ export const DateFilters = () => {
       {showByMonth ? (
        
         months.map((month, index) => (
-          <>
-            {/*<Paper
-    onClick={()=>{console.log('cl'); setDaysInMonth(getDaysInMonth(month.num, month.year)); setShowByMonth(false)}}
-      sx={{ p: 1, display: "inline", mr: "1px", mb: "1px", pt: 0, pb: "4px" }}
-      elevation={0}
-    >
-      <Link variant="caption">{month.name}</Link>
-      </Paper>*/}
-
-
-
+          
             <DateItem
+              key={"month"+index}
               text={month.name}
               onClick={() => {
                 console.log("cl");
@@ -107,7 +98,7 @@ export const DateFilters = () => {
                 
               }}
             />
-          </>
+         
           
         ))
         
@@ -123,6 +114,7 @@ export const DateFilters = () => {
           />
           {daysInMonth.map((day, index) => (
             <DateItem
+            key={"day"+index}
               text={dayjs(day).format("DD.MM")}
               onClick={() => {
                 console.log(dayjs(day).format("DD.MM"))
