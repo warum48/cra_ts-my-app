@@ -22,7 +22,13 @@ interface ISelectLabel {
 const SelectLabel = ({ text }: ISelectLabel) => {
   const theme = useTheme();
   return (
-    <Typography variant="overline" sx={{ lineHeight: "100%" }}>
+    <Typography 
+    //variant="overline"
+    //variant="subtitle2"
+    variant="button"
+     sx={{ lineHeight: "100%", pb:1, textTransform: 'uppercase', color:theme.palette.text.secondary,
+      //fontSize:12 
+      }}>
       {text}
     </Typography>
   );

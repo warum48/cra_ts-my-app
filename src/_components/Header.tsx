@@ -19,10 +19,13 @@ export function Header(props: HeaderProps) {
     <React.Fragment>
       <Toolbar>
         <Grid container spacing={1} alignItems="center">
-          <Grid sx={{ 
-            //display: { sm: "none", xs: "block" } 
-            display: { lg: "none", xs: "block" } 
-            }} item>
+          <Grid
+            sx={{
+              //display: { sm: "none", xs: "block" }
+              display: { lg: "none", xs: "block" },
+            }}
+            item
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -35,10 +38,10 @@ export function Header(props: HeaderProps) {
           <Grid item xs />
 
           <Grid item>
-          <DebugSwitcher/>
-            <IconButton color="inherit" sx={{ p: 0.5 }}>
+            <DebugSwitcher />
+            {/*<IconButton color="inherit" sx={{ p: 0.5 }}>
               <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
-            </IconButton>
+          </IconButton>*/}
           </Grid>
           <Grid item>
             <LightMode />

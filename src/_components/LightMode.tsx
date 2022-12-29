@@ -8,6 +8,7 @@ import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { GlobalContext } from "_context/ContextGlobal";
+import { graphqlSync } from "graphql";
 
 interface IColor {
   name: string;
@@ -27,6 +28,7 @@ const ColorModeIcon = ({ name, bgcolor }: IColor) => {
           width: size,
           height: size,
           borderRadius: size,
+          border: '1px solid gray',
           background: bgcolor,
         }}
       ></Box>
@@ -40,7 +42,7 @@ export function LightMode() {
   );
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { colorMode, getColorMode } = React.useContext(GlobalContext);
+  const { colorMode, getColorMode, fontSize, setFontSize } = React.useContext(GlobalContext);
 
   return (
     <Box
@@ -53,6 +55,22 @@ export function LightMode() {
         color: "text.primary",
       }}
     >
+      
+      <IconButton
+        sx={{ ml: 1, fontSize:12, backgroundColor:'#dddddd' }}
+        onClick={()=>setFontSize('small')}
+        color="inherit"
+        //{fontSize === "small" ? 'aa' : 'AA' }
+      >
+        Aa
+      </IconButton>
+      <IconButton
+        sx={{ ml: 1, mr: 2 , fontSize:16, backgroundColor:'#dddddd'}}
+        onClick={()=>setFontSize('large')}
+        color="inherit"
+      >
+       Aa
+      </IconButton>
       <ColorModeIcon
         name="fresh"
         bgcolor={getColorMode("fresh").buttonGradient}
@@ -64,6 +82,14 @@ export function LightMode() {
       <ColorModeIcon
         name="classic"
         bgcolor={getColorMode("classic").buttonGradient}
+      />
+      <ColorModeIcon
+        name="purple"
+        bgcolor={getColorMode("purple").buttonGradient}
+      />
+      <ColorModeIcon
+        name="black"
+        bgcolor={getColorMode("black").buttonGradient}
       />
       <IconButton
         sx={{ ml: 1 }}

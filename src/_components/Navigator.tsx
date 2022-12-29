@@ -104,7 +104,7 @@ export function Navigator(props: any) {
   },[isDebug])
 
   return (
-    <Drawer variant="permanent" {...other}>
+    <Drawer variant="permanent" {...other} sx={{borderRight:''}}>
       <Box
       className="gray_lines"
         sx={{
@@ -120,13 +120,19 @@ export function Navigator(props: any) {
         <Box
           component="img"
           sx={{
-            height: 37,
-            width: 150,
+            display: 'block',
+            height: 27,
+            //150,
             marginBottom: "30px",
-            marginLeft: "30px",
+            //marginLeft: "30px",
+            //textAlign:'center'
+            
+            marginLeft: 'auto',
+  marginRight: 'auto'
           }}
           alt="logo"
-          src="/surlogo_white.png"
+          //src="/surlogo_white.png"
+          src="https://client.shop-survey.ru/static/admin/img/logo-w.png"
         />
         <List disablePadding>
           {categories.map(({ id, children, active, icon, route }) => (

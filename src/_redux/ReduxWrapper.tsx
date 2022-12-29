@@ -41,7 +41,7 @@ const persistConfig = {
     //"posts",
     //"users",
     //"alldictonaries"
-    "colorTheme"
+    //"colorTheme"
   ],
   storage
 };

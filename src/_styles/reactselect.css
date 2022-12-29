@@ -1,7 +1,13 @@
 .react-select__control{
     background-color: #ffffff;
     color:black;
+    font-size:0.857rem;
   }
+
+  .react-select__control div{
+    font-size:0.857rem;
+  }
+
   .react-select-dark__value-container{
     color:white;
   }
@@ -22,6 +28,7 @@
   .react-select-dark__menu,  .react-select-dark__option{
     background-color: #222222;
     color:white;
+  
   }
   
   
@@ -32,5 +39,9 @@
   
   .react-select-dark__multi-value__remove{
     background-color: gray;
+  }
+
+  .react-select__menu div, .react-select-dark__menu div{
+    font-size:0.857rem;
   }
   

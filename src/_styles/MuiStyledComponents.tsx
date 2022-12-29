@@ -25,7 +25,7 @@ export const Heading = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: "left",
   color: theme.palette.text.secondary,
-  fontSize: "16px",
+  fontSize: "1rem",//"16px",
   fontWeight: theme.typography.fontWeightRegular,
 }));
 
@@ -33,7 +33,7 @@ export const ItemInfo = styled(Box)(({ theme }) => ({
   //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   //...theme.typography.body2,
   padding: theme.spacing(2),
-  fontSize: "14px",
+  fontSize: '14px',//theme.typography.body2.fontSize, //"0.875rem",//"14px",
   textAlign: "left",
   //color: theme.palette.text.secondary,
 }));
@@ -41,7 +41,7 @@ export const ItemInfo = styled(Box)(({ theme }) => ({
 export const ItemName = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: "left",
-  fontSize: "14px",
+  fontSize: '14px',//theme.typography.body2.fontSize, //"0.875rem",//"14px",
   fontWeight: theme.typography.fontWeightBold,
 }));
 
@@ -73,10 +73,15 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     //backgroundColor: theme.palette.common.white,
     //color: theme.palette.common.black,
     backgroundColor: panel_bg[theme.palette.mode],
+    textTransform: 'uppercase',
+    color:theme.palette.text.secondary,
     //color: theme.palette.common.black,
+    //fontSize:'12px'
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    //fontSize: '0.875rem'//13,
+    //fontSize:10
+    fontSize: theme.typography.body2.fontSize
   },
 }));
 
@@ -91,11 +96,11 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 //------stack-------
-export const StackHeader = styled(Box)`
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-`;
+export const StackHeader = styled(Box)(({ theme }) => ({
+  fontWeight: 500,
+  fontSize: '0.875rem',
+  lineHeight: '1.5rem',
+}));
 export const StackRow = styled(Box)`
   gap: 10px;
   display: flex;
@@ -111,7 +116,10 @@ export const DateItem = ({ text, onClick }: IText) => {
       sx={{ p: 1, display: "inline-block", mr: "1px", mb: "1px", pt: 0, pb: "4px", cursor:'pointer' }}
       elevation={0}
     >
-      <Link variant="caption">{text}</Link>
+      <Link 
+      //variant="caption"
+      variant="body2"
+      >{text}</Link>
     </Paper>
   );
 };
@@ -135,7 +143,7 @@ export const LoginError = ({ text }: IText) => {
   );
 };
 
-export const CodeError = ({ text }: IText) => {
+export const CodeError = ({ text }: IText | any) => {
   return (
     <Box sx={{ textAlign: "center", p: 3 }}>
       <Typography variant="caption" color="error.main">

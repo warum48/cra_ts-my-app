@@ -6,6 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { PaletteMode } from "@mui/material";
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import usePersistState from '_hooks/usePersistState';
 //import { createHttpLink } from 'apollo-link-http';
 //import App from './App';
 const testtoken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzIxMjMzMzAsInN1YiI6eyJsb2dpbiI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkX2hhc2giOiJwYmtkZjJfc2hhMjU2JDM5MDAwMCRIbXhsYldBRklDMlRnYWFhcFhtTlZEJGRMbW9COHNnTXVxekZrWVhldG5UQlZSbFM4bkxCRlVPV2JVcVdoeU41M3c9In19.jPwPVoj-8VtHXRbozVwa03jzrQ4-vMsx3a147Z5vQMg";
@@ -14,15 +15,16 @@ let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
 //let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
-let apolloServer ="https://5470-46-252-243-226.eu.ngrok.io/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
+let apolloServer ="http://195.19.97.196:8002/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
-if(apolloType == "maintest"){
+/*if(apolloType == "maintest"){
 console.log('main_apollo')
   apolloServer = "https://flyby-gateway.herokuapp.com/";
 }
 if(apolloType == "surtest"){
   //apolloServer = " https://cors-anywhere.herokuapp.com/https://ea34-188-170-78-39.eu.ngrok.io/graphql";
 }
+*/
 
 
 
@@ -55,6 +57,8 @@ interface IContext {
   isDebug: boolean;
   setIsDebug: React.Dispatch<React.SetStateAction<boolean>>;
   colorMode: { toggleColorMode: () => void }; //string;
+  fontSize: 'small' | 'large' ; // string;
+  setFontSize: React.Dispatch<React.SetStateAction<'small' | 'large'>>;
   getColorMode: (colorSet: string) => {
     mainGradientBg_135: string;
     buttonGradient: string;
@@ -107,6 +111,36 @@ export const GlobalProvider = ({ children }: Props) => {
     }),
     []
   );
+  //------fontSize
+  //const [fontSize, setFontSize] = React.useState<"small" | "large">("small");
+  const [fontSize, setFontSize] = usePersistState('fontSize', "small");
+
+
+
+  /*const fontSize = React.useMemo(
+    () => ({
+      toggleFontSize: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+    }),
+    []
+  );*/
+
+  const getFontSizeMode = (fontSize: string) => {
+    if (fontSize === "small") {
+      return 12
+    } else  { //if (fontSize === "large") {
+      return 14
+    }
+  }
+
+  const getHTMLFontSizeMode = (fontSize: string) => {
+    if (fontSize === "small") {
+      return 18
+    } else  { //if (fontSize === "large") {
+      return 16
+    }
+  }
 
   //TODO: useMemo
   const getColorMode = (colorSet: string) => {
@@ -128,6 +162,16 @@ export const GlobalProvider = ({ children }: Props) => {
         mainGradientBg_135: "linear-gradient(130deg, #20304b , #1e293b 90.53%)",
         buttonGradient: "linear-gradient(90deg,#206bc4 1.2%,#206bc4 90.53%)",
       };
+    } else if (colorSet === "purple") {
+      return {
+        mainGradientBg_135: "linear-gradient(130deg, #37016e , #0c0025 90.53%)",
+        buttonGradient: "linear-gradient(180deg,#6420c4 1.2%,#320576 90.53%)",
+      };  
+    } else if (colorSet === "black") {
+      return {
+        mainGradientBg_135: "linear-gradient(130deg, #111111 , #000000 90.53%)",
+        buttonGradient: "linear-gradient(90deg,#141414 1.2%,#000000 90.53%)",
+      };  
     } else {
       return {
         mainGradientBg_135:
@@ -138,6 +182,13 @@ export const GlobalProvider = ({ children }: Props) => {
     }
   };
 
+  const themeCommon = {
+    typography: {
+      //fontSize:  getFontSizeMode(fontSize) ,//12//"0.875rem" ;//12
+      htmlFontSize:  getHTMLFontSizeMode(fontSize)
+    }
+  }
+
   const themeLight = createTheme({
     palette: {
       mode: "light",
@@ -146,7 +197,14 @@ export const GlobalProvider = ({ children }: Props) => {
       },
       common: getColorMode(colorSet),
     },
+    ...themeCommon
+    //typography: {
+    //  fontSize:  getFontSizeMode(fontSize) ,//12//"0.875rem" ;//12
+      //htmlFontSize:  getHTMLFontSizeMode(fontSize)
+   // }
   });
+
+  
 
   const themeDark = createTheme({
     palette: {
@@ -159,6 +217,10 @@ export const GlobalProvider = ({ children }: Props) => {
       },*/
       common: getColorMode(colorSet),
     },
+    ...themeCommon
+    //typography: {
+     // fontSize:  getFontSizeMode(fontSize) //12//"0.875rem" ;//12
+    //}
   });
 
   const theme = React.useMemo(
@@ -169,7 +231,7 @@ export const GlobalProvider = ({ children }: Props) => {
         },
       }),*/
       mode == "light" ? themeLight : themeDark,
-    [mode, colorSet]
+    [mode, colorSet, fontSize]
   );
 
   //------end color mode
@@ -182,7 +244,9 @@ export const GlobalProvider = ({ children }: Props) => {
     colorMode, //dark-light
     getColorMode, //fresh-strong
     token,
-    setToken
+    setToken,
+    fontSize,
+    setFontSize
   };
 
   return (

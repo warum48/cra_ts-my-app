@@ -23,6 +23,7 @@ import { filtersVar, searchInputVar, startDateVar, endDateVar } from "_apollo/st
 //import { filtersVar } from "_apollo/state";
 import { useReactiveVar } from "@apollo/client";
 import { formatDate } from "_components/UTILS";
+import { errorTransformator} from "_apollo/errors"
 //import { useQuery, gql } from "@apollo/client";
 //import { useLazyQuery } from "@apollo/client";
 
@@ -318,7 +319,7 @@ type TFilters = {
             <TableRow>        
               {columns.map((item, index) => (
                 <StyledTableCell sx={{ whiteSpace: "nowrap" }} key={'head'+index}>
-                  {item.headerName}
+                  <Typography variant="button" ></Typography>{item.headerName}
                 </StyledTableCell>
               ))}
             </TableRow>
@@ -337,11 +338,11 @@ type TFilters = {
                             textDecorationColor:theme.palette.text.primary
                           }}
                         >{row.id}</Link></StyledTableCell>
-              <StyledTableCell >{data.getTasksNames.tasksNamesList.find((x:any) => x.id === row.taskId).name}</StyledTableCell>
-              <StyledTableCell >{formatDate(row.dateStart)}</StyledTableCell>
+              <StyledTableCell sx={{maxWidth:'120px'}}>{data.getTasksNames.tasksNamesList.find((x:any) => x.id === row.taskId).name}</StyledTableCell>
+              <StyledTableCell sx={{minWidth:'110px'}}>{formatDate(row.dateStart)}</StyledTableCell>
               <StyledTableCell >{formatDate(row.dateEnd)}</StyledTableCell>
               <StyledTableCell >{row.user?.name + " " + row.user?.surname}</StyledTableCell>
-              <StyledTableCell >{row.store?.address}</StyledTableCell>
+              <StyledTableCell sx={{maxWidth:'180px'}}>{row.store?.address}</StyledTableCell>
               <StyledTableCell >{row.source}</StyledTableCell>
               <StyledTableCell sx={getStyleFor_("status", data.getTeStatus.statusesList[row.status-1].description)} >{data.getTeStatus.statusesList[row.status-1].description}</StyledTableCell>
 
@@ -380,7 +381,7 @@ type TFilters = {
           </TableBody>
 }
         </Table>
-        {error && <CodeError text={JSON.stringify(error, null, 3)}/>}
+        {error && <CodeError text={errorTransformator(error)}/>}
           {loading && <LoadingBox/>}
       </TableContainer>
 {/*       <Box>{JSON.stringify(data?.tasksExecutions?.teList)}</Box>
