@@ -17,7 +17,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 //import { grayLines } from "_styles/jsstyles";
 import { RoutesTypes } from "_types/TYPES";
-import { Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
+import { StyledButton } from "_styles/MuiStyledComponents";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 let menuCategories = [
   {
@@ -43,12 +45,13 @@ let menuCategories = [
         active: false,
         route: RoutesTypes.Execution,
       }, //Execution,
-      { id: "Изображения", 
-      //icon: <TimerIcon />, 
-      route: RoutesTypes.Pictures },
-    ]
-  }
-  
+      {
+        id: "Изображения",
+        //icon: <TimerIcon />,
+        route: RoutesTypes.Pictures,
+      },
+    ],
+  },
 ];
 
 const debugCategories = [
@@ -60,19 +63,17 @@ const debugCategories = [
       { id: "GraphQL lazy", route: RoutesTypes.Debug_LazyGQL },
       { id: "Lazy GQL Select", route: RoutesTypes.Debug_LazySelect },
       { id: "Leaflet pure", route: RoutesTypes.Debug_LeafletPure },
-    ]
-  }
-]
+    ],
+  },
+];
 
-interface IMenuCategory{
-  id:string,
-  icon:React.ReactElement,
-  children?:{id:string, active?:boolean, route:RoutesTypes}[],
-  route?:any,
-  active?:boolean 
+interface IMenuCategory {
+  id: string;
+  icon: React.ReactElement;
+  children?: { id: string; active?: boolean; route: RoutesTypes }[];
+  route?: any;
+  active?: boolean;
 }
-
-
 
 const item = {
   py: "2px",
@@ -81,7 +82,6 @@ const item = {
   "&:hover, &:focus": {
     bgcolor: "rgba(255, 255, 255, 0.08)",
   },
-  
 };
 
 const itemCategory = {
@@ -93,22 +93,22 @@ const itemCategory = {
 export function Navigator(props: any) {
   const { ...other } = props;
   const theme = useTheme();
-  const { isDebug, setIsDebug} = React.useContext(GlobalContext);
+  const { isDebug, setIsDebug } = React.useContext(GlobalContext);
   //let categories:IMenuCategory[] = [];
-  const [categories, setCategories] = React.useState<IMenuCategory[]>([])
+  const [categories, setCategories] = React.useState<IMenuCategory[]>([]);
 
-  React.useEffect(()=>{
-  if(isDebug){
-    setCategories([...menuCategories, ...debugCategories])
-  }else{
-    setCategories([...menuCategories])
-  }
-  },[isDebug])
+  React.useEffect(() => {
+    if (isDebug) {
+      setCategories([...menuCategories, ...debugCategories]);
+    } else {
+      setCategories([...menuCategories]);
+    }
+  }, [isDebug]);
 
   return (
-    <Drawer variant="permanent" {...other} >
+    <Drawer variant="permanent" {...other}>
       <Box
-      className="gray_lines"
+        className="gray_lines"
         sx={{
           //bgcolor: '#101F33' ,
           height: "100%",
@@ -117,73 +117,123 @@ export function Navigator(props: any) {
           //...bluegreen_bg_130_dark,
           background: theme.palette.common.mainGradientBg_135,
           //...grayLines,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
-        <Box
-          component="img"
-          sx={{
-            display: 'block',
-            height: 27,
-            //150,
-            marginBottom: "30px",
-            //marginLeft: "30px",
-            //textAlign:'center'
-            
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}
-          alt="logo"
-          //src="/surlogo_white.png"
-          src="https://client.shop-survey.ru/static/admin/img/logo-w.png"
-        />
-        <List disablePadding>
-          {categories.map(({ id, children, active, icon, route }) => (
-            <Box key={id}>
-              <ListItem
-                disablePadding
-                key={id}
-                //sx={{ paddingBottom: children ? "2px" : 2, px: 0 }}
-              >
-                <ListItemButton
-                  selected={active}
-                  sx={{
-                    ...item,
-                    m: 0,
-                    px: 3,
-                    marginBottom: children ? "2px" : 2,
-                    opacity: !!route ? "1  !important" : "0.6 !important",
-                    fontSize: theme.typography.body2.fontSize 
-                  }}
-                  component={Link}
-                  to={route || "/"}
-                  disabled={!route}
+        <Box>
+          <Box
+            component="img"
+            sx={{
+              display: "block",
+              height: 27,
+              //150,
+              marginBottom: "30px",
+              //marginLeft: "30px",
+              //textAlign:'center'
+
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            alt="logo"
+            //src="/surlogo_white.png"
+            src="https://client.shop-survey.ru/static/admin/img/logo-w.png"
+          />
+          <List disablePadding>
+            {categories.map(({ id, children, active, icon, route }) => (
+              <Box key={id}>
+                <ListItem
+                  disablePadding
+                  key={id}
+                  //sx={{ paddingBottom: children ? "2px" : 2, px: 0 }}
                 >
-                  <ListItemIcon sx={{ color: "#fff", minWidth: "40px" }}>
-                    {" "}
-                    {icon}
-                  </ListItemIcon>
-                  <ListItemText sx={{ color: "#fff", }}><Typography variant="body2">{id}</Typography></ListItemText>
-                </ListItemButton>
-              </ListItem>
-              {children?.map(({ id: childId, active, route }) => (
-                <ListItem disablePadding key={childId}>
                   <ListItemButton
                     selected={active}
-                    sx={item}
+                    sx={{
+                      ...item,
+                      m: 0,
+                      px: 3,
+                      marginBottom: children ? "2px" : 2,
+                      opacity: !!route ? "1  !important" : "0.6 !important",
+                      fontSize: theme.typography.body2.fontSize,
+                    }}
                     component={Link}
                     to={route || "/"}
-                    
+                    disabled={!route}
                   >
-                    <ListItemText sx={{ marginLeft: "40px", color: "#fff" }}>
-                    <Typography variant="body2">{childId}</Typography>
+                    <ListItemIcon sx={{ color: "#fff", minWidth: "40px" }}>
+                      {" "}
+                      {icon}
+                    </ListItemIcon>
+                    <ListItemText sx={{ color: "#fff" }}>
+                      <Typography variant="body2">{id}</Typography>
                     </ListItemText>
                   </ListItemButton>
                 </ListItem>
-              ))}
-              {/*<Divider sx={{ mt: 2 }} />*/}
+                {children?.map(({ id: childId, active, route }) => (
+                  <ListItem disablePadding key={childId}>
+                    <ListItemButton
+                      selected={active}
+                      sx={item}
+                      component={Link}
+                      to={route || "/"}
+                    >
+                      <ListItemText sx={{ marginLeft: "40px", color: "#fff" }}>
+                        <Typography variant="body2">{childId}</Typography>
+                      </ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+                {/*<Divider sx={{ mt: 2 }} />*/}
+              </Box>
+            ))}
+          </List>
+        </Box>
+        <Box
+          sx={{
+            //p:2,
+            m: 3,
+            position: "relative",
+            bottom: 0,
+          }}
+        >
+          {/*<Paper sx={{ 
+          width:'100%', height:'100%',
+          position:'absolute',
+          zIndex:0,
+          //p:2, 
+         // m:3,
+        opacity:.8}}></Paper>*/}
+          <Box
+            sx={{
+              top: 0,
+              m: 2,
+              my: 1,
+              zIndex: 10,
+              position: "relative",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              fontSize: theme.typography.body2.fontSize,
+            }}
+          >
+            <Box
+              sx={{
+                mr: 1,
+                mb: 1,
+                color: "white",
+                fontSize: theme.typography.caption.fontSize,
+              }}
+            >
+              someemail@gmail.com
             </Box>
-          ))}
-        </List>
+            <StyledButton size="small" sx={{ fontSize: "10px", px:1 }}>
+              <LogoutIcon fontSize="small" sx={{mr:1}}/>
+              log out
+            </StyledButton>
+          </Box>
+        </Box>
       </Box>
     </Drawer>
   );

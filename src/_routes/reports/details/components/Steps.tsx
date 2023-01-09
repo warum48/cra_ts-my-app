@@ -32,6 +32,7 @@ type IStep = {
   isSkip: boolean;
   name: string;
   stepType: string;
+  stepTypeDescription: string;
   taskId: number;
 };
 type IStepsProps = {
@@ -75,6 +76,7 @@ const columns: IHeader[] = [
   {
     field: "isSkip",
     headerName: "Шаг пропущен",
+    func: st => st === true? 'Да' : '-'
   },
 ];
 

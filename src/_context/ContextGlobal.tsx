@@ -168,7 +168,15 @@ export const GlobalProvider = ({ children }: Props) => {
         mainGradientBg_135: "linear-gradient(130deg, #37016e , #0c0025 90.53%)",
         buttonGradient: "linear-gradient(180deg,#6420c4 1.2%,#320576 90.53%)",
       };  
-    } else if (colorSet === "black") {
+    }
+   else if (colorSet === "pink") {
+    return {
+      color:"#6420c4",
+      mainGradientBg_135: "linear-gradient(130deg, #8302a3 , #4410b3 90.53%)",
+      buttonGradient: "linear-gradient(130deg,#c420b4 1.2%,#682cc1 90.53%)",
+    };  
+  }
+    else if (colorSet === "black") {
       return {
         mainGradientBg_135: "linear-gradient(130deg, #111111 , #000000 90.53%)",
         buttonGradient: "linear-gradient(180deg,#141414 1.2%,#000000 90.53%)",

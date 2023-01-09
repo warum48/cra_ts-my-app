@@ -19,7 +19,7 @@ interface IText {
   onClick?:()=>void
 }
 
-//--------------TABLE in DETAILS (Info.tsx, ReportMainTable.tsx ...)
+//--------------TABLE in DETAILS (Info.tsx,  ...)
 export const Heading = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.action.hover,
   padding: theme.spacing(2),
@@ -87,7 +87,8 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     //fontSize: '0.875rem'//13,
     //fontSize:10
-    fontSize: theme.typography.body2.fontSize
+    fontSize: theme.typography.body2.fontSize,
+    overflowWrap: 'break-word'
   },
 }));
 
@@ -119,7 +120,7 @@ export const DateItem = ({ text, onClick }: IText) => {
     <Paper
     // {...props}
     onClick={onClick}
-      sx={{ p: 1, display: "inline-block", mr: "1px", mb: "1px", pt: 0, pb: "4px", cursor:'pointer' }}
+      sx={{ p: 1, display: "inline-block", mr: "1px", mb: "1px", pt: 0, pb: "4px", cursor:'pointer', textTransform: 'capitalize' }}
       elevation={0}
     >
       <Link 

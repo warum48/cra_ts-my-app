@@ -12,7 +12,7 @@ import { Assortment } from "_routes/reports/details/components/Assortment";
 import { Steps } from "_routes/reports/details/components/Steps";
 import { Info } from "_routes/reports/details/components/Info";
 import { Geolocation } from "_routes/reports/details/components/Geolocation";
-import Button from "@mui/material/Button";
+import { Button, Typography, Paper } from "@mui/material";
 import {
   gql,
   useQuery,
@@ -246,7 +246,12 @@ export default function ReportDetails() {
 
   return (
     <Box sx={{ width: "100%", mb: 3 }}>
+      <Typography variant="h6" sx={{pb:2}}>
+        <>
+      Просмотр отчёта по задаче {currentTEIDVar_re}</>
+          </Typography>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Paper sx={{boxShadow:0}}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -267,15 +272,14 @@ export default function ReportDetails() {
             />
           ))}
         </Tabs>
+        </Paper>
       </Box>
 
       {Object.entries(reportDetailsTabs).map(([key, item], index) => (
         <TabPanel value={value} index={index} key={"panel" + key}>
-          <DebugBox>
-          {JSON.stringify(data)}
-          {JSON.stringify(error)}
-          </DebugBox>
+          
           {item.component}
+          
         </TabPanel>
       ))}
 
@@ -301,6 +305,14 @@ export default function ReportDetails() {
         </Button>
       </Box>
       {/*data && JSON.stringify(data)*/}
+      <DebugBox sx={{fontSize:8}}>
+            <code><pre>
+          {JSON.stringify(data, null, 3)}
+          </pre>
+          </code>
+          
+          {JSON.stringify(error)}
+          </DebugBox>
     </Box>
   );
 }

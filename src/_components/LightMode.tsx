@@ -84,9 +84,14 @@ export function LightMode() {
         bgcolor={getColorMode("classic").buttonGradient}
       />
       <ColorModeIcon
+        name="pink"
+        bgcolor={getColorMode("pink").buttonGradient}
+      />
+      <ColorModeIcon
         name="purple"
         bgcolor={getColorMode("purple").buttonGradient}
       />
+      
       <ColorModeIcon
         name="black"
         bgcolor={getColorMode("black").buttonGradient}

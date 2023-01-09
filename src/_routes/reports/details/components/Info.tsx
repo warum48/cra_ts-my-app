@@ -72,7 +72,7 @@ export function Info( {infoData, inputRef}:IInfoProps) {
           <ItemName>Задача:</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>{infoData.taskId}</ItemInfo>
+          <ItemInfo>{infoData.task?.name || infoData.taskId}</ItemInfo>
         </Grid>
         <Grid item xs={3}>
           <ItemName>Магазин:</ItemName>
@@ -153,6 +153,10 @@ export function Info( {infoData, inputRef}:IInfoProps) {
               onChange={e => inputInternalCommentVar(e.target.value)}
               //onChange={e => {inputRef.current.value = e.target.value;}}
               //inputRef={e => inputRef = e}
+              sx={{
+                fontSize: theme.typography.body2.fontSize
+              }}
+              InputProps={{ style: { fontSize: theme.typography.body2.fontSize } }}
             />
           </ItemInfo>
         </Grid>

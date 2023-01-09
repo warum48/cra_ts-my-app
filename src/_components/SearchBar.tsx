@@ -38,12 +38,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     /*[theme.breakpoints.up('md')]: {
       width: '20ch',
     },*/
+    fontSize: theme.typography.body2.fontSize,
+            border: 1,
+            borderColor: "hsl(0, 0%, 80%)",//"grey.300", //like in ReactSelect
+            borderRadius: 1,
   },
 }));
 
 export default function SearchBar() {
   const theme = useTheme();
-  const inputRef = React.useRef<any>(null)
+  const inputRef = React.useRef<any>(null);
 
   return (
     <Box
@@ -58,13 +62,20 @@ export default function SearchBar() {
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-        ref={inputRef}
+          ref={inputRef}
           fullWidth
           placeholder="…"
           inputProps={{ "aria-label": "search" }}
           defaultValue=""
-          onChange={e => {inputRef.current.value = e.target.value;}}
-          sx={{fontSize: theme.typography.body2.fontSize}}
+          onChange={(e) => {
+            inputRef.current.value = e.target.value;
+          }}
+          sx={{
+            fontSize: theme.typography.body2.fontSize,
+            border: 1,
+            borderColor: "hsl(0, 0%, 80%)",//"grey.300", //like in ReactSelect
+            borderRadius: 1,
+          }}
           //!!!---instant update---//onChange={e => {if(e.target.value.length > 2 || e.target.value.length==0){searchInputVar(e.target.value)}}}
         />
       </Search>
@@ -75,7 +86,7 @@ export default function SearchBar() {
         //  color: "#ffffff",
         //  background: theme.palette.common.buttonGradient,
         //}}
-        onClick={()=>searchInputVar(inputRef.current?.value)}
+        onClick={() => searchInputVar(inputRef.current?.value)}
       >
         Искать
       </StyledButton>

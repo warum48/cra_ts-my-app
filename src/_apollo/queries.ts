@@ -4,8 +4,8 @@ import { gql, useReactiveVar } from "@apollo/client";
 
 //-------------------MAIN TABLE-----------
 export const GET_TE = gql`
-  query MyQuery ($page:Int!, $filters:TeFilters, $search:String, $startDate:Date, $endDate:Date ) {
-    getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 100}, search:$search, startDate:$startDate, endDate:$endDate) {
+  query MyQuery ($page:Int!, $filters:TeFilters, $search:String, $startDate:Date, $endDate:Date, $ascSortBy:String, $descSortBy:String ) {
+    getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 100}, search:$search, startDate:$startDate, endDate:$endDate, ascSortBy: $ascSortBy, descSortBy: $descSortBy) {
       pagesCount
       earliestDate
       teList {
@@ -44,7 +44,26 @@ export const GET_TE = gql`
 
   }
   `
+// sory by:
+/*
+Значения параметров должны быть:
+'teId'
+'taskId'
+'dateStart'
+'dateEnd'
+'userId'
+'storeId'
+'source'
+'status'*/
 
+//---EARLIEST DATE--- used in DateFilters ---
+export const GET_EARLIEST_DATE = gql`
+  query MyQuery ($page:Int!) {
+    getTasksExecutions(pages: {pageNumber: $page, limit: 1}) {
+      earliestDate     
+    }
+  }
+  `
 
 //-------------------DETAILS---------------
 //TODO:extract 
@@ -58,6 +77,7 @@ export const GET_TE_DETAILS = gql`
         isSkip
         name
         stepType
+        stepTypeDescription
         taskId
       }
     }
@@ -93,6 +113,11 @@ export const GET_TE_DETAILS = gql`
       storeId
       taskId
       userId
+      statusDescription
+      task {
+        id
+        name
+      }
       store {
         address
         id

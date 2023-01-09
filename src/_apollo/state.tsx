@@ -57,7 +57,26 @@ export const cache: InMemoryCache = new InMemoryCache({
           read() {
             return endDateVar();
           },
-        }
+        },
+
+        ascSortBy: {
+          read() {
+            return ascSortByVar();
+          },
+        },
+
+        descSortBy: {
+          read() {
+            return descSortByVar();
+          },
+        },
+
+        //---HELPERS---(not used in queries)---
+        curtSortField: {
+          read() {
+            return curSortFieldVar();
+          },
+        },
 
         /*todos: {
           read () {
@@ -95,13 +114,24 @@ export const visibilityFilterVar = makeVar<VisibilityFilter>(
 )*/
 
 //"id": 4421432
+interface ISortField{
+  field: string
+  sortType: string//'desc' | 'asc' | null | undefined
+}
+
+//---INIT VALUES---
 const filtersInitValue = {};
 const currentTEIDInitValue = 4421432;
 const tokenInitValue = "";
 const inputInternalCommentInitValue = "";
 const searchInputInitValue = "";
-export const startDateInitValue = "2022-09-01";//undefined;
-export const endDateInitValue = "2222-09-01";//undefined;
+export const startDateInitValue = "2022-09-01"; //undefined;
+export const endDateInitValue = "2222-09-01"; //undefined;
+export const ascSortByInitValue = "";
+export const descSortByInitValue = "teId";
+export const curSortFieldInitValue = { field: "teId", sortType: "desc" };
+
+//---VARS---
 export const filtersVar: ReactiveVar<IFilters> =
   makeVar<IFilters>(filtersInitValue);
 export const currentTEIDVar: ReactiveVar<Number> =
@@ -113,6 +143,12 @@ export const inputInternalCommentVar: ReactiveVar<String> = makeVar<String>(
 export const searchInputVar: ReactiveVar<String> =
   makeVar<String>(searchInputInitValue);
 export const startDateVar: ReactiveVar<String> =
-  makeVar<String>(startDateInitValue);  
+  makeVar<String>(startDateInitValue);
 export const endDateVar: ReactiveVar<String> =
-  makeVar<String>(endDateInitValue); 
+  makeVar<String>(endDateInitValue);
+export const ascSortByVar: ReactiveVar<String> =
+  makeVar<String>(ascSortByInitValue);
+export const descSortByVar: ReactiveVar<String> =
+  makeVar<String>(descSortByInitValue);
+  export const curSortFieldVar: ReactiveVar<ISortField> =
+  makeVar<ISortField>(curSortFieldInitValue);
