@@ -17,9 +17,10 @@ import DownloadIcon from "@mui/icons-material/Download";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 //import { grayLines } from "_styles/jsstyles";
 import { RoutesTypes } from "_types/TYPES";
-import { Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import { StyledButton } from "_styles/MuiStyledComponents";
 import LogoutIcon from '@mui/icons-material/Logout';
+import Person2Icon from '@mui/icons-material/Person2';
 
 let menuCategories = [
   {
@@ -208,30 +209,43 @@ export function Navigator(props: any) {
           <Box
             sx={{
               top: 0,
-              m: 2,
+              m: 0,
               my: 1,
               zIndex: 10,
               position: "relative",
               display: "flex",
+              flexDirection:'column',
               flexWrap: "wrap",
-              justifyContent: "center",
+              //justifyContent: 'flex-start',//"center",
+              alignItems:'center',
               fontSize: theme.typography.body2.fontSize,
             }}
           >
+            
             <Box
               sx={{
-                mr: 1,
+                //mr: 1,
+                display:'flex',
                 mb: 1,
                 color: "white",
-                fontSize: theme.typography.caption.fontSize,
+                textAlign:'center',
+                fontSize: theme.typography.body2.fontSize,
               }}
             >
-              someemail@gmail.com
+             <Person2Icon fontSize="small" sx={{mr:1}}/> test@test.ru 
             </Box>
-            <StyledButton size="small" sx={{ fontSize: "10px", px:1 }}>
-              <LogoutIcon fontSize="small" sx={{mr:1}}/>
-              log out
-            </StyledButton>
+            
+            <Box>
+              {/*<LogoutIcon fontSize="small" sx={{mr:1}}/>*/}
+            <Button size="small" variant="outlined" sx={{ color: 'white', fontSize: "11px", px:1.2 , mx:.5, minWidth:'10px'}}>
+              
+              Выйти
+            </Button>
+            <Button variant="outlined" size="small" sx={{ color: 'white', fontSize: "11px", px:1.2, mx:.5 }}>
+              
+              Сменить пароль
+            </Button>
+            </Box>
           </Box>
         </Box>
       </Box>
