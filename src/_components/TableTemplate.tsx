@@ -45,12 +45,14 @@ export function TableTemplate<Item>({
   }
 
   return (
+    <>
+    { rows && columns && 
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             {columns.map((item: IHeader, index) => (
-              <StyledTableCell sx={{ whiteSpace: "nowrap" }}>
+              <StyledTableCell sx={{ whiteSpace: "nowrap" }} key={'head'+index}>
                 {item.headerName}
               </StyledTableCell>
             ))}
@@ -60,7 +62,7 @@ export function TableTemplate<Item>({
           {rows.map((row: any, i: number) => (
             <StyledTableRow key={"row" + i}>
               {columns.map((col: IHeader, index) => (
-                <StyledTableCell sx={{ ...getStyle(row, col.field) }}>
+                <StyledTableCell sx={{ ...getStyle(row, col.field) }} key={'col'+i+index}>
                   <>
                     {getValue(row, col)}
                     {/*   row[col.field as keyof typeof row]    */}
@@ -77,5 +79,8 @@ export function TableTemplate<Item>({
         </TableBody>
       </Table>
     </TableContainer>
+    
+                  }
+                  </>
   );
 }

@@ -39,7 +39,7 @@ const RootWrapper = () => {
 
               <Grid item>
                 <Box sx={{display:'flex'}}>
-              <DebugSwitcher/>
+              {/*<DebugSwitcher/>*/}
                 <LightMode />
                 </Box>
               </Grid>
@@ -48,7 +48,9 @@ const RootWrapper = () => {
           <Auth setIsLoggedIn={setIsLoggedIn} />
         </>
       ) : (
-        <BrowserRouter>
+        <BrowserRouter 
+        //basename="/aerovadim/surveer"
+        >
           <Routes>
             <Route path="/" element={<App />}>
               <Route path={RoutesTypes.Home} element={<Home />} />

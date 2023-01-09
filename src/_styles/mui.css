@@ -6,3 +6,12 @@
   background: rgba(232, 241, 250, 0) !important
 }
 /*TODO: not working yet*/
+
+.MuiDrawer-paperAnchorLeft {
+  border-right: none !important;
+}
+
+input:-webkit-autofill,
+.my-class:-webkit-autofill {
+    -webkit-transition-delay: 9999999s;
+}

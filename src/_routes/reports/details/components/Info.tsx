@@ -22,9 +22,14 @@ interface IInfoProps {
     moneySource: string;
     source: string;
     status: string;
+    statusDescription?: string;
     storeId: string;
     taskId: string;
     userId: string;
+    task?: {
+      id?: string;
+      name?: string;
+    }
     store: {
       address: string;
       id: number;
@@ -91,7 +96,7 @@ export function Info( {infoData, inputRef}:IInfoProps) {
           <ItemName>Статус:</ItemName>
         </Grid>
         <Grid item xs={9}>
-          <ItemInfo>{infoData.status}</ItemInfo>
+          <ItemInfo>{infoData.statusDescription || infoData.status}</ItemInfo>
         </Grid>
         {/** -------- */}
         <Grid item xs={12}>

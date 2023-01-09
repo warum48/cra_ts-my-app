@@ -15,7 +15,7 @@ let params = new URLSearchParams(document.location.search);
 let apolloType = params.get("apollo"); // is the string "Jonathan"
 
 //let apolloServer = "https://f6b4-188-170-78-39.eu.ngrok.io/graphql"//"https://ea34-188-170-78-39.eu.ngrok.io/graphql";
-let apolloServer ="http://195.19.97.196:8002/graphql";//"https://712e-188-170-77-22.eu.ngrok.io/graphql";
+let apolloServer ="http://195.19.97.196:8002/graphql"; // http://195.19.97.196:8002/graphql   //"https://712e-188-170-77-22.eu.ngrok.io/graphql";
 //https://ea34-188-170-78-39.eu.ngrok.io/graphql
 /*if(apolloType == "maintest"){
 console.log('main_apollo')
@@ -164,13 +164,14 @@ export const GlobalProvider = ({ children }: Props) => {
       };
     } else if (colorSet === "purple") {
       return {
+        color:"#6420c4",
         mainGradientBg_135: "linear-gradient(130deg, #37016e , #0c0025 90.53%)",
         buttonGradient: "linear-gradient(180deg,#6420c4 1.2%,#320576 90.53%)",
       };  
     } else if (colorSet === "black") {
       return {
         mainGradientBg_135: "linear-gradient(130deg, #111111 , #000000 90.53%)",
-        buttonGradient: "linear-gradient(90deg,#141414 1.2%,#000000 90.53%)",
+        buttonGradient: "linear-gradient(180deg,#141414 1.2%,#000000 90.53%)",
       };  
     } else {
       return {
@@ -184,20 +185,63 @@ export const GlobalProvider = ({ children }: Props) => {
 
   const themeCommon = {
     typography: {
-      //fontSize:  getFontSizeMode(fontSize) ,//12//"0.875rem" ;//12
-      htmlFontSize:  getHTMLFontSizeMode(fontSize)
+      fontSize:  getFontSizeMode(fontSize) ,//12//"0.875rem" ;//12
+     // htmlFontSize:  getHTMLFontSizeMode(fontSize)
     }
   }
 
+  const colorThemeLight= {
+    strong:{},
+    fresh:{},
+    classic:{},
+    black:{},
+    purple:{
+      
+        primary:{
+          main:"#5f02bc",
+          light:"#7502e7",
+          dark:"#48028d"
+          
+        }
+      
+    }
+  }
+  const colorThemeDark= {
+    "strong":{},
+    "fresh":{},
+    "classic":{},
+    "black":{},
+    /*"purple":createTheme({
+      palette:{
+        primary:{
+          main:"#37016e"
+        }
+      }
+      
+    })*/
+    purple:{
+        primary:{
+          main:"#b26bf9",
+          light:"#b673fa",
+          dark:"#8b1ff6"
+        }
+      }
+  }
+
   const themeLight = createTheme({
+    
     palette: {
       mode: "light",
       background: {
-        default: colorSet === "strong" ? "#f3f6f9" : "#f3f3f3", //"#efefef",
+        default: colorSet === "strong" ? "#f3f6f966" : "#f3f3f366", //"#efefef",
       },
       common: getColorMode(colorSet),
+      //!!...colorThemeLight[colorSet as keyof typeof colorThemeLight],
     },
-    ...themeCommon
+    
+    ...themeCommon,
+    
+    
     //typography: {
     //  fontSize:  getFontSizeMode(fontSize) ,//12//"0.875rem" ;//12
       //htmlFontSize:  getHTMLFontSizeMode(fontSize)
@@ -216,8 +260,10 @@ export const GlobalProvider = ({ children }: Props) => {
         primary: "#ffffff",
       },*/
       common: getColorMode(colorSet),
+      //11...colorThemeDark[colorSet as keyof typeof colorThemeDark]
     },
-    ...themeCommon
+    ...themeCommon,
+    //...colorThemeDark[colorSet as keyof typeof colorThemeDark]
     //typography: {
      // fontSize:  getFontSizeMode(fontSize) //12//"0.875rem" ;//12
     //}

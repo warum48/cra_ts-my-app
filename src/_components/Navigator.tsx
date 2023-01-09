@@ -17,6 +17,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 //import { grayLines } from "_styles/jsstyles";
 import { RoutesTypes } from "_types/TYPES";
+import { Typography } from "@mui/material";
 
 let menuCategories = [
   {
@@ -80,6 +81,7 @@ const item = {
   "&:hover, &:focus": {
     bgcolor: "rgba(255, 255, 255, 0.08)",
   },
+  
 };
 
 const itemCategory = {
@@ -104,7 +106,7 @@ export function Navigator(props: any) {
   },[isDebug])
 
   return (
-    <Drawer variant="permanent" {...other} sx={{borderRight:''}}>
+    <Drawer variant="permanent" {...other} >
       <Box
       className="gray_lines"
         sx={{
@@ -128,7 +130,7 @@ export function Navigator(props: any) {
             //textAlign:'center'
             
             marginLeft: 'auto',
-  marginRight: 'auto'
+            marginRight: 'auto'
           }}
           alt="logo"
           //src="/surlogo_white.png"
@@ -150,6 +152,7 @@ export function Navigator(props: any) {
                     px: 3,
                     marginBottom: children ? "2px" : 2,
                     opacity: !!route ? "1  !important" : "0.6 !important",
+                    fontSize: theme.typography.body2.fontSize 
                   }}
                   component={Link}
                   to={route || "/"}
@@ -159,7 +162,7 @@ export function Navigator(props: any) {
                     {" "}
                     {icon}
                   </ListItemIcon>
-                  <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
+                  <ListItemText sx={{ color: "#fff", }}><Typography variant="body2">{id}</Typography></ListItemText>
                 </ListItemButton>
               </ListItem>
               {children?.map(({ id: childId, active, route }) => (
@@ -169,9 +172,10 @@ export function Navigator(props: any) {
                     sx={item}
                     component={Link}
                     to={route || "/"}
+                    
                   >
                     <ListItemText sx={{ marginLeft: "40px", color: "#fff" }}>
-                      {childId}
+                    <Typography variant="body2">{childId}</Typography>
                     </ListItemText>
                   </ListItemButton>
                 </ListItem>

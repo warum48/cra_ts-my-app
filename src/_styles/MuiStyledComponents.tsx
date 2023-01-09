@@ -25,7 +25,8 @@ export const Heading = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: "left",
   color: theme.palette.text.secondary,
-  fontSize: "1rem",//"16px",
+  //fontSize: "1rem",//"16px",
+  fontSize: theme.typography.body2.fontSize,
   fontWeight: theme.typography.fontWeightRegular,
 }));
 
@@ -33,7 +34,8 @@ export const ItemInfo = styled(Box)(({ theme }) => ({
   //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   //...theme.typography.body2,
   padding: theme.spacing(2),
-  fontSize: '14px',//theme.typography.body2.fontSize, //"0.875rem",//"14px",
+  //fontSize: '14px',//theme.typography.body2.fontSize, //"0.875rem",//"14px",
+  fontSize: theme.typography.body2.fontSize,
   textAlign: "left",
   //color: theme.palette.text.secondary,
 }));
@@ -41,7 +43,8 @@ export const ItemInfo = styled(Box)(({ theme }) => ({
 export const ItemName = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: "left",
-  fontSize: '14px',//theme.typography.body2.fontSize, //"0.875rem",//"14px",
+  //fontSize: '14px',//theme.typography.body2.fontSize, //"0.875rem",//"14px",
+  fontSize: theme.typography.body2.fontSize,
   fontWeight: theme.typography.fontWeightBold,
 }));
 
@@ -56,7 +59,7 @@ export const StyledButton = styled(Button)(
   }: //_color = 'primary'
   IColor) => ({
     color: "#ffffff",
-    boxShadow: "0",
+    boxShadow: theme.shadows[0],//"0",
     background: theme.palette.common.buttonGradient,
     /*':hover': {
     color: theme.palette[_color].main,
@@ -73,8 +76,11 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     //backgroundColor: theme.palette.common.white,
     //color: theme.palette.common.black,
     backgroundColor: panel_bg[theme.palette.mode],
-    textTransform: 'uppercase',
-    color:theme.palette.text.secondary,
+    fontSize: theme.typography.body2.fontSize
+    //!!makes button-like
+    //textTransform: 'uppercase',
+    //color:theme.palette.text.secondary,
+
     //color: theme.palette.common.black,
     //fontSize:'12px'
   },

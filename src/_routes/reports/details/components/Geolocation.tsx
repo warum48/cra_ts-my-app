@@ -20,9 +20,11 @@ import { currentTEIDVar } from "_apollo/state";
 
 
 interface IProps{
-  points: number[][]
+  points?: number[][]
 }
-export function Geolocation({points}:IProps) {
+export function Geolocation(
+  //{points}:IProps
+  ) {
   const theme = useTheme();
   const { loading, error, data } = useQuery(GEO_TE_BYID,{
     variables: {id:currentTEIDVar()}

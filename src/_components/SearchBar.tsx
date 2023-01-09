@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { panel_bg } from "_styles/MuiStyledComponents";
+import { panel_bg, StyledButton } from "_styles/MuiStyledComponents";
 import { searchInputVar } from "_apollo/state";
 
 const Search = styled(Box)(({ theme }) => ({
@@ -60,24 +60,25 @@ export default function SearchBar() {
         <StyledInputBase
         ref={inputRef}
           fullWidth
-          placeholder="Search…"
+          placeholder="…"
           inputProps={{ "aria-label": "search" }}
           defaultValue=""
           onChange={e => {inputRef.current.value = e.target.value;}}
+          sx={{fontSize: theme.typography.body2.fontSize}}
           //!!!---instant update---//onChange={e => {if(e.target.value.length > 2 || e.target.value.length==0){searchInputVar(e.target.value)}}}
         />
       </Search>
-      <Button
+      <StyledButton
         type="submit"
         variant="contained"
-        sx={{
-          color: "#ffffff",
-          background: theme.palette.common.buttonGradient,
-        }}
+        //sx={{
+        //  color: "#ffffff",
+        //  background: theme.palette.common.buttonGradient,
+        //}}
         onClick={()=>searchInputVar(inputRef.current?.value)}
       >
         Искать
-      </Button>
+      </StyledButton>
     </Box>
   );
 }

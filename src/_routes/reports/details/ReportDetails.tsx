@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { panel_bg } from "_styles/MuiStyledComponents";
+import { panel_bg, StyledButton } from "_styles/MuiStyledComponents";
 import { useTheme } from "@mui/material/styles";
 import "_styles/mui.css";
 
@@ -21,8 +21,12 @@ import {
   useMutation,
 } from "@apollo/client";
 import { currentTEIDVar, inputInternalCommentVar, filtersVar } from "_apollo/state";
+import {GET_TE_DETAILS} from "_apollo/queries";
+import {SAVE_INPUT} from "_apollo/mutations";
+import { DebugBox } from "_components/debug/DebugBox";
 
 
+//------------------------------TAB PANEL---------------
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -31,8 +35,6 @@ interface TabPanelProps {
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-
-  //-------------end apollo--------
 
   return (
     <div
@@ -54,22 +56,27 @@ function a11yProps(index: number) {
   };
 }
 
+//----------------------end TAB PANEL-----------------------
+
 export default function ReportDetails() {
+  //----------mui------------------
   const theme = useTheme();
   //----------tabs-----------------
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
   const inputRef = React.useRef<any>(null);
 
   let { routerTEId } = useParams();
+  //-----------apollo---------
   const currentTEIDVar_re = useReactiveVar(currentTEIDVar);
   const currentInput_re = useReactiveVar(inputInternalCommentVar);
   //const currentTEIDVar_re = useReactiveVar(routerTEId);
 
-  //-----------apollo---------
-  const GET_TE_DETAILS = gql`
+  
+  /*const GET_TE_DETAILS = gql`
     query TeDetailsQuery($id: Int!) {
       getTeSteps(teId: $id) {
         teStepsList {
@@ -127,10 +134,11 @@ export default function ReportDetails() {
       }
     }
   `;
+  */
 
   //----------mutations--------
   //("${inputRef.current.value}");
-  const SAVE_INPUT = gql`
+  /*const SAVE_INPUT = gql`
     mutation SaveInput($comment: String!, $id: Int!) {
       teInternalCommentUpdate(commentsInternal: $comment, teId: $id) {
         ... on MutationSuccess {
@@ -145,6 +153,7 @@ export default function ReportDetails() {
       }
     }
   `;
+  */
 
   //const { loading, error, data } = useQuery(GET_TE_DETAILS,{
   const [getDetails, { loading, error, data }] = useLazyQuery(GET_TE_DETAILS, {
@@ -177,15 +186,7 @@ export default function ReportDetails() {
     }
   }, [routerTEId]);
 
-  /*const reportDetailsTabsNamesAr = [
-    "Информация",
-    "Шаги и задачи",
-    "Изображения",
-    "Анкеты",
-    "Ассортимент магазина",
-    "Причины отсутствия товаров",
-    "Геолокация",
-  ];*/
+  
 
   function saveAndContinue() {}
   function saveAndGoBack() {
@@ -197,12 +198,12 @@ export default function ReportDetails() {
     }
   }
 
-  const details = {
+  /*const details = {
     geolocation: [
       [13.363, 103.859],
       [13.364047, 103.860313],
     ],
-  };
+  };*/
 
   const reportDetailsTabs = {
     info: {
@@ -233,9 +234,15 @@ export default function ReportDetails() {
     },
     geolocation: {
       name: "Геолокация",
-      component: <Geolocation points={details.geolocation} />,
+      component: <Geolocation 
+      //points={details.geolocation} 
+      />,
     },
   };
+
+  function getColor(){
+    return theme.palette.common.color ? theme.palette.common.color : theme.palette.primary.main
+  }
 
   return (
     <Box sx={{ width: "100%", mb: 3 }}>
@@ -252,7 +259,11 @@ export default function ReportDetails() {
               key={"tab" + key}
               label={item.name}
               {...a11yProps(index)}
-              sx={{ fontSize: "12px" }}
+              sx={{ fontSize: "12px",
+               //!!color: value === index ? getColor() + '!important' : '' 
+               //!!also need to color underline
+              }}
+             
             />
           ))}
         </Tabs>
@@ -260,23 +271,27 @@ export default function ReportDetails() {
 
       {Object.entries(reportDetailsTabs).map(([key, item], index) => (
         <TabPanel value={value} index={index} key={"panel" + key}>
+          <DebugBox>
+          {JSON.stringify(data)}
+          {JSON.stringify(error)}
+          </DebugBox>
           {item.component}
         </TabPanel>
       ))}
 
       <Box sx={{ pt: 2 }}>
-        <Button
+        <StyledButton
           type="submit"
           variant="contained"
-          sx={{
-            color: "#ffffff",
-            boxShadow: 0,
-            background: theme.palette.common.buttonGradient,
-          }}
+          //sx={{
+            //color: "#ffffff",
+            //boxShadow: 0,
+            //background: theme.palette.common.buttonGradient,
+          //</Box></Box>}}
           onClick={() => saveAndGoBack()} //console.log(inputRef.current.value)}
         >
           Сохранить
-        </Button>
+        </StyledButton>
         <Button
           type="submit"
           variant="outlined"

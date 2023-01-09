@@ -23,7 +23,8 @@ import { filtersVar, searchInputVar, startDateVar, endDateVar } from "_apollo/st
 //import { filtersVar } from "_apollo/state";
 import { useReactiveVar } from "@apollo/client";
 import { formatDate } from "_components/UTILS";
-import { errorTransformator} from "_apollo/errors"
+import { errorTransformator} from "_apollo/errors";
+import {GET_TE} from "_apollo/queries";
 //import { useQuery, gql } from "@apollo/client";
 //import { useLazyQuery } from "@apollo/client";
 
@@ -109,7 +110,8 @@ const columns: IHeader[] = [
     headerName: "Источник",
   },
   {
-    field: "status",
+    //field: "status",
+    field: "statusDescription",
     headerName: "Статус",
     funcComplex: (dataAr:any[], num:number ) => dataAr[num-1].description
   },
@@ -157,7 +159,7 @@ type TFilters = {
      taskId?: number;
 }
 
-  const GET_TE = gql`
+  /*const GET_TE = gql`
   query MyQuery ($page:Int!, $filters:TeFilters, $search:String, $startDate:Date, $endDate:Date ) {
     getTasksExecutions(filters: $filters, pages: {pageNumber: $page, limit: 100}, search:$search, startDate:$startDate, endDate:$endDate) {
       pagesCount
@@ -197,12 +199,13 @@ type TFilters = {
 
   }
   `
+  */
   const filtersVar_re = useReactiveVar(filtersVar);
   const searchInputVar_re = useReactiveVar(searchInputVar);
   const startDatetVar_re = useReactiveVar(startDateVar);
   const endDatetVar_re = useReactiveVar(endDateVar);
   const { loading, error, data } = useQuery(GET_TE,{
-    variables: {page: page, filters: filtersVar_re, search:searchInputVar_re, startDate: startDateVar(), endDate:endDateVar()}
+    variables: {page: page, filters: filtersVar(), search:searchInputVar(), startDate: startDateVar(), endDate:endDateVar()}
   });
 
 

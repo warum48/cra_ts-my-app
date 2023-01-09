@@ -69,7 +69,7 @@ const columns: IHeader[] = [
     headerName: "Название шага",
   },
   {
-    field: "stepType",
+    field: "stepTypeDescription",
     headerName: "Тип шага",
   },
   {

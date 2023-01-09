@@ -84,6 +84,8 @@ function App() {
           flex: 1,
           display: "flex",
           flexDirection: "column",
+          //!!background: "linear-gradient(100deg, #8400ff11 , #8400ff00 10.53%)",
+          
         }}
       >
         <Header onDrawerToggle={handleDrawerToggle} />

@@ -57,7 +57,7 @@ export function LightMode() {
     >
       
       <IconButton
-        sx={{ ml: 1, fontSize:12, backgroundColor:'#dddddd' }}
+        sx={{ ml: 1, fontSize:12, backgroundColor: '#99999911'}}
         onClick={()=>setFontSize('small')}
         color="inherit"
         //{fontSize === "small" ? 'aa' : 'AA' }
@@ -65,7 +65,7 @@ export function LightMode() {
         Aa
       </IconButton>
       <IconButton
-        sx={{ ml: 1, mr: 2 , fontSize:16, backgroundColor:'#dddddd'}}
+        sx={{ ml: 1, mr: 2 , fontSize:16, backgroundColor:'#dddddd11'}}
         onClick={()=>setFontSize('large')}
         color="inherit"
       >

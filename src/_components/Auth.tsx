@@ -53,6 +53,7 @@ type AForm = {
 };
 
 export function Auth({ setIsLoggedIn }: IAuth) {
+  const [refresher, setRefresher] = React.useState(0);
   //const [token, setTokem] = React.useContext(GlobalContext)
   const { token, setToken} = React.useContext(GlobalContext);
   const theme = useTheme();
@@ -95,6 +96,38 @@ export function Auth({ setIsLoggedIn }: IAuth) {
     //setIsLoggedIn(true);
   };
 
+  React.useEffect(()=>{
+   /*   setTimeout(()=>{
+       // setRefresher(refresher+1)
+       //@ts-ignore
+       document.getElementById('password').click();
+       
+      },1000)
+
+      var evt = new MouseEvent("click", {
+        view: window,
+        clientX: 0
+      });
+      window.dispatchEvent(evt);
+      let iterations = 0;
+  
+      const interval:any = setInterval(() => {
+        const value = `${pass}`;//this.inputs.email.value;
+        console.log('value', value);
+        // plain js alternative:
+         //const value:any = document.getElementById("password").value;
+        if (!!value || iterations > 20) {
+          console.log(value);
+          return clearInterval(interval);
+        }
+  
+        iterations++;
+        console.log("not found -> repeat");
+      }, 100);*/
+
+
+  },[])
+
   React.useEffect(() => {
     if (data && data.login?.token) {
       setIsLoggedIn(true);
@@ -127,8 +160,8 @@ export function Auth({ setIsLoggedIn }: IAuth) {
             alt="logo"
             src={
               theme.palette.mode === "dark"
-                ? "/surlogo_white.png"
-                : "/surlogo.png"
+                ? "https://dev.nahab.info/aerovadim/surveer/surlogo_white.png"//"/surlogo_white.png"
+                : 'https://client.shop-survey.ru/static/admin/img/logo.png'//"/surlogo.png"
             }
           />
 
@@ -160,6 +193,7 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                     //value={value}
                     margin="normal"
                     required
+                    
                     fullWidth
                     id="email"
                     label="Email Address"
@@ -181,8 +215,11 @@ export function Auth({ setIsLoggedIn }: IAuth) {
               />
 
               <Controller
-                defaultValue={""}
+                defaultValue={pass||""}
                 name="password"
+                key={'reffresh'+refresher}
+                //autoComplete="new-password"
+                //value={pass}
                 control={control}
                 rules={{
                   required: {
@@ -199,11 +236,14 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                     margin="normal"
                     required
                     fullWidth
+                    //autoFocus
                     //name="password"
-                    label="Password"
+                    label="Пароль"
                     type="password"
                     id="password"
-                    autoComplete="current-password"
+                    //autoComplete="current-password"
+                    autoComplete="new-password"
+                    //autoComplete="off"
                     error={invalid && isTouched}
                     helperText={error?.message}
                     // ref={passRef}
@@ -211,7 +251,11 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                       setPass(e.target.value);
                       field.onChange(e.target.value);
                     }}
+                    //InputLabelProps={{ shrink: true }} 
+                    //value={pass }
                     //defaultValue={''}
+                    //key={'reffresh'+refresher}
+                    //key="Confirmation Code"
                   />
                 )}
               />
@@ -300,3 +344,5 @@ export function Auth({ setIsLoggedIn }: IAuth) {
 }
 
 //https://stackoverflow.com/questions/70129485/react-hook-form-validation-with-material-ui-textfield-is-not-working
+
+//https://github.com/mui/material-ui/issues/14427
