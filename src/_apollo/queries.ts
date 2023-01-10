@@ -12,6 +12,7 @@ export const GET_TE = gql`
         dateEnd
         dateStart
         source
+        sourceDescription
         storeId
         userId
         taskId
@@ -57,6 +58,7 @@ export const GET_TE = gql`
 'status'*/
 
 //---EARLIEST DATE--- used in DateFilters ---
+//,  ascSortBy: "", descSortBy: ""
 export const GET_EARLIEST_DATE = gql`
   query MyQuery ($page:Int!) {
     getTasksExecutions(pages: {pageNumber: $page, limit: 1}) {

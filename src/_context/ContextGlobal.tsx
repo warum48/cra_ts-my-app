@@ -146,6 +146,7 @@ export const GlobalProvider = ({ children }: Props) => {
   const getColorMode = (colorSet: string) => {
     if (colorSet === "strong") {
       return {
+        bodybg: "#121212",
         mainGradientBg_135:
           "linear-gradient(to right bottom, #007fff, #0059b2 120%)", //'blue',
         buttonGradient:
@@ -267,6 +268,10 @@ export const GlobalProvider = ({ children }: Props) => {
       text: {
         primary: "#ffffff",
       },*/
+      background: {
+        default: "#191919", //good color for pink
+        paper:"#12121200" //"#efefef",
+      },
       common: getColorMode(colorSet),
       //11...colorThemeDark[colorSet as keyof typeof colorThemeDark]
     },

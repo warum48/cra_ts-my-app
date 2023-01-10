@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import { StyledTableCell, StyledTableRow } from "_styles/MuiStyledComponents";
 import { rows } from "_components/debug/_mockrows";
 import Pagination from "@mui/material/Pagination";
-import {TabHeaderSorter} from "./TabHeaderSorter";
+import { TabHeaderSorter } from "./TabHeaderSorter";
 import { useQuery, gql } from "@apollo/client";
 //import { Interface } from "readline";
 import dayjs from "dayjs";
@@ -24,7 +24,7 @@ import {
   startDateVar,
   endDateVar,
   ascSortByVar,
-  descSortByVar
+  descSortByVar,
 } from "_apollo/state";
 //import { filtersVar } from "_apollo/state";
 import { useReactiveVar } from "@apollo/client";
@@ -88,29 +88,29 @@ type Item = {
 ]; */
 
 const columns: IHeader[] = [
-  { field: "id", headerName: "ID", canSort:true, sortFieldName:'teId' },
+  { field: "id", headerName: "ID", canSort: true, sortFieldName: "teId" },
   {
     field: "taskId",
     headerName: "Задача",
-    canSort:true,
-    
+    canSort: true,
   },
   {
     field: "dateStart",
     headerName: "Начало", //"Дата начала    ",
-    canSort:true
+    canSort: true,
     //func: (st) => formatDate(st), //dayjs(st).format('YYYY-MM-DD HH:mm:ss')//tz("Europe/Moscow") //locale('ru-ru').format(
   },
   {
     field: "dateEnd",
     headerName: "Завершение", //"Дата завершения",
-    canSort:true
+    canSort: true,
     //func: (st) => formatDate(st), //dayjs(st).format('YYYY-MM-DD HH:mm:ss')
   },
   {
     //field: "userId",
     field: "user",
     headerName: "Сотрудник",
+    canSort: true,
     //func: (ob) => ob?.surname + " " + ob?.name,
   },
   {
@@ -119,8 +119,10 @@ const columns: IHeader[] = [
     //func: (ob) => ob?.address,
   },
   {
-    field: "source",
+    field: "sourceDescription",
     headerName: "Источник",
+    canSort: true,
+    sortFieldName: "source"
   },
   {
     //field: "status",
@@ -267,7 +269,15 @@ export default function ReportMainTable() {
                   key={"head" + index}
                 >
                   {/*<Typography variant="button"></Typography>*/}
-                  {item.canSort? <TabHeaderSorter headerName={item.headerName} field={item.field} sortFieldName={item.sortFieldName}/> : item.headerName}
+                  {item.canSort ? (
+                    <TabHeaderSorter
+                      headerName={item.headerName}
+                      field={item.field}
+                      sortFieldName={item.sortFieldName}
+                    />
+                  ) : (
+                    item.headerName
+                  )}
                 </StyledTableCell>
               ))}
             </TableRow>
@@ -308,7 +318,7 @@ export default function ReportMainTable() {
                     <StyledTableCell sx={{ maxWidth: "180px" }}>
                       {row.store?.address}
                     </StyledTableCell>
-                    <StyledTableCell>{row.source}</StyledTableCell>
+                    <StyledTableCell>{row.sourceDescription}</StyledTableCell>
                     <StyledTableCell
                       sx={getStyleFor_(
                         "status",
@@ -380,4 +390,3 @@ export default function ReportMainTable() {
     </Box>
   );
 }
-

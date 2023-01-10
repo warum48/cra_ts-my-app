@@ -19,6 +19,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import CloseIcon from "@mui/icons-material/Close";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { Link } from "@mui/material";
 
 const Search = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -90,21 +91,21 @@ export function TabHeaderSorter({ field, headerName, sortFieldName }: IHeaderSor
           alignItems: "center",
         }}
       >
-        <Box onClick={setSort}>{headerName}</Box>
+        <Box onClick={setSort} sx={{cursor:'pointer'}}><Link sx={{color:theme.palette.text.primary}}>{headerName}</Link></Box>
 
         {curSortFieldVar_re.field == field_apiname && (
           <>
             
               {curSortFieldVar().sortType === "desc" ? (
-                <ArrowDropDownIcon onClick={setSort}/>
+                <ArrowDropDownIcon onClick={setSort} sx={{cursor:'pointer'}}/>
               ) : (
-                <ArrowDropUpIcon onClick={setSort}/>
+                <ArrowDropUpIcon onClick={setSort} sx={{cursor:'pointer'}}/>
               )}
             
 
             {field_apiname != "id" && field_apiname != "teId" && (
               <HighlightOffIcon
-                sx={{ mt: "2px", fontSize: "medium" }}
+                sx={{ mt: "2px", fontSize: "medium", cursor:'pointer' }}
                 onClick={resetSort}
               />
             )}

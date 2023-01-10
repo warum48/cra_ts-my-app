@@ -117,9 +117,11 @@ export const DateFilters = () => {
 
   return (
     <>
+    <DebugBox>{JSON.stringify(data)}</DebugBox>
+    <DebugBox>{JSON.stringify(error)}</DebugBox>
       {data && (
         <Box sx={{ mb: 2 }}>
-          <DebugBox>{JSON.stringify(data)}</DebugBox>
+          
           {/*<DateItem
               text="Все даты"
               onClick={() => {
