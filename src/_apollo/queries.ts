@@ -191,3 +191,33 @@ export const GEO_TE_BYID = gql`
     }
   }
 `;
+
+//---FILTERS---
+export const ALL_FILTERS = gql`
+query FilterQuery {
+  getTeSources {
+    sourcesList {
+      source
+      description
+    }
+  }
+  getTeStatus {
+    statusesList {
+      description
+      status
+    }
+  }
+  getTasksNames {
+    tasksNamesList {
+      id
+      name
+    }
+  }
+  getRegions {
+    regionsList {
+      id
+      name
+    }
+  }
+}
+`;

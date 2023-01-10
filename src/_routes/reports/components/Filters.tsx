@@ -14,6 +14,7 @@ import Select, {
 import { DebugBox } from "_components/debug/DebugBox";
 import { useQuery, gql } from "@apollo/client";
 import { StyledButton } from "_styles/MuiStyledComponents";
+import { ALL_FILTERS } from "_apollo/queries";
 
 interface ISelectLabel {
   text: string;
@@ -23,16 +24,10 @@ const SelectLabel = ({ text }: ISelectLabel) => {
   const theme = useTheme();
   return (
     <Typography
-      //variant="overline"
-      //variant="subtitle2"
       variant="subtitle2"
-      //variant="button"
       sx={{
         lineHeight: "100%",
         pb: 1,
-        //textTransform: 'uppercase',
-        //color:theme.palette.text.secondary,
-        //fontSize:12
       }}
     >
       {text}
@@ -40,73 +35,21 @@ const SelectLabel = ({ text }: ISelectLabel) => {
   );
 };
 
-const options = [
+/*const options = [
   { value: 1, label: "One" },
   { value: 2, label: "two" },
   { value: 3, label: "three" },
 ];
 
-type Option = typeof options;
+type Option = typeof options;*/
 
 export const Filters = () => {
   const { debug } = useParams();
   console.log("debug", debug);
   const theme = useTheme();
   const [selectedOption, setSelectedOption] = useState<any>(null);
-
   const filtersVar_re = useReactiveVar(filtersVar);
 
-  /*const SOURCES_FILTER = gql`
-  query SourcesFilterQuery {
-    getTeSources {
-      sourcesList {
-        source
-        description
-      }
-    }
-  }
-  `
-  const STATUS_FILTER = gql`
-  query StatusFilterQuery {
-    getTeStatus {
-      statusesList {
-        description
-        status
-      }
-    }
-  }
-`*/
-  const ALL_FILTERS = gql`
-    query FilterQuery {
-      getTeSources {
-        sourcesList {
-          source
-          description
-        }
-      }
-      getTeStatus {
-        statusesList {
-          description
-          status
-        }
-      }
-      getTasksNames {
-        tasksNamesList {
-          id
-          name
-        }
-      }
-      getRegions {
-        regionsList {
-          id
-          name
-        }
-      }
-    }
-  `;
-
-  //const { loading:loading_sources, error:error_sources, data:data_sources } = useQuery(SOURCES_FILTER);
-  //const { loading:loading_status, error:error_status, data:data_status } = useQuery(STATUS_FILTER);
 
   const { loading, error, data } = useQuery(ALL_FILTERS);
 
@@ -287,5 +230,4 @@ export const Filters = () => {
   );
 };
 
-//https://github.com/SiwakornSitti/react-select-typescript-example/blob/master/src/App.tsx
-//https://dev.to/craigaholliday/using-the-usereducer-hook-in-react-with-typescript-27m1
+

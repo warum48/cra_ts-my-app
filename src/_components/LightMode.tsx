@@ -60,7 +60,6 @@ export function LightMode() {
         sx={{ ml: 1, fontSize:12, backgroundColor: '#99999911'}}
         onClick={()=>setFontSize('small')}
         color="inherit"
-        //{fontSize === "small" ? 'aa' : 'AA' }
       >
         Aa
       </IconButton>

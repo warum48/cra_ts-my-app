@@ -1,12 +1,10 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import Grid from "@mui/material/Grid";
 import { panel_bg, } from "_styles/MuiStyledComponents";
 import "_styles/leaflet.css";
-import { Heading, ItemInfo, ItemName } from "_styles/MuiStyledComponents";
+import { ItemInfo, ItemName } from "_styles/MuiStyledComponents";
 import { LeafletPure } from "_components/LeafletPure";
 import {
   gql,

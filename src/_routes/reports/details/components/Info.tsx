@@ -145,14 +145,11 @@ export function Info( {infoData, inputRef}:IInfoProps) {
               id="outlined-multiline-static"
               label="Ваш комментарий"
               multiline
-              //rows={3}
               fullWidth
               maxRows={10}
               variant="outlined"
               defaultValue={infoData.commentsInternal}
               onChange={e => inputInternalCommentVar(e.target.value)}
-              //onChange={e => {inputRef.current.value = e.target.value;}}
-              //inputRef={e => inputRef = e}
               sx={{
                 fontSize: theme.typography.body2.fontSize
               }}

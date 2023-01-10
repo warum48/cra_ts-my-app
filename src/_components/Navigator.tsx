@@ -199,13 +199,7 @@ export function Navigator(props: any) {
             bottom: 0,
           }}
         >
-          {/*<Paper sx={{ 
-          width:'100%', height:'100%',
-          position:'absolute',
-          zIndex:0,
-          //p:2, 
-         // m:3,
-        opacity:.8}}></Paper>*/}
+         
           <Box
             sx={{
               top: 0,

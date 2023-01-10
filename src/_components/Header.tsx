@@ -5,7 +5,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { LightMode } from "_components/LightMode";
-import { FormControlLabel, Switch } from "@mui/material";
 import { DebugSwitcher } from "./debug/DebugSwitcher";
 
 interface HeaderProps {
@@ -39,9 +38,6 @@ export function Header(props: HeaderProps) {
 
           <Grid item>
             <DebugSwitcher />
-            {/*<IconButton color="inherit" sx={{ p: 0.5 }}>
-              <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
-          </IconButton>*/}
           </Grid>
           <Grid item>
             <LightMode />

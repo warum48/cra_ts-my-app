@@ -6,26 +6,14 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { Controller, useForm } from "react-hook-form";
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useLazyQuery } from "@apollo/client";
 import { StyledButton } from "_styles/MuiStyledComponents";
 import { DebugBox } from "./debug/DebugBox";
-import { ErrorSharp } from "@mui/icons-material";
 import { Typography } from "@mui/material";
-import {GlobalContext} from "_context/ContextGlobal";
-
-const GET_LOCATIONS = gql`
-  query GetLocations {
-    locations {
-      id
-      name
-      description
-      photo
-    }
-  }
-`;
+import { GlobalContext } from "_context/ContextGlobal";
 
 const TEST_PRE_AUTH = gql`
   query MyQuery {
@@ -54,13 +42,11 @@ type AForm = {
 
 export function Auth({ setIsLoggedIn }: IAuth) {
   const [refresher, setRefresher] = React.useState(0);
-  //const [token, setTokem] = React.useContext(GlobalContext)
-  const { token, setToken} = React.useContext(GlobalContext);
+  const { token, setToken } = React.useContext(GlobalContext);
   const theme = useTheme();
-  //const emailRef = React.useRef<any>(null);
-  //const passRef = React.useRef<any>(null);
   const [email, setEmail] = React.useState("");
   const [pass, setPass] = React.useState("");
+
   const TEST_AUTH = gql`
   query MyQuery {
     login(login: "${email}", password: "${pass}") {
@@ -96,8 +82,8 @@ export function Auth({ setIsLoggedIn }: IAuth) {
     //setIsLoggedIn(true);
   };
 
-  React.useEffect(()=>{
-   /*   setTimeout(()=>{
+  React.useEffect(() => {
+    /*   setTimeout(()=>{
        // setRefresher(refresher+1)
        //@ts-ignore
        document.getElementById('password').click();
@@ -124,16 +110,12 @@ export function Auth({ setIsLoggedIn }: IAuth) {
         iterations++;
         console.log("not found -> repeat");
       }, 100);*/
-
-
-  },[])
+  }, []);
 
   React.useEffect(() => {
     if (data && data.login?.token) {
       setIsLoggedIn(true);
-
-      setToken(data.login?.token)
-      
+      setToken(data.login?.token);
     }
   }, [data]);
 
@@ -141,7 +123,6 @@ export function Auth({ setIsLoggedIn }: IAuth) {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-
         <Paper
           sx={{
             marginTop: 8,
@@ -160,8 +141,8 @@ export function Auth({ setIsLoggedIn }: IAuth) {
             alt="logo"
             src={
               theme.palette.mode === "dark"
-                ? "https://dev.nahab.info/aerovadim/surveer/surlogo_white.png"//"/surlogo_white.png"
-                : 'https://client.shop-survey.ru/static/admin/img/logo.png'//"/surlogo.png"
+                ? "https://dev.nahab.info/aerovadim/surveer/surlogo_white.png" //"/surlogo_white.png"
+                : "https://client.shop-survey.ru/static/admin/img/logo.png" //"/surlogo.png"
             }
           />
 
@@ -193,7 +174,6 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                     //value={value}
                     margin="normal"
                     required
-                    
                     fullWidth
                     id="email"
                     label="Email Address"
@@ -215,9 +195,9 @@ export function Auth({ setIsLoggedIn }: IAuth) {
               />
 
               <Controller
-                defaultValue={pass||""}
+                defaultValue={pass || ""}
                 name="password"
-                key={'reffresh'+refresher}
+                key={"reffresh" + refresher}
                 //autoComplete="new-password"
                 //value={pass}
                 control={control}
@@ -251,7 +231,7 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                       setPass(e.target.value);
                       field.onChange(e.target.value);
                     }}
-                    //InputLabelProps={{ shrink: true }} 
+                    //InputLabelProps={{ shrink: true }}
                     //value={pass }
                     //defaultValue={''}
                     //key={'reffresh'+refresher}
@@ -272,34 +252,8 @@ export function Auth({ setIsLoggedIn }: IAuth) {
                   }}
                   onClick={() => setIsLoggedIn(true)}
                 >
-                  пропустить 
+                  пропустить
                 </Button>
-
-                {/* <StyledButton
-                  sx={{
-                    mt: 1,
-                    mb: 0,
-                  }}
-                  variant="contained"
-                  fullWidth
-                  theme={theme}
-                  onClick={() => doPreAuth()}
-                >
-                  Тестовый запрос без входа
-                </StyledButton>
-                {pre_data && <DebugBox code={JSON.stringify(pre_data)} />} */}
-
-                {/*} <StyledButton
-                variant="contained"
-                fullWidth
-                theme={theme}
-                //onClick={()=>console.log('cv', emailRef.current)} //- doesn't work
-                onClick={() => console.log("cv", email)}
-              >
-                log
-              </StyledButton>*/}
-
-                
               </DebugBox>
 
               <StyledButton
@@ -319,11 +273,6 @@ export function Auth({ setIsLoggedIn }: IAuth) {
               {data && <DebugBox code={JSON.stringify(data)} />}
               {error && (
                 <>
-                  {/*error.map((err, i) => (
-              <div>{err.message}</div>
-              ))}
-              <div>{JSON.stringify(error)}</div>
-              <div>{JSON.stringify(error.graphQLErrors[0].message)}</div>*/}
                   <DebugBox code={JSON.stringify(error, null, 3)} />
                 </>
               )}
@@ -343,6 +292,4 @@ export function Auth({ setIsLoggedIn }: IAuth) {
   );
 }
 
-//https://stackoverflow.com/questions/70129485/react-hook-form-validation-with-material-ui-textfield-is-not-working
 
-//https://github.com/mui/material-ui/issues/14427
